@@ -1,11 +1,6 @@
 name: Deploy Pages
 
 on:
-  push:
-    branches: [main]
-    paths:
-      - "crystal-b2b GitHub/**"
-      - ".github/workflows/deploy-pages.yml"
   workflow_dispatch:
 
 permissions:
