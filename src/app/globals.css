@@ -786,7 +786,7 @@ svg {
 .scroll-scene[data-motion-ready="true"].process-scene { height: 680vh; }
 .scroll-scene[data-motion-ready="true"].flow-scene { height: 620vh; }
 .scroll-scene[data-motion-ready="true"].architecture-scene { height: 160vh; }
-.scroll-scene[data-motion-ready="true"].lighthouse-scene { height: 500vh; }
+.scroll-scene[data-motion-ready="true"].lighthouse-scene { height: 300vh; }
 
 .scroll-stage {
   position: relative;
@@ -3039,7 +3039,7 @@ svg {
   .scroll-scene[data-motion-ready="true"].process-scene { height: 520vh; }
   .scroll-scene[data-motion-ready="true"].flow-scene { height: 480vh; }
   .scroll-scene[data-motion-ready="true"].architecture-scene { height: 119vh; }
-  .scroll-scene[data-motion-ready="true"].lighthouse-scene { height: 390vh; }
+  .scroll-scene[data-motion-ready="true"].lighthouse-scene { height: 245vh; }
 
   .scroll-stage {
     padding: 5.8rem 1rem 1.5rem;
