@@ -57,6 +57,7 @@ Settings → Secrets and variables → Actions → Variables:
 
 ## Деплой
 
-Пуш в `main`, затрагивающий `crystal-b2b GitHub/**`, автоматически
-собирает и публикует через `.github/workflows/deploy-pages.yml`.
-Ручной запуск — вкладка Actions → Deploy Pages → Run workflow.
+Публикация — только вручную: вкладка Actions → Deploy Pages → Run
+workflow. Пуш в `main` больше не запускает деплой автоматически —
+это осознанно отключено, чтобы изменения можно было проверить
+локально перед тем, как они попадут на живой домен.
