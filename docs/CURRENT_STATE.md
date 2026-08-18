@@ -1,8 +1,11 @@
 # CRYSTAL CUBE - актуальное состояние
 
-**Обновлено:** 2026-08-17
+**Обновлено:** 2026-08-18
 
 **Публичный сайт:** <https://crystal-b2b.duckdns.org>
+**Репозиторий:** <https://github.com/CRYSTAL-B2B/crystal-b2b> — push в `main`
+автоматически деплоит на прод через GitHub Actions
+(`.github/workflows/deploy.yml` → `deploy/github-deploy.sh` на VPS).
 **Текущий кодовый релиз:** `760c096` (`fix: shift desktop hero media right`)
 
 Этот файл - оперативный источник правды для разработки и release handoff.
