@@ -1,0 +1,2 @@
+# The production pack is an imported source of truth. Preserve it byte-for-byte.
+b2b_marketing_site_production_pack_v1/** -whitespace

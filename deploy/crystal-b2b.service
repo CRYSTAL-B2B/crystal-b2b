@@ -1,0 +1,23 @@
+[Unit]
+Description=CRYSTAL CUBE — B2B motion site (Next.js)
+After=network-online.target
+Wants=network-online.target
+
+[Service]
+Type=simple
+WorkingDirectory=/root/projects/CRYSTAL CUBE
+Environment=NODE_ENV=production
+Environment=PORT=3012
+Environment=HOSTNAME=127.0.0.1
+Environment=NEXT_PUBLIC_SITE_URL=https://crystal-b2b.duckdns.org
+ExecStart=/usr/bin/npm run start -- -p 3012 -H 127.0.0.1
+Restart=on-failure
+RestartSec=5
+TimeoutStopSec=20
+KillSignal=SIGINT
+NoNewPrivileges=true
+PrivateTmp=true
+UMask=0027
+
+[Install]
+WantedBy=multi-user.target
