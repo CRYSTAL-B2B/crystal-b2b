@@ -1,0 +1,4 @@
+interface:
+  display_name: "Production Motion Sites"
+  short_description: "Motion-сайты: video, QA и production release"
+  default_prompt: "Use $motion-site-production to turn this brief into a production-ready motion site."

@@ -3,8 +3,6 @@ name: Deploy
 on:
   push:
     branches: [main]
-    paths-ignore:
-      - "crystal-b2b GitHub/**"
 
 jobs:
   deploy:
