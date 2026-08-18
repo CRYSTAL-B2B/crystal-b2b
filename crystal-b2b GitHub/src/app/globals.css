@@ -298,7 +298,7 @@ svg {
   object-fit: cover;
   object-position: 50% 50%;
   filter: saturate(0.94) contrast(1.04);
-  transform: translate3d(calc(var(--media-x) + var(--hero-media-offset-x)), var(--media-y), 0) scale(1.201);
+  transform: translate3d(calc(var(--media-x) + var(--hero-media-offset-x)), var(--media-y), 0) scale(1.035);
   animation: hero-image-breathe 16s var(--ease-in-out) infinite alternate;
   will-change: transform;
 }
@@ -763,8 +763,8 @@ svg {
 }
 
 @keyframes hero-image-breathe {
-  from { transform: translate3d(calc(var(--media-x) + var(--hero-media-offset-x)), var(--media-y), 0) scale(1.201); }
-  to { transform: translate3d(calc(var(--media-x) + var(--hero-media-offset-x)), var(--media-y), 0) scale(1.224); }
+  from { transform: translate3d(calc(var(--media-x) + var(--hero-media-offset-x)), var(--media-y), 0) scale(1.035); }
+  to { transform: translate3d(calc(var(--media-x) + var(--hero-media-offset-x)), var(--media-y), 0) scale(1.055); }
 }
 
 @media (min-width: 961px) {
@@ -2987,12 +2987,7 @@ svg {
   .hero-image {
     object-position: 63% 50%;
     filter: saturate(0.9) contrast(1.04) brightness(0.88);
-    transform: translate3d(0, 0, 0) scale(1.365);
-  }
-
-  @keyframes hero-image-breathe {
-    from { transform: translate3d(calc(var(--media-x) + var(--hero-media-offset-x)), var(--media-y), 0) scale(1.346); }
-    to { transform: translate3d(calc(var(--media-x) + var(--hero-media-offset-x)), var(--media-y), 0) scale(1.372); }
+    transform: translate3d(0, 0, 0) scale(1.05);
   }
 
   .visual-readout,
