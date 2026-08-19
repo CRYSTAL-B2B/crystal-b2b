@@ -5038,8 +5038,8 @@ body[data-navigation-open="true"] {
 
 .hero-scrim {
   background:
-    linear-gradient(90deg, rgba(2, 3, 5, 0.9) 0%, rgba(2, 3, 5, 0.78) 29%, rgba(2, 3, 5, 0.26) 54%, rgba(2, 3, 5, 0.02) 78%),
-    linear-gradient(180deg, rgba(2, 3, 5, 0.42) 0%, rgba(2, 3, 5, 0.18) 26%, transparent 50%, rgba(2, 3, 5, 0.16) 66%, rgba(2, 3, 5, 0.62) 87%, rgba(2, 3, 5, 0.96) 100%);
+    linear-gradient(90deg, rgba(2, 3, 5, 0.63) 0%, rgba(2, 3, 5, 0.546) 29%, rgba(2, 3, 5, 0.182) 54%, rgba(2, 3, 5, 0.014) 78%),
+    linear-gradient(180deg, rgba(2, 3, 5, 0.294) 0%, rgba(2, 3, 5, 0.126) 26%, transparent 50%, rgba(2, 3, 5, 0.112) 66%, rgba(2, 3, 5, 0.434) 87%, rgba(2, 3, 5, 0.672) 100%);
 }
 
 .editorial-bridge::after,
@@ -5162,10 +5162,16 @@ body[data-navigation-open="true"] {
 }
 
 @media (max-width: 768px) {
+  .hero-scrim {
+    background:
+      linear-gradient(90deg, rgba(2, 3, 5, 0.585) 0%, rgba(2, 3, 5, 0.507) 29%, rgba(2, 3, 5, 0.169) 54%, rgba(2, 3, 5, 0.013) 78%),
+      linear-gradient(180deg, rgba(2, 3, 5, 0.273) 0%, rgba(2, 3, 5, 0.117) 26%, transparent 50%, rgba(2, 3, 5, 0.104) 66%, rgba(2, 3, 5, 0.403) 87%, rgba(2, 3, 5, 0.624) 100%);
+  }
+
   .hero::before {
     background:
-      linear-gradient(90deg, rgba(2, 3, 5, 0.9) 0%, rgba(2, 3, 5, 0.66) 62%, rgba(2, 3, 5, 0.18) 100%),
-      linear-gradient(180deg, rgba(2, 3, 5, 0.46) 0%, rgba(2, 3, 5, 0.18) 30%, transparent 52%, rgba(2, 3, 5, 0.2) 68%, rgba(2, 3, 5, 0.92) 100%);
+      linear-gradient(90deg, rgba(2, 3, 5, 0.585) 0%, rgba(2, 3, 5, 0.429) 62%, rgba(2, 3, 5, 0.117) 100%),
+      linear-gradient(180deg, rgba(2, 3, 5, 0.299) 0%, rgba(2, 3, 5, 0.117) 30%, transparent 52%, rgba(2, 3, 5, 0.13) 68%, rgba(2, 3, 5, 0.598) 100%);
   }
 }
 
