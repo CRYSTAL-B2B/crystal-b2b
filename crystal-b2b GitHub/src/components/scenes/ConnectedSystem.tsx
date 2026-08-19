@@ -67,7 +67,6 @@ export function ConnectedSystem() {
       <div className="scroll-stage architecture-stage">
         <div className="scene-chrome">
           <SectionLabel index="04">Связанная система</SectionLabel>
-          <p>Шесть уровней / одна архитектура / непрерывная обратная связь</p>
         </div>
 
         <div className="architecture-layout">

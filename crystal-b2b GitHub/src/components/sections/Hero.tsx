@@ -74,7 +74,6 @@ export function Hero() {
         <div className="hero-scrim" />
       </div>
       <div className="hero-copy">
-        <p className="eyebrow">B2B-МАРКЕТИНГ / CRM / РОСТ</p>
         <h1 id="hero-title">
           <span>Строю B2B-маркетинг</span>
           <span>от спроса до <em>выручки.</em></span>
@@ -93,11 +92,6 @@ export function Hero() {
         </div>
       </div>
 
-      <div className="hero-proof">
-        <span>11+ лет в маркетинге</span>
-        <span>B2B</span>
-        <span>Москва</span>
-      </div>
       <p className="scroll-cue" aria-hidden="true"><span /> Прокрутите, чтобы продолжить</p>
     </section>
   );

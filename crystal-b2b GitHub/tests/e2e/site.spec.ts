@@ -35,14 +35,6 @@ test("верхняя навигация использует имя, систе�
   await expect(page.getByRole("link", { name: /Даниил Чекулаев - в начало страницы/ })).toBeVisible();
   await expect(header).toHaveAttribute("data-scrolled", "false");
 
-  const eyebrowSize = await page.locator(".hero .eyebrow").evaluate((element) =>
-    Number.parseFloat(getComputedStyle(element).fontSize),
-  );
-  const microSize = await page.locator(".section-label").first().evaluate((element) =>
-    Number.parseFloat(getComputedStyle(element).fontSize),
-  );
-  expect(eyebrowSize / microSize).toBeCloseTo(1.5, 1);
-
   const desktopNavSize = await page.locator(".desktop-nav").evaluate((element) =>
     Number.parseFloat(getComputedStyle(element).fontSize),
   );
@@ -166,7 +158,6 @@ test("все пользовательские подписи в абзацах �
   await page.goto("/", { waitUntil: "networkidle" });
 
   const paragraphText = (await page.locator("p").allInnerTexts()).join("\n");
-  expect(paragraphText).toContain("B2B-МАРКЕТИНГ / CRM / РОСТ");
   expect(paragraphText).toContain("Не обязательно закупать больше трафика.");
   expect(paragraphText).not.toMatch(/Control the Flow|Economic thesis|Scroll to explore|SIX LAYERS|STABLE SIGNAL|GROWTH/i);
 });

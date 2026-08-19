@@ -89,7 +89,6 @@ export function Lighthouse() {
       <div className="scroll-stage lighthouse-stage">
         <div className="scene-chrome">
           <SectionLabel index="05">Сигнал / курс</SectionLabel>
-          <p>Неопределённость - ориентир - решение</p>
         </div>
 
         <div className="beacon-visual" aria-hidden="true">
@@ -110,11 +109,9 @@ export function Lighthouse() {
               <path className="beacon-course-line" pathLength="1" d="M86 572 C248 548 336 468 480 486 S650 530 748 410 770 238 824 126" />
               <circle className="beacon-course-end" cx="824" cy="126" r="9" />
             </svg>
-            <span className="beacon-map-label beacon-map-label-noise">РЫНОЧНЫЙ ШУМ</span>
             <span className="beacon-map-label beacon-map-label-signal">СТАБИЛЬНЫЙ СИГНАЛ</span>
             <span className="beacon-map-label beacon-map-label-course">УПРАВЛЯЕМЫЙ КУРС</span>
           </div>
-          <p className="beacon-frame-caption">СТАБИЛЬНЫЙ СИГНАЛ / УПРАВЛЯЕМЫЙ КУРС</p>
         </div>
 
         <div className="beacon-copy-stack">

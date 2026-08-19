@@ -108,9 +108,6 @@ export function SystemProcesses() {
                   </span>
                 ))}
               </div>
-              <span className="system-processes-frame-caption">
-                {systemState === "system" ? "СИСТЕМА / ГОТОВА К РАЗВЁРТЫВАНИЮ" : systemState === "connected" ? "СВЯЗАННАЯ РАБОТА / ЦИКЛ ОБРАТНОЙ СВЯЗИ" : `ПРОЦЕСС 0${activeProcess + 1} / СИГНАЛ В ДВИЖЕНИИ`}
-              </span>
             </div>
 
             <div className="system-processes-thesis">

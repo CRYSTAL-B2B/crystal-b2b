@@ -11,7 +11,6 @@ export function Footer() {
           ))}
         </p>
       </div>
-      <p>B2B-маркетинг / CRM / рост</p>
       <p>© {new Date().getFullYear()}</p>
     </footer>
   );

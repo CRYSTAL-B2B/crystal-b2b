@@ -2685,7 +2685,7 @@ svg {
   display: grid;
   min-height: 9rem;
   padding: 2rem max(calc((100% - 94rem) / 2), clamp(1rem, 3vw, 4rem));
-  grid-template-columns: 1fr auto 1fr;
+  grid-template-columns: 1fr auto;
   gap: 1rem;
   align-items: center;
   color: rgba(255, 255, 255, 0.5);
@@ -3443,14 +3443,6 @@ svg {
 
   .button-contact {
     width: 100%;
-  }
-
-  .site-footer {
-    grid-template-columns: 1fr auto;
-  }
-
-  .site-footer > p:nth-child(2) {
-    display: none;
   }
 
   .site-footer-identity {

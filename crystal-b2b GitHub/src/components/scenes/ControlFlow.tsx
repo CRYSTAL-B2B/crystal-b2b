@@ -85,7 +85,6 @@ export function ControlFlow() {
       <div className="scroll-stage flow-stage">
         <div className="scene-chrome">
           <SectionLabel index="03">Управление потоком</SectionLabel>
-          <p>Входной поток не обязан расти - управляемость меняет результат</p>
         </div>
 
         <div className="flow-visual" aria-hidden="true">
