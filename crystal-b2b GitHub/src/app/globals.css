@@ -5150,6 +5150,7 @@ body[data-navigation-open="true"] {
     font-size: 0.78rem;
     font-weight: 400;
     letter-spacing: -0.01em;
+    white-space: nowrap;
   }
 }
 
