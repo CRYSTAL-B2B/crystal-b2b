@@ -26,7 +26,7 @@ export function ControlFlow() {
         const crawl = section.querySelector<HTMLElement>(".flow-crawl");
         if (!crawl) return;
 
-        gsap.set(crawl, { yPercent: 90 });
+        gsap.set(crawl, { yPercent: 0 });
 
         let flowState = "loss";
         const setFlowState = (next: string) => {
