@@ -42,19 +42,17 @@ export function Lighthouse() {
             scrub: 0.58,
             invalidateOnRefresh: true,
             onUpdate: (trigger) => {
-              const nextState = trigger.progress < 0.24
+              const nextState = trigger.progress < 0.17
                 ? "weather"
-                : trigger.progress < 0.5
+                : trigger.progress < 0.45
                   ? "signal"
-                  : trigger.progress < 0.76
+                  : trigger.progress < 0.74
                     ? "course"
                     : "decision";
               setLighthouseState(nextState);
             },
           },
         });
-
-        timeline.to({}, { duration: 0.52 });
 
         copy.slice(1).forEach((item, index) => {
           timeline
