@@ -23,6 +23,7 @@ export default function Home() {
     jobTitle: "B2B-маркетолог и руководитель маркетинга",
     description: "Специалист по B2B-маркетинговым системам, CRM, лидогенерации, аналитике и автоматизации.",
     knowsAbout: ["B2B-маркетинг", "CRM-маркетинг", "Лидогенерация", "Маркетинговая аналитика", "Автоматизация маркетинга"],
+    sameAs: ["https://t.me/DAmarketolog"],
     ...(siteUrl ? { url: siteUrl.toString() } : {}),
   };
 
