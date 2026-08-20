@@ -1,6 +1,6 @@
 # Деплой (GitHub Pages)
 
-Это статическая версия сайта `crystal-b2b.duckdns.org`, собранная через
+Это статическая версия сайта `b2b-system.pro`, собранная через
 `next build` с `output: "export"`. Никакого сервера — GitHub Pages отдаёт
 файлы из `out/` напрямую.
 
@@ -24,7 +24,10 @@
 поэтому передаются как GitHub Actions **Variables** (не Secrets), в
 Settings → Secrets and variables → Actions → Variables:
 
-- `TURNSTILE_SITE_KEY` — тот же ключ, что и у VPS-версии (домен не меняется)
+- `TURNSTILE_SITE_KEY` — ⚠️ после смены домена на `b2b-system.pro`
+  проверить в Cloudflare Turnstile, что этот домен добавлен в список
+  разрешённых hostname для виджета - иначе форма перестанет проходить
+  проверку
 - `LEAD_WEBHOOK_URL` — тот же n8n webhook
 - `YANDEX_METRIKA_ID` — тот же счётчик
 
@@ -36,24 +39,28 @@ Settings → Secrets and variables → Actions → Variables:
 
 1. **Settings → Pages** → Source: **GitHub Actions**.
 2. Добавить три Variables выше.
-3. **Settings → Pages → Custom domain**: `crystal-b2b.duckdns.org`
+3. **Settings → Pages → Custom domain**: `b2b-system.pro`
    (файл `public/CNAME` уже прописывает это при сборке, но поле в
    настройках GitHub тоже нужно заполнить — так GitHub начинает
    проверять DNS и выпускать сертификат).
-4. **DNS на DuckDNS**: заменить A-запись `crystal-b2b` с текущего IP VPS
-   на статические IP GitHub Pages:
+4. **DNS в Cloudflare** (домен куплен на Porkbun, зона DNS — в
+   Cloudflare): удалить парковочные ALIAS/CNAME на `pixie.porkbun.com`,
+   добавить 4 A-записи на apex-домен:
    ```
    185.199.108.153
    185.199.109.153
    185.199.110.153
    185.199.111.153
    ```
-   DuckDNS хранит только один IP на поддомен — если нужны все четыре,
-   можно оставить один (Pages работает и с одним A-record) либо уточнить
-   в DuckDNS поддержку нескольких записей.
+   и CNAME `www` → `crystal-b2b.github.io`. **Proxy status — обязательно
+   "DNS only" (серое облако)**: проксирование через Cloudflare ломает
+   выпуск сертификата GitHub Pages.
 5. После того как DNS обновится и GitHub подтвердит домен — включить
    **Enforce HTTPS** в Settings → Pages (появится, когда сертификат
    будет готов, обычно в течение часа).
+
+Домен сменился 2026-08-20 с `crystal-b2b.duckdns.org` на
+`b2b-system.pro` — DuckDNS-домен GitHub Pages больше не обслуживает.
 
 ## Деплой
 

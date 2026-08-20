@@ -1,9 +1,10 @@
 # crystal-b2b — GitHub Pages, актуальное состояние
 
-**Обновлено:** 2026-08-18
+**Обновлено:** 2026-08-20
 
-Статическая версия основного сайта, заменившая VPS-хостинг на
-`crystal-b2b.duckdns.org` — теперь полностью на GitHub Pages. Код и
+Статическая версия основного сайта, заменившая VPS-хостинг —
+теперь полностью на GitHub Pages, домен `b2b-system.pro` (ранее
+`crystal-b2b.duckdns.org`, миграция 2026-08-20). Код и
 разница с VPS-версией — см. [deployment.md](deployment.md).
 
 ## Что сделано
@@ -12,8 +13,9 @@
 - `ContactForm.tsx` шлёт заявку прямо в n8n (`fetch` из браузера), тот
   же payload, что раньше собирал `/api/lead`
 - `public/CNAME` + `public/.nojekyll` для кастомного домена
-- `.github/workflows/deploy-pages.yml` — автосборка и публикация при
-  пуше в `main` (только при изменениях в этой папке)
+- `.github/workflows/deploy-pages.yml` — публикация только вручную
+  (Actions → Deploy Pages → Run workflow); автодеплой по пуше
+  отключён осознанно
 - Локальная сборка/тесты по умолчанию без `LEAD_WEBHOOK_URL` — заявки
   не улетают в реальный n8n при разработке
 - Три Variables добавлены в GitHub Actions, Pages включён (Source:
