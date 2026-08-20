@@ -1,8 +1,9 @@
 export const navigation = [
-  { label: "Система", href: "#system" },
-  { label: "Результаты", href: "#results" },
-  { label: "Кейсы", href: "#cases" },
-  { label: "Опыт", href: "#experience" },
+  { label: "Система", href: "/#system" },
+  { label: "Результаты", href: "/#results" },
+  { label: "Кейсы", href: "/#cases" },
+  { label: "Опыт", href: "/#experience" },
+  { label: "FAQ", href: "/faq" },
 ] as const;
 
 export type Process = {

@@ -1,5 +1,6 @@
 "use client";
 
+import Link from "next/link";
 import { useEffect, useRef, useState } from "react";
 import { navigation } from "@/data/site";
 import { contactLinks } from "@/data/contacts";
@@ -40,19 +41,19 @@ export function Header() {
 
   return (
     <header className="site-header" data-open={open} data-scrolled={scrolled}>
-      <a className="site-mark" href="#top" aria-label="Даниил Чекулаев - в начало страницы">
+      <Link className="site-mark" href="/#top" aria-label="Даниил Чекулаев - в начало страницы">
         <span>Даниил Чекулаев</span>
-      </a>
+      </Link>
       <nav className="desktop-nav" aria-label="Основная навигация">
-        {navigation.map((item) => <a key={item.href} href={item.href}>{item.label}</a>)}
+        {navigation.map((item) => <Link key={item.href} href={item.href}>{item.label}</Link>)}
       </nav>
-      <a
+      <Link
         className="header-contact"
-        href="#contact"
+        href="/#contact"
         onClick={() => trackEvent("navigation_contact")}
       >
         Обсудить задачу <Arrow />
-      </a>
+      </Link>
       <button
         ref={buttonRef}
         className="menu-toggle"
@@ -67,19 +68,19 @@ export function Header() {
       <div id="mobile-menu" className="mobile-menu" ref={menuRef} aria-hidden={!open} inert={!open}>
         <nav aria-label="Мобильная навигация">
           {navigation.map((item, index) => (
-            <a key={item.href} href={item.href} onClick={() => setOpen(false)}>
+            <Link key={item.href} href={item.href} onClick={() => setOpen(false)}>
               <span>0{index + 1}</span>{item.label}
-            </a>
+            </Link>
           ))}
-          <a
-            href="#contact"
+          <Link
+            href="/#contact"
             onClick={() => {
               trackEvent("navigation_contact");
               setOpen(false);
             }}
           >
-            <span>05</span>Обсудить задачу
-          </a>
+            <span>0{navigation.length + 1}</span>Обсудить задачу
+          </Link>
         </nav>
         <div className="mobile-menu-contacts">
           {contactLinks.map((contact) => (

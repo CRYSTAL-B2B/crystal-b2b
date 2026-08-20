@@ -257,6 +257,13 @@ test("reduced motion показывает полное статическое с
   await context.close();
 });
 
+test("переход с /faq по ссылке навигации приводит к нужной секции главной", async ({ page }) => {
+  await page.goto("/faq", { waitUntil: "networkidle" });
+  await page.getByRole("link", { name: "Кейсы" }).click();
+  await expect(page).toHaveURL(/\/#cases$/);
+  await expect(page.locator("#cases")).toBeInViewport();
+});
+
 test("мобильное меню закрывается по Escape с возвратом фокуса", async ({ page }) => {
   await page.setViewportSize({ width: 390, height: 844 });
   await page.goto("/", { waitUntil: "networkidle" });
@@ -314,26 +321,28 @@ test("форма валидирует поля и честно сообщает 
   await expect(page.getByLabel(/^Имя/)).toHaveValue("Анна");
 });
 
-for (const viewport of [
-  { name: "desktop", width: 1440, height: 900 },
-  { name: "mobile", width: 390, height: 844 },
-] as const) {
-  test(`${viewport.name}: нет серьёзных WCAG-нарушений`, async ({ page }) => {
-    await page.setViewportSize(viewport);
-    await page.goto("/", { waitUntil: "networkidle" });
+for (const route of ["/", "/faq"] as const) {
+  for (const viewport of [
+    { name: "desktop", width: 1440, height: 900 },
+    { name: "mobile", width: 390, height: 844 },
+  ] as const) {
+    test(`${route === "/" ? "главная" : route}, ${viewport.name}: нет серьёзных WCAG-нарушений`, async ({ page }) => {
+      await page.setViewportSize(viewport);
+      await page.goto(route, { waitUntil: "networkidle" });
 
-    const results = await new AxeBuilder({ page })
-      .withTags(["wcag2a", "wcag2aa", "wcag21a", "wcag21aa"])
-      .analyze();
-    const blockingViolations = results.violations.filter(
-      ({ impact }) => impact === "critical" || impact === "serious",
-    );
+      const results = await new AxeBuilder({ page })
+        .withTags(["wcag2a", "wcag2aa", "wcag21a", "wcag21aa"])
+        .analyze();
+      const blockingViolations = results.violations.filter(
+        ({ impact }) => impact === "critical" || impact === "serious",
+      );
 
-    expect(
-      blockingViolations.map(({ id, nodes }) => ({
-        id,
-        nodes: nodes.map(({ failureSummary, target }) => ({ failureSummary, target })),
-      })),
-    ).toEqual([]);
-  });
+      expect(
+        blockingViolations.map(({ id, nodes }) => ({
+          id,
+          nodes: nodes.map(({ failureSummary, target }) => ({ failureSummary, target })),
+        })),
+      ).toEqual([]);
+    });
+  }
 }
