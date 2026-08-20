@@ -1,13 +1,22 @@
 "use client";
 
-import { useRef } from "react";
+import { useRef, useState } from "react";
 import { cases, metrics } from "@/data/site";
 import { SectionLabel } from "@/components/ui/SectionLabel";
 import { Arrow } from "@/components/ui/Arrow";
 import { trackEvent } from "@/lib/analytics";
 
+const caseFilters = [
+  { id: "all", label: "Все" },
+  { id: "ai-automation", label: "AI-автоматизации" },
+] as const;
+
+type CaseFilter = (typeof caseFilters)[number]["id"];
+
 export function Proof() {
   const viewed = useRef(new Set<string>());
+  const [filter, setFilter] = useState<CaseFilter>("all");
+  const visibleCases = filter === "all" ? cases : cases.filter((caseStudy) => caseStudy.evidence);
 
   return (
     <>
@@ -37,8 +46,20 @@ export function Proof() {
             <SectionLabel index="07">Кейсы</SectionLabel>
             <h2 id="cases-title">Не отдельные инструменты. Изменения в системе.</h2>
           </div>
+          <div className="case-filters" role="group" aria-label="Фильтр кейсов по категории">
+            {caseFilters.map((option) => (
+              <button
+                key={option.id}
+                type="button"
+                aria-pressed={filter === option.id}
+                onClick={() => setFilter(option.id)}
+              >
+                {option.label}
+              </button>
+            ))}
+          </div>
           <div className="case-list">
-            {cases.map((caseStudy) => (
+            {visibleCases.map((caseStudy) => (
               <details
                 className="case-row"
                 key={caseStudy.id}
@@ -55,10 +76,13 @@ export function Proof() {
                   <span className="case-preview">{caseStudy.results[0]}</span>
                   <span className="case-toggle"><i>Открыть</i><Arrow /></span>
                 </summary>
-                <div className="case-body">
-                  <div><small>Проблема</small><p>{caseStudy.problem}</p></div>
-                  <div><small>Система</small><p>{caseStudy.system}</p></div>
+                <div className={caseStudy.evidence ? "case-body case-body-evidence" : "case-body"}>
+                  <div><small>{caseStudy.evidence ? "Проект" : "Проблема"}</small><p>{caseStudy.problem}</p></div>
+                  <div><small>{caseStudy.evidence ? "Мой вклад" : "Система"}</small><p>{caseStudy.system}</p></div>
                   <div className="case-results"><small>Результат</small>{caseStudy.results.map((result) => <p key={result}>{result}</p>)}</div>
+                  {caseStudy.evidence ? (
+                    <div className="case-evidence"><small>Evidence</small>{caseStudy.evidence.map((item) => <p key={item}>{item}</p>)}</div>
+                  ) : null}
                 </div>
               </details>
             ))}

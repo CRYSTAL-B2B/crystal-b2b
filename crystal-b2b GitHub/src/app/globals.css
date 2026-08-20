@@ -1873,8 +1873,40 @@ svg {
   letter-spacing: -0.06em;
 }
 
+.case-filters {
+  display: flex;
+  gap: 0.5rem;
+  margin-top: 1.75rem;
+}
+
+.case-filters button {
+  padding: 0.55rem 1.1rem;
+  color: var(--muted);
+  border: 1px solid var(--line);
+  border-radius: 100vmax;
+  background: transparent;
+  cursor: pointer;
+  font-family: "IBM Plex Mono", monospace;
+  font-size: 0.68rem;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+  transition: color 180ms ease, background 180ms ease, border-color 180ms ease;
+}
+
+.case-filters button:hover,
+.case-filters button:focus-visible {
+  color: var(--white);
+  border-color: rgba(255, 255, 255, 0.4);
+}
+
+.case-filters button[aria-pressed="true"] {
+  color: #08090b;
+  border-color: var(--white);
+  background: var(--white);
+}
+
 .case-list {
-  margin-top: var(--space-lg);
+  margin-top: var(--space-md);
   border-top: 1px solid var(--line);
 }
 
@@ -1976,6 +2008,20 @@ svg {
   color: var(--blue);
   font-size: 1.25rem;
   font-weight: 650;
+}
+
+.case-body-evidence {
+  grid-template-columns: repeat(4, 1fr);
+}
+
+.case-evidence p {
+  color: var(--muted);
+  font-size: 0.92rem;
+  line-height: 1.5;
+}
+
+.case-evidence p + p {
+  margin-top: 0.6rem;
 }
 
 .expertise-section {
