@@ -85,7 +85,7 @@ export function Proof() {
               >
                 <summary>
                   <span className="case-index">{caseStudy.index}</span>
-                  <span className="case-title"><small>{caseStudy.category}</small><b>{caseStudy.company}</b></span>
+                  <span className="case-title"><small>{caseStudy.category}</small>{" "}<b>{caseStudy.company}</b></span>
                   <span className="case-preview">{caseStudy.results[0]}</span>
                   <span className="case-toggle"><i>Открыть</i><Arrow /></span>
                 </summary>

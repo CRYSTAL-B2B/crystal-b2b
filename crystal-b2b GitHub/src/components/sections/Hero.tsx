@@ -75,7 +75,7 @@ export function Hero() {
       </div>
       <div className="hero-copy">
         <h1 id="hero-title">
-          <span>Строю B2B-маркетинг</span>
+          <span>Строю B2B-маркетинг</span>{" "}
           <span>от спроса до <em>выручки.</em></span>
         </h1>
         <p className="hero-lede">
