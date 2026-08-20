@@ -114,15 +114,15 @@ export function Lighthouse() {
 
         <div className="beacon-copy-stack">
           <div className="beacon-copy"><p>01 / РЫНОЧНЫЙ ШУМ</p><h2 id="lighthouse-title">Подготовьтесь к шторму.</h2></div>
-          <div className="beacon-copy"><p>02 / СИГНАЛ</p><h2>Когда рынок шумит, ориентируйтесь на сигнал.</h2></div>
-          <div className="beacon-copy"><p>03 / КУРС</p><h2>Следуйте за маяком, а не за шумом.</h2></div>
-          <div className="beacon-copy"><p>04 / СИСТЕМА</p><h2>У курса должна быть система.</h2></div>
-          <div className="beacon-copy"><p>05 / РЕШЕНИЕ</p><h2>Если нужен курс - давайте обсудим задачу.</h2></div>
+          <div className="beacon-copy"><p>02 / СИГНАЛ</p><div className="scene-statement-heading">Когда рынок шумит, ориентируйтесь на сигнал.</div></div>
+          <div className="beacon-copy"><p>03 / КУРС</p><div className="scene-statement-heading">Следуйте за маяком, а не за шумом.</div></div>
+          <div className="beacon-copy"><p>04 / СИСТЕМА</p><div className="scene-statement-heading">У курса должна быть система.</div></div>
+          <div className="beacon-copy"><p>05 / РЕШЕНИЕ</p><div className="scene-statement-heading">Если нужен курс - давайте обсудим задачу.</div></div>
         </div>
 
         <div className="beacon-static-summary">
           <p>СИГНАЛ - КУРС - РЕШЕНИЕ</p>
-          <h2>У курса должна быть система.</h2>
+          <div className="scene-statement-heading">У курса должна быть система.</div>
         </div>
       </div>
     </section>

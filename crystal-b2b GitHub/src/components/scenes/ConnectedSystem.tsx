@@ -129,7 +129,7 @@ export function ConnectedSystem() {
 
         <div className="architecture-copy">
           <p>Ценность - не только в элементах.</p>
-          <h2>Ценность - в связях между ними.</h2>
+          <div className="scene-statement-heading">Ценность - в связях между ними.</div>
         </div>
       </div>
     </section>

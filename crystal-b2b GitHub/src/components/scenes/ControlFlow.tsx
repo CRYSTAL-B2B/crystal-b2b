@@ -142,26 +142,26 @@ export function ControlFlow() {
             </div>
             <div className="flow-statement">
               <p>ПОЛЕ КОНТРОЛЯ</p>
-              <h2>Те же данные. <em>Меньше потерь.</em></h2>
+              <div className="scene-statement-heading">Те же данные. <em>Меньше потерь.</em></div>
             </div>
             <div className="flow-statement">
               <p>ПОЛЕЗНЫЙ РЕЗУЛЬТАТ</p>
-              <h2>Те же лиды. <em>Больше результата.</em></h2>
+              <div className="scene-statement-heading">Те же лиды. <em>Больше результата.</em></div>
             </div>
             <div className="flow-statement">
               <p>ОБРАТНАЯ СВЯЗЬ</p>
-              <h2>Дополнительная прибыль - результат управления.</h2>
+              <div className="scene-statement-heading">Дополнительная прибыль - результат управления.</div>
             </div>
             <div className="flow-statement">
               <p>ПРЕИМУЩЕСТВО АДАПТАЦИИ</p>
-              <h2>Канал можно скопировать. Систему решений - значительно сложнее.</h2>
+              <div className="scene-statement-heading">Канал можно скопировать. Систему решений - значительно сложнее.</div>
             </div>
           </div>
         </div>
 
         <div className="flow-static-summary">
           <p>ДАННЫЕ - КОНТРОЛЬ - МЕНЬШЕ ПОТЕРЬ - ЦЕННОСТЬ - ОБРАТНАЯ СВЯЗЬ</p>
-          <h2>Те же лиды. <em>Больше результата.</em></h2>
+          <div className="scene-statement-heading">Те же лиды. <em>Больше результата.</em></div>
         </div>
       </div>
     </section>

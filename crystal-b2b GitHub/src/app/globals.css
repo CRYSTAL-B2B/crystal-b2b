@@ -1298,7 +1298,9 @@ svg {
 }
 
 .flow-statement h2,
-.flow-static-summary h2 {
+.flow-static-summary h2,
+.flow-statement .scene-statement-heading,
+.flow-static-summary .scene-statement-heading {
   font-size: clamp(2.4rem, 4.5vw, 5.7rem);
   font-weight: 520;
   line-height: 0.99;
@@ -1306,7 +1308,9 @@ svg {
 }
 
 .flow-statement h2 em,
-.flow-static-summary h2 em {
+.flow-static-summary h2 em,
+.flow-statement .scene-statement-heading em,
+.flow-static-summary .scene-statement-heading em {
   color: var(--warm);
 }
 
@@ -1730,7 +1734,8 @@ svg {
   font-size: 0.82rem;
 }
 
-.architecture-copy h2 {
+.architecture-copy h2,
+.architecture-copy .scene-statement-heading {
   max-width: 46rem;
   margin-top: 0.35rem;
   font-size: clamp(2.4rem, 3.7vw, 4.5rem);
@@ -2498,7 +2503,9 @@ svg {
 }
 
 .beacon-copy h2,
-.beacon-static-summary h2 {
+.beacon-static-summary h2,
+.beacon-copy .scene-statement-heading,
+.beacon-static-summary .scene-statement-heading {
   font-size: clamp(3rem, 6vw, 7.2rem);
   font-weight: 520;
   line-height: 0.96;
@@ -3215,7 +3222,9 @@ svg {
   }
 
   .flow-statement h2,
-  .flow-static-summary h2 {
+  .flow-static-summary h2,
+  .flow-statement .scene-statement-heading,
+  .flow-static-summary .scene-statement-heading {
     font-size: clamp(2.5rem, 10.8vw, 3.8rem);
   }
 
@@ -3452,7 +3461,9 @@ svg {
   }
 
   .beacon-copy h2,
-  .beacon-static-summary h2 {
+  .beacon-static-summary h2,
+  .beacon-copy .scene-statement-heading,
+  .beacon-static-summary .scene-statement-heading {
     max-width: 30rem;
     font-size: clamp(3rem, 13vw, 5rem);
   }
@@ -3658,25 +3669,34 @@ body {
 .cases-heading h2,
 .flow-statement h2,
 .flow-static-summary h2,
+.flow-statement .scene-statement-heading,
+.flow-static-summary .scene-statement-heading,
 .beacon-copy h2,
-.beacon-static-summary h2 {
+.beacon-static-summary h2,
+.beacon-copy .scene-statement-heading,
+.beacon-static-summary .scene-statement-heading {
   font-size: var(--type-display-secondary);
 }
 
 /* "03 Управление потоком" only - 2pt smaller than the shared display-secondary scale. */
 .flow-statement h2,
-.flow-static-summary h2 {
+.flow-static-summary h2,
+.flow-statement .scene-statement-heading,
+.flow-static-summary .scene-statement-heading {
   font-size: calc(var(--type-display-secondary) - 2pt);
 }
 
 /* On the "Тихая" preset specifically, 3pt smaller still (5pt total). */
 html[data-typography="calm"] .flow-statement h2,
-html[data-typography="calm"] .flow-static-summary h2 {
+html[data-typography="calm"] .flow-static-summary h2,
+html[data-typography="calm"] .flow-statement .scene-statement-heading,
+html[data-typography="calm"] .flow-static-summary .scene-statement-heading {
   font-size: calc(var(--type-display-secondary) - 5pt);
 }
 
 .architecture-side h2,
 .architecture-copy h2,
+.architecture-copy .scene-statement-heading,
 .experience-sticky h2 {
   font-size: var(--type-heading);
 }
