@@ -3951,6 +3951,19 @@ html[data-typography="calm"] .flow-static-summary h2 {
   color: var(--blue-soft);
 }
 
+.case-results a {
+  color: inherit;
+  text-decoration-line: underline;
+  text-decoration-color: rgba(151, 197, 255, 0.4);
+  text-underline-offset: 0.18em;
+  transition: text-decoration-color 180ms ease;
+}
+
+.case-results a:hover,
+.case-results a:focus-visible {
+  text-decoration-color: currentColor;
+}
+
 .expertise-section {
   background:
     linear-gradient(90deg, rgba(6, 6, 9, 0.86), rgba(6, 6, 9, 0.6) 58%, rgba(6, 6, 9, 0.9)),

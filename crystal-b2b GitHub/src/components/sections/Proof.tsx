@@ -5,6 +5,19 @@ import { cases, metrics } from "@/data/site";
 import { SectionLabel } from "@/components/ui/SectionLabel";
 import { Arrow } from "@/components/ui/Arrow";
 import { trackEvent } from "@/lib/analytics";
+import type { CaseStudy } from "@/data/site";
+
+function renderResult(result: string, resultLink: CaseStudy["resultLink"]) {
+  if (!resultLink || !result.includes(resultLink.text)) return result;
+  const [before, after] = result.split(resultLink.text);
+  return (
+    <>
+      {before}
+      <a href={resultLink.href} target="_blank" rel="noopener noreferrer">{resultLink.text}</a>
+      {after}
+    </>
+  );
+}
 
 const caseFilters = [
   { id: "all", label: "Все" },
@@ -79,7 +92,7 @@ export function Proof() {
                 <div className={caseStudy.evidence ? "case-body case-body-evidence" : "case-body"}>
                   <div><small>{caseStudy.evidence ? "Проект" : "Проблема"}</small><p>{caseStudy.problem}</p></div>
                   <div><small>{caseStudy.evidence ? "Мой вклад" : "Система"}</small><p>{caseStudy.system}</p></div>
-                  <div className="case-results"><small>Результат</small>{caseStudy.results.map((result) => <p key={result}>{result}</p>)}</div>
+                  <div className="case-results"><small>Результат</small>{caseStudy.results.map((result) => <p key={result}>{renderResult(result, caseStudy.resultLink)}</p>)}</div>
                   {caseStudy.evidence ? (
                     <div className="case-evidence"><small>Evidence</small>{caseStudy.evidence.map((item) => <p key={item}>{item}</p>)}</div>
                   ) : null}
