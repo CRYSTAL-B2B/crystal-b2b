@@ -10,16 +10,28 @@ const yandexMetrikaId = process.env.NEXT_PUBLIC_YANDEX_METRIKA_ID;
 
 export const metadata: Metadata = {
   ...(siteUrl ? { metadataBase: siteUrl } : {}),
-  title: "Даниил Чекулаев - B2B-маркетолог | Стратегия, CRM и лидогенерация",
+  title: "Даниил Чекулаев - B2B-маркетинг от спроса до выручки",
   description: "Строю измеримые B2B-маркетинговые системы: стратегия, лидогенерация, CRM, аналитика и AI-автоматизация. Более 11 лет опыта.",
   applicationName: "Даниил Чекулаев - B2B-маркетинг",
   authors: [{ name: "Даниил Чекулаев" }],
   creator: "Даниил Чекулаев",
   category: "marketing",
   ...(siteUrl ? { alternates: { canonical: "/" } } : {}),
+  robots: {
+    index: true,
+    follow: true,
+    googleBot: {
+      index: true,
+      follow: true,
+      "max-video-preview": -1,
+      "max-image-preview": "large",
+      "max-snippet": -1,
+    },
+  },
   openGraph: {
     type: "website",
     locale: "ru_RU",
+    ...(siteUrl ? { url: "/" } : {}),
     title: "Даниил Чекулаев - B2B-маркетинг от спроса до выручки",
     description: "Стратегия, лидогенерация, CRM, аналитика и автоматизация - в одной измеримой системе.",
     siteName: "Даниил Чекулаев",
