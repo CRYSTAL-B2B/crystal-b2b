@@ -8,8 +8,10 @@ export default function robots(): MetadataRoute.Robots {
   return {
     rules: [
       { userAgent: "*", allow: "/" },
-      // Explicit allow for AI search/citation crawlers - intent, not just a
-      // side effect of the wildcard rule above.
+      // Explicit allow for search/AI citation crawlers - intent, not just a
+      // side effect of the wildcard rule above. YandexBot first: primary
+      // audience is Russia-wide.
+      { userAgent: "YandexBot", allow: "/" },
       { userAgent: "GPTBot", allow: "/" },
       { userAgent: "ChatGPT-User", allow: "/" },
       { userAgent: "ClaudeBot", allow: "/" },

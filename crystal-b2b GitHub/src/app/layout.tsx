@@ -11,7 +11,7 @@ const yandexMetrikaId = process.env.NEXT_PUBLIC_YANDEX_METRIKA_ID;
 export const metadata: Metadata = {
   ...(siteUrl ? { metadataBase: siteUrl } : {}),
   title: "Даниил Чекулаев - B2B-маркетинг от спроса до выручки",
-  description: "Строю измеримые B2B-маркетинговые системы: стратегия, лидогенерация, CRM, аналитика и AI-автоматизация. Более 11 лет опыта.",
+  description: "Строю измеримые B2B-маркетинговые системы по всей России: стратегия, лидогенерация, CRM, аналитика и AI-автоматизация. Более 11 лет опыта.",
   applicationName: "Даниил Чекулаев - B2B-маркетинг",
   authors: [{ name: "Даниил Чекулаев" }],
   creator: "Даниил Чекулаев",
