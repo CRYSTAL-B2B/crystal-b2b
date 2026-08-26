@@ -4,6 +4,7 @@ import { useRef, useState } from "react";
 import { cases, metrics } from "@/data/site";
 import { SectionLabel } from "@/components/ui/SectionLabel";
 import { Arrow } from "@/components/ui/Arrow";
+import { CaseVisual } from "@/components/sections/CaseVisual";
 import { trackEvent } from "@/lib/analytics";
 import type { CaseStudy } from "@/data/site";
 
@@ -95,6 +96,9 @@ export function Proof() {
                   <div className="case-results"><small>Результат</small>{caseStudy.results.map((result) => <p key={result}>{renderResult(result, caseStudy.resultLink)}</p>)}</div>
                   {caseStudy.evidence ? (
                     <div className="case-evidence"><small>Evidence</small>{caseStudy.evidence.map((item) => <p key={item}>{item}</p>)}</div>
+                  ) : null}
+                  {caseStudy.visual ? (
+                    <CaseVisual visual={caseStudy.visual} company={caseStudy.company} />
                   ) : null}
                 </div>
               </details>
