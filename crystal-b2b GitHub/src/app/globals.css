@@ -2078,12 +2078,19 @@ svg {
   font-weight: 400;
 }
 
-/* Вторичный ряд: одиночные величины при наличии пар «было → стало». */
+/* Пары «было → стало» и одиночные величины стоят в одну строку:
+   одиночные - справа от пар, отделённые вертикальной линией. */
+.case-visual-body {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: flex-start;
+  gap: 1.6rem 2.8rem;
+}
+
 .case-visual-items {
-  margin-top: 1.7rem;
-  padding-top: 1.4rem;
-  border-top: 1px solid var(--line);
-  gap: 1.3rem 2.6rem;
+  padding-left: 2.8rem;
+  border-left: 1px solid var(--line);
+  gap: 1.3rem 2.2rem;
 }
 
 .case-visual-figures-sm {
@@ -3480,6 +3487,15 @@ svg {
 
   .case-visual-rows {
     gap: 1.3rem 2.2rem;
+  }
+
+  /* На узком экране ряды становятся друг под другом - вертикальный
+     разделитель между ними превращается в горизонтальный. */
+  .case-visual-items {
+    padding-top: 1.3rem;
+    padding-left: 0;
+    border-top: 1px solid var(--line);
+    border-left: 0;
   }
 
   .competency-grid,

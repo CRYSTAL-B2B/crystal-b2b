@@ -58,7 +58,7 @@ export function Proof() {
         <div className="container">
           <div className="cases-heading">
             <SectionLabel index="07">Кейсы</SectionLabel>
-            <h2 id="cases-title">Это не отдельные инструменты. Это точечные системные изменения.</h2>
+            <h2 id="cases-title">Это не отдельные инструменты.<br />Это точечные системные изменения.</h2>
           </div>
           <div className="case-filters" role="group" aria-label="Фильтр кейсов по категории">
             {caseFilters.map((option) => (
