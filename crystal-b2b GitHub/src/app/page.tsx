@@ -1,6 +1,5 @@
 import { Header } from "@/components/layout/Header";
 import { Footer } from "@/components/layout/Footer";
-import { TypographySwitcher } from "@/components/ui/TypographySwitcher";
 import { Hero } from "@/components/sections/Hero";
 import { EditorialBridge } from "@/components/sections/EditorialBridge";
 import { SystemProcesses } from "@/components/scenes/SystemProcesses";
@@ -34,7 +33,6 @@ export default function Home() {
       <ScrollToHashOnLoad />
       <a className="skip-link" href="#main">Перейти к содержанию</a>
       <Header />
-      <TypographySwitcher />
       <main id="main">
         <Hero />
         <EditorialBridge

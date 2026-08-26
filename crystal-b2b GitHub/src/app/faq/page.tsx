@@ -1,7 +1,6 @@
 import type { Metadata } from "next";
 import { Header } from "@/components/layout/Header";
 import { Footer } from "@/components/layout/Footer";
-import { TypographySwitcher } from "@/components/ui/TypographySwitcher";
 import { SectionLabel } from "@/components/ui/SectionLabel";
 import { Arrow } from "@/components/ui/Arrow";
 import { faqItems } from "@/data/faq";
@@ -44,7 +43,6 @@ export default function FaqPage() {
     <>
       <a className="skip-link" href="#main">Перейти к содержанию</a>
       <Header />
-      <TypographySwitcher />
       <main id="main">
         <section className="cases-section faq-section" aria-labelledby="faq-title">
           <div className="container">

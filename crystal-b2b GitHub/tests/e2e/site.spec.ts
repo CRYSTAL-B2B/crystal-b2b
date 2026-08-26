@@ -285,26 +285,20 @@ test("кнопка mobile-меню закреплена у правого кра
   expect(rightInset).toBeCloseTo(16, 0);
 });
 
-test("переключатель типографики применяет и сохраняет выбранную шкалу", async ({ page }) => {
+test("типографика зафиксирована: переключателя нет, шкала применяется", async ({ page }) => {
   await page.goto("/", { waitUntil: "networkidle" });
 
-  const calm = page.getByRole("button", { name: /Тихая:/ });
-  const editorial = page.getByRole("button", { name: /Акцент:/ });
-  await expect(calm).toHaveAttribute("aria-pressed", "true");
+  // Переключатель шкал убран: это был инструмент дизайнера, а его плавающая
+  // панель перекрывала контент в правом нижнем углу.
+  await expect(page.locator(".typography-switcher")).toHaveCount(0);
+  await expect(page.locator("html")).not.toHaveAttribute("data-typography");
 
-  const calmSize = await page.locator(".hero h1").evaluate((element) =>
+  // Токены шкалы всё ещё разрешаются - после удаления переопределений
+  // базовый :root остаётся единственным источником значений.
+  const heroSize = await page.locator(".hero h1").evaluate((element) =>
     Number.parseFloat(getComputedStyle(element).fontSize),
   );
-  await editorial.click();
-  await expect(page.locator("html")).toHaveAttribute("data-typography", "editorial");
-  const editorialSize = await page.locator(".hero h1").evaluate((element) =>
-    Number.parseFloat(getComputedStyle(element).fontSize),
-  );
-  expect(editorialSize).toBeGreaterThan(calmSize);
-
-  await page.reload({ waitUntil: "networkidle" });
-  await expect(page.locator("html")).toHaveAttribute("data-typography", "editorial");
-  await expect(page.getByRole("button", { name: /Акцент:/ })).toHaveAttribute("aria-pressed", "true");
+  expect(heroSize).toBeGreaterThan(40);
 });
 
 test("форма валидирует поля и честно сообщает об отсутствующем delivery endpoint", async ({ page }) => {
