@@ -154,7 +154,7 @@ export function ControlFlow() {
             </div>
             <div className="flow-statement">
               <p>ПРЕИМУЩЕСТВО АДАПТАЦИИ</p>
-              <div className="scene-statement-heading">Канал можно скопировать. Систему решений - значительно сложнее.</div>
+              <div className="scene-statement-heading">Система решений - остаётся преимуществом.</div>
             </div>
           </div>
         </div>
