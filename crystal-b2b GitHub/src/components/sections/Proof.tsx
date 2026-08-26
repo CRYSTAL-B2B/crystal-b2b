@@ -58,7 +58,7 @@ export function Proof() {
         <div className="container">
           <div className="cases-heading">
             <SectionLabel index="07">Кейсы</SectionLabel>
-            <h2 id="cases-title">Это не отдельные инструменты.<br />Это точечные системные изменения.</h2>
+            <h2 id="cases-title">Измеримый результат создают не инструменты,<br />а точные системные изменения.</h2>
           </div>
           <div className="case-filters" role="group" aria-label="Фильтр кейсов по категории">
             {caseFilters.map((option) => (
@@ -87,7 +87,11 @@ export function Proof() {
                 <summary>
                   <span className="case-index">{caseStudy.index}</span>
                   <span className="case-title"><small>{caseStudy.category}</small>{" "}<b>{caseStudy.company}</b></span>
-                  <span className="case-preview">{caseStudy.results[0]}</span>
+                  <span className="case-preview">
+                    {(caseStudy.preview ?? [caseStudy.results[0]]).map((line) => (
+                      <span key={line}>{line}</span>
+                    ))}
+                  </span>
                   <span className="case-toggle"><i>Открыть</i><Arrow /></span>
                 </summary>
                 <div className={caseStudy.evidence ? "case-body case-body-evidence" : "case-body"}>

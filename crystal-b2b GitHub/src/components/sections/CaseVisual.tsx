@@ -14,9 +14,10 @@ interface CaseVisualProps {
  * шкалы - в SVG всё это пришлось бы эмулировать.
  */
 export function CaseVisual({ visual, company }: CaseVisualProps) {
-  // Одиночные величины мельче пар «было → стало», но только когда пары есть:
-  // иначе блоку не с чем создавать иерархию и величины остаются крупными.
-  const itemsAreSecondary = Boolean(visual.rows?.length);
+  // Одиночные величины набраны тем же кеглем, что и пары «было → стало»:
+  // цифры во всех кейсах должны выглядеть одинаково. Разделяет их не размер,
+  // а вертикальная линия между рядами.
+  const hasRows = Boolean(visual.rows?.length);
 
   return (
     <figure className="case-visual">
@@ -47,10 +48,10 @@ export function CaseVisual({ visual, company }: CaseVisualProps) {
         ) : null}
 
         {visual.items?.length ? (
-          <div className={itemsAreSecondary ? "case-visual-rows case-visual-items" : "case-visual-rows"}>
+          <div className={hasRows ? "case-visual-rows case-visual-items" : "case-visual-rows"}>
             {visual.items.map((item) => (
               <div className="case-visual-scale" key={item.caption}>
-                <p className={itemsAreSecondary ? "case-visual-figures case-visual-figures-sm" : "case-visual-figures"}>
+                <p className="case-visual-figures">
                   <span className="case-visual-to">{item.value}</span>
                 </p>
                 <p className="case-visual-label">{item.caption}</p>

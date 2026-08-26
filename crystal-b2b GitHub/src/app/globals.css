@@ -1954,6 +1954,9 @@ svg {
 }
 
 .case-preview {
+  display: flex;
+  flex-direction: column;
+  gap: 0.28em;
   color: var(--blue);
   font-size: clamp(1.1rem, 2vw, 2rem);
   font-weight: 620;
@@ -2093,22 +2096,12 @@ svg {
   gap: 1.3rem 2.2rem;
 }
 
-.case-visual-figures-sm {
-  font-size: clamp(1.5rem, 2.6vw, 2.1rem);
-}
-
 .case-visual-label {
   max-width: 22ch;
   margin: 0.7rem 0 0;
   color: var(--muted);
   font-size: 0.88rem;
   line-height: 1.4;
-}
-
-.case-visual-figures-sm + .case-visual-label {
-  margin-top: 0.5rem;
-  max-width: 20ch;
-  font-size: 0.8rem;
 }
 
 .case-visual-note {
