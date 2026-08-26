@@ -118,6 +118,25 @@ export const metrics: readonly Metric[] = [
   },
 ] as const;
 
+/**
+ * Визуальный блок в раскрытой карточке кейса.
+ *
+ * Два режима, потому что кейсы разного типа: у одних результат — это переход
+ * «было → стало», у других сравнивать не с чем и говорит сам масштаб системы.
+ */
+export type CaseVisual =
+  | {
+      mode: "delta";
+      rows: readonly { from: string; to: string; caption: string }[];
+      /** Сдержанная сноска о происхождении метрики - знак аккуратности, не предупреждение. */
+      note?: string;
+    }
+  | {
+      mode: "scale";
+      items: readonly { value: string; caption: string }[];
+      note?: string;
+    };
+
 export type CaseStudy = {
   id: string;
   index: string;
@@ -128,6 +147,8 @@ export type CaseStudy = {
   results: readonly string[];
   /** Present only for cases that use the Project / Contribution / Result / Evidence chain. */
   evidence?: readonly string[];
+  /** Крупная метрика в раскрытой карточке. Числа - те же, что в results/metrics. */
+  visual?: CaseVisual;
   /** Hyperlinks a substring within a `results` entry (e.g. a domain name). */
   resultLink?: { text: string; href: string };
 };
@@ -141,6 +162,10 @@ export const cases: readonly CaseStudy[] = [
     problem: "Разрозненные точки входа, медленная реакция и ручные операции.",
     system: "CRM + CJM + сегментация + автоматические коммуникации + AI.",
     results: ["Реакция на заявку сокращена с 24 - 1 часа.", "+18% конверсия лида в сделку.", "Высвобождено до 30% рабочего времени менеджеров."],
+    visual: {
+      mode: "delta",
+      rows: [{ from: "24", to: "1", caption: "час до первой реакции на B2B-лид" }],
+    },
   },
   {
     id: "techstroy",
@@ -150,6 +175,14 @@ export const cases: readonly CaseStudy[] = [
     problem: "Нужно масштабировать B2B-лидогенерацию без роста бюджета.",
     system: "Каналы + CRO + CRM + аналитика + интеграция с продажами.",
     results: ["60 - 200 лидов / мес.", "4 000 - 2 300 ₽ CPL", "+37% продаж"],
+    visual: {
+      mode: "delta",
+      rows: [
+        { from: "60", to: "200", caption: "квалифицированных лидов в месяц" },
+        { from: "4 000 ₽", to: "2 300 ₽", caption: "стоимость лида" },
+      ],
+      note: "Бюджет при этом не менялся.",
+    },
   },
   {
     id: "machines",
@@ -159,6 +192,11 @@ export const cases: readonly CaseStudy[] = [
     problem: "Медленное прохождение клиента через работу с коммерческим предложением.",
     system: "Интерактивное КП + поведенческие сигналы + автоматические уведомления.",
     results: ["×2,6 к назначенным встречам"],
+    visual: {
+      mode: "scale",
+      items: [{ value: "×2,6", caption: "к назначенным встречам" }],
+      note: "Метрика требует уточнения источника.",
+    },
   },
   {
     id: "smetika",
@@ -170,6 +208,14 @@ export const cases: readonly CaseStudy[] = [
     results: ["Система ведения и контроля отделочных работ. Tg-bot + Web-панель + Приложение.", "Домен: smetika.pro."],
     resultLink: { text: "smetika.pro", href: "https://smetika.pro" },
     evidence: ["Уже считают сметы в Москве, Екатеринбурге, Санкт-Петербурге и Новосибирске."],
+    visual: {
+      mode: "scale",
+      items: [
+        { value: "307", caption: "Python-файлов" },
+        { value: "1238", caption: "тест-функций" },
+        { value: "4", caption: "города в эксплуатации" },
+      ],
+    },
   },
   {
     id: "ai-lab",
@@ -180,6 +226,14 @@ export const cases: readonly CaseStudy[] = [
     system: "Автоматическая квалификация и маршрутизация лида нужному менеджеру. Генерация товарных фото без фотостудии. Конвейер контента для соцсетей по расписанию. Аналитические сервисы, оценивающие активность конкурентов.",
     results: ["Маршрутизация лидов", "Контент-заводы", "Аналитические дашборды"],
     evidence: ["Воркфлоу «Qualifizer» решает задачу маршрутизации лидов, «Research For Posting» - конвейер контента, «Агент-фотограф» - товарные фото без фотостудии", "44 работающие автоматизации, 1187 узлов суммарно - в реальной эксплуатации, а не демо-версии"],
+    visual: {
+      mode: "scale",
+      items: [
+        { value: "44", caption: "работающих воркфлоу" },
+        { value: "1187", caption: "узлов суммарно" },
+        { value: "49", caption: "LangChain-агентов" },
+      ],
+    },
   },
   {
     id: "conveyorbot",
@@ -190,6 +244,13 @@ export const cases: readonly CaseStudy[] = [
     system: "Пайплайн целиком - парсинг HH.ru API, LLM-оценка с антитоксик-радаром работодателя, визуальный конструктор поисковых запросов в Web UI, Telegram-бот управления. Осознанно «человек в контуре»: не автоотклик, а готовое решение для человека.",
     results: ["517 из 3661 обработанных вакансий в истории - оценка, обоснование и письмо на каждую."],
     evidence: ["Механизм LLM-оценки соответствия может работать и в обратную сторону - подбирать самых подходящих кандидатов с HH.ru под вакансию", "Экономит кадровой службе время на первичном отборе, кратно повышая её эффективность."],
+    visual: {
+      mode: "scale",
+      items: [
+        { value: "3661", caption: "вакансия обработана" },
+        { value: "517", caption: "прошли отбор с обоснованием" },
+      ],
+    },
   },
 ] as const;
 
