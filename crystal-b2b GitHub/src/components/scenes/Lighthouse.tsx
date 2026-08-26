@@ -22,16 +22,18 @@ export function Lighthouse() {
       section.dataset.motionReady = "true";
 
       const context = gsap.context(() => {
-        const copy = gsap.utils.toArray<HTMLElement>(".beacon-copy");
+        const crawl = section.querySelector<HTMLElement>(".beacon-crawl");
+        if (!crawl) return;
+
+        gsap.set(crawl, { yPercent: 0 });
+        gsap.set(".beacon-visual-frame", { scale: 1.055, yPercent: 0 });
+
         let lighthouseState = "weather";
         const setLighthouseState = (next: string) => {
           if (next === lighthouseState) return;
           lighthouseState = next;
           section.dataset.lighthouseState = next;
         };
-        gsap.set(copy, { autoAlpha: 0, y: 24 });
-        gsap.set(copy[0], { autoAlpha: 1, y: 0 });
-        gsap.set(".beacon-visual-frame", { scale: 1.055, yPercent: 0 });
 
         const timeline = gsap.timeline({
           defaults: { ease: "power2.inOut" },
@@ -39,8 +41,14 @@ export function Lighthouse() {
             trigger: section,
             start: "top top",
             end: "bottom bottom",
-            scrub: 0.58,
+            scrub: 0.6,
             invalidateOnRefresh: true,
+            onEnter: () => {
+              section.dataset.beaconPinned = "true";
+            },
+            onLeaveBack: () => {
+              delete section.dataset.beaconPinned;
+            },
             onUpdate: (trigger) => {
               const nextState = trigger.progress < 0.17
                 ? "weather"
@@ -54,23 +62,16 @@ export function Lighthouse() {
           },
         });
 
-        copy.slice(1).forEach((item, index) => {
-          timeline
-            .to(copy[index], { autoAlpha: 0, y: -10, duration: 0.18 })
-            .to(item, { autoAlpha: 1, y: 0, duration: 0.18 }, "<")
-            .to(".beacon-visual-frame", {
-              scale: 1.047 - index * 0.008,
-              yPercent: index * -0.45,
-              duration: 0.86,
-            }, "<")
-            .to({}, { duration: 0.58 });
-        });
+        timeline.to(crawl, { yPercent: -68, duration: 1, ease: "none" });
+        // Кадр подъезжает на всю длину сцены, а не рывками между репликами.
+        timeline.to(".beacon-visual-frame", { scale: 1.015, yPercent: -1.8, duration: 1, ease: "none" }, 0);
 
         requestAnimationFrame(() => ScrollTrigger.refresh());
       }, section);
 
       cleanupMotion = () => {
         delete section.dataset.motionReady;
+        delete section.dataset.beaconPinned;
         section.dataset.lighthouseState = "weather";
         context.revert();
       };
@@ -112,12 +113,14 @@ export function Lighthouse() {
           </div>
         </div>
 
-        <div className="beacon-copy-stack">
-          <div className="beacon-copy"><p>01 / РЫНОЧНЫЙ ШУМ</p><h2 id="lighthouse-title">Подготовьтесь к шторму.</h2></div>
-          <div className="beacon-copy"><p>02 / СИГНАЛ</p><div className="scene-statement-heading">Когда рынок шумит, ориентируйтесь на сигнал.</div></div>
-          <div className="beacon-copy"><p>03 / КУРС</p><div className="scene-statement-heading">Следуйте за маяком, а не за шумом.</div></div>
-          <div className="beacon-copy"><p>04 / СИСТЕМА</p><div className="scene-statement-heading">У курса должна быть система.</div></div>
-          <div className="beacon-copy"><p>05 / РЕШЕНИЕ</p><div className="scene-statement-heading">Если нужен курс - давайте обсудим задачу.</div></div>
+        <div className="beacon-copy-stack" aria-live="off">
+          <div className="beacon-crawl">
+            <div className="beacon-copy"><p>01 / РЫНОЧНЫЙ ШУМ</p><h2 id="lighthouse-title">Подготовьтесь к шторму.</h2></div>
+            <div className="beacon-copy"><p>02 / СИГНАЛ</p><div className="scene-statement-heading">Когда рынок шумит, ориентируйтесь на сигнал.</div></div>
+            <div className="beacon-copy"><p>03 / КУРС</p><div className="scene-statement-heading">Следуйте за маяком, а не за шумом.</div></div>
+            <div className="beacon-copy"><p>04 / СИСТЕМА</p><div className="scene-statement-heading">У курса должна быть система.</div></div>
+            <div className="beacon-copy"><p>05 / РЕШЕНИЕ</p><div className="scene-statement-heading">Если нужен курс - давайте обсудим задачу.</div></div>
+          </div>
         </div>
 
         <div className="beacon-static-summary">

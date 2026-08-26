@@ -786,7 +786,7 @@ svg {
 .scroll-scene[data-motion-ready="true"].process-scene { height: 680vh; }
 .scroll-scene[data-motion-ready="true"].flow-scene { height: 620vh; }
 .scroll-scene[data-motion-ready="true"].architecture-scene { height: 160vh; }
-.scroll-scene[data-motion-ready="true"].lighthouse-scene { height: 300vh; }
+.scroll-scene[data-motion-ready="true"].lighthouse-scene { height: 620vh; }
 
 .scroll-stage {
   position: relative;
@@ -2565,14 +2565,14 @@ svg {
 .beacon-static-summary {
   position: absolute;
   z-index: 8;
-  bottom: 11%;
+  bottom: 8%;
   left: max(calc((100% - 94rem) / 2), clamp(1rem, 3vw, 4rem));
-  width: min(51rem, 58vw);
+  width: min(58rem, 64vw);
 }
 
 .beacon-copy-stack {
   display: none;
-  min-height: 13rem;
+  min-height: 16rem;
 }
 
 .lighthouse-scene[data-motion-ready="true"] .beacon-copy-stack {
@@ -2586,6 +2586,37 @@ svg {
 .beacon-copy {
   position: absolute;
   bottom: 0;
+}
+
+/* Лента реплик едет вверх целиком - та же механика, что в сцене «Управление
+   потоком». Реплики идут друг за другом, а не перекрёстно затухают. */
+.beacon-crawl {
+  position: absolute;
+  top: 4%;
+  left: 0;
+  width: 100%;
+  will-change: transform;
+}
+
+.lighthouse-scene[data-motion-ready="true"] .beacon-copy {
+  position: relative;
+  bottom: auto;
+  padding: 0 0 0.1rem;
+}
+
+.lighthouse-scene[data-motion-ready="true"] .beacon-copy + .beacon-copy {
+  margin-top: clamp(1.75rem, 4vh, 3rem);
+}
+
+/* Текст показывается только когда сцена реально доехала до закреплённого
+   полноэкранного положения - иначе он всплывает поверх предыдущего блока. */
+.lighthouse-scene[data-motion-ready="true"] .beacon-copy-stack {
+  opacity: 0;
+  transition: opacity 320ms var(--ease-out);
+}
+
+.lighthouse-scene[data-beacon-pinned="true"] .beacon-copy-stack {
+  opacity: 1;
 }
 
 .beacon-copy p,
@@ -3187,7 +3218,7 @@ svg {
   .scroll-scene[data-motion-ready="true"].process-scene { height: 520vh; }
   .scroll-scene[data-motion-ready="true"].flow-scene { height: 480vh; }
   .scroll-scene[data-motion-ready="true"].architecture-scene { height: 119vh; }
-  .scroll-scene[data-motion-ready="true"].lighthouse-scene { height: 245vh; }
+  .scroll-scene[data-motion-ready="true"].lighthouse-scene { height: 480vh; }
 
   .scroll-stage {
     padding: 5.8rem 1rem 1.5rem;
@@ -5402,7 +5433,12 @@ body[data-navigation-open="true"] {
     height: 204svh;
   }
 
-  .flow-copy-stack {
+  .scroll-scene[data-motion-ready="true"].lighthouse-scene {
+    height: 204svh;
+  }
+
+  .flow-copy-stack,
+  .lighthouse-scene[data-motion-ready="true"] .beacon-copy-stack {
     right: 1rem;
     bottom: 5%;
     left: 1rem;
@@ -5412,11 +5448,13 @@ body[data-navigation-open="true"] {
     mask-image: linear-gradient(to bottom, transparent 0%, #000 5%, #000 55%, transparent 66%);
   }
 
-  .flow-crawl {
+  .flow-crawl,
+  .beacon-crawl {
     top: 3%;
   }
 
-  .flow-statement + .flow-statement {
+  .flow-statement + .flow-statement,
+  .lighthouse-scene[data-motion-ready="true"] .beacon-copy + .beacon-copy {
     margin-top: clamp(1.4rem, 3.2vh, 2.2rem);
   }
 }
