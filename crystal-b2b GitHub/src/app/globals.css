@@ -2565,14 +2565,14 @@ svg {
 .beacon-static-summary {
   position: absolute;
   z-index: 8;
-  bottom: 8%;
+  bottom: 11%;
   left: max(calc((100% - 94rem) / 2), clamp(1rem, 3vw, 4rem));
-  width: min(58rem, 64vw);
+  width: min(51rem, 58vw);
 }
 
 .beacon-copy-stack {
   display: none;
-  min-height: 16rem;
+  min-height: 13rem;
 }
 
 .lighthouse-scene[data-motion-ready="true"] .beacon-copy-stack {
@@ -2588,36 +2588,6 @@ svg {
   bottom: 0;
 }
 
-/* Лента реплик едет вверх целиком - та же механика, что в сцене «Управление
-   потоком». Реплики идут друг за другом, а не перекрёстно затухают. */
-.beacon-crawl {
-  position: absolute;
-  top: 4%;
-  left: 0;
-  width: 100%;
-  will-change: transform;
-}
-
-.lighthouse-scene[data-motion-ready="true"] .beacon-copy {
-  position: relative;
-  bottom: auto;
-  padding: 0 0 0.1rem;
-}
-
-.lighthouse-scene[data-motion-ready="true"] .beacon-copy + .beacon-copy {
-  margin-top: clamp(1.75rem, 4vh, 3rem);
-}
-
-/* Текст показывается только когда сцена реально доехала до закреплённого
-   полноэкранного положения - иначе он всплывает поверх предыдущего блока. */
-.lighthouse-scene[data-motion-ready="true"] .beacon-copy-stack {
-  opacity: 0;
-  transition: opacity 320ms var(--ease-out);
-}
-
-.lighthouse-scene[data-beacon-pinned="true"] .beacon-copy-stack {
-  opacity: 1;
-}
 
 .beacon-copy p,
 .beacon-static-summary p {
@@ -5425,6 +5395,49 @@ body[data-navigation-open="true"] {
 }
 
 .flow-statement + .flow-statement {
+  margin-top: clamp(1.75rem, 4vh, 3rem);
+}
+
+/* Signal / Course crawls at the same pace as Control the Flow: identical scene
+   height and identical masked window, so text travels the same distance per
+   pixel of scroll. */
+.scroll-scene[data-motion-ready="true"].lighthouse-scene {
+  height: 184.5svh;
+}
+
+.lighthouse-scene[data-motion-ready="true"] .beacon-copy-stack {
+  width: min(68.8rem, 86.4vw);
+  bottom: 7%;
+  height: min(68svh, 42rem);
+  min-height: 0;
+  overflow: hidden;
+  pointer-events: none;
+  -webkit-mask-image: linear-gradient(to bottom, transparent 0%, #000 6%, #000 55%, transparent 66%);
+  mask-image: linear-gradient(to bottom, transparent 0%, #000 6%, #000 55%, transparent 66%);
+  opacity: 0;
+  transition: opacity 0.4s ease;
+}
+
+.lighthouse-scene[data-beacon-pinned="true"] .beacon-copy-stack {
+  opacity: 1;
+}
+
+.beacon-crawl {
+  position: absolute;
+  top: 4%;
+  left: 0;
+  width: 100%;
+  will-change: transform;
+}
+
+.lighthouse-scene[data-motion-ready="true"] .beacon-copy {
+  position: relative;
+  bottom: auto;
+  left: auto;
+  padding: 0 0 0.1rem;
+}
+
+.lighthouse-scene[data-motion-ready="true"] .beacon-copy + .beacon-copy {
   margin-top: clamp(1.75rem, 4vh, 3rem);
 }
 
