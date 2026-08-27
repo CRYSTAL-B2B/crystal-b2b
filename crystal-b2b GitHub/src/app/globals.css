@@ -3981,6 +3981,39 @@ body {
     #07080a;
 }
 
+/* Аура вокруг карточек.
+ *
+ * Свечение даёт box-shadow, а не размытый псевдоэлемент: у .metric и .case-row
+ * стоит overflow:hidden, который обрезал бы любого потомка, - но собственную
+ * тень элемента overflow не трогает. Плюс тень сама повторяет border-radius.
+ *
+ * Осознанно НЕ используется filter:blur() и mix-blend-mode из типовых рецептов:
+ * на этих же карточках уже работает backdrop-filter, и второй тяжёлый фильтр
+ * поверх него роняет прокрутку. Радиус тени даёт ту же мягкость бесплатно.
+ *
+ * --aura (0..1) проставляет CardAura по мере прохода карточки через экран.
+ */
+/* Полосы взяты из потока в фоновом видео сцены «Управление потоком»:
+   белое ядро, тёплая сторона (янтарь → магента) и холодная (фиолет → кобальт). */
+:root {
+  --aura-core: 255, 251, 242;
+  --aura-amber: 255, 166, 74;
+  --aura-magenta: 232, 84, 140;
+  --aura-violet: 150, 96, 235;
+  --aura-cobalt: 41, 151, 255;
+  /* Пока карточка вне экрана - пустая тень, чтобы ничего не рисовалось. */
+  --aura-shadow: 0 0 rgba(0, 0, 0, 0);
+}
+
+[data-aura] {
+  --aura-shadow:
+    0 0 1.6rem -0.4rem rgba(var(--aura-core), calc(var(--aura, 0) * 0.2)),
+    -1.6rem 0 4rem -1.2rem rgba(var(--aura-amber), calc(var(--aura, 0) * 0.34)),
+    -3.4rem 0 7rem -1.4rem rgba(var(--aura-magenta), calc(var(--aura, 0) * 0.26)),
+    1.6rem 0 4rem -1.2rem rgba(var(--aura-violet), calc(var(--aura, 0) * 0.32)),
+    3.4rem 0 7rem -1.4rem rgba(var(--aura-cobalt), calc(var(--aura, 0) * 0.26));
+}
+
 .metrics-grid {
   gap: 0.8rem;
   border: 0;
@@ -3993,7 +4026,7 @@ body {
   border: 1px solid rgba(255, 255, 255, 0.13);
   border-radius: 1.25rem;
   background: rgba(10, 12, 16, 0.58);
-  box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.04), 0 1.5rem 4rem rgba(0, 0, 0, 0.16);
+  box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.04), 0 1.5rem 4rem rgba(0, 0, 0, 0.16), var(--aura-shadow);
   backdrop-filter: blur(18px) saturate(120%);
 }
 
@@ -4030,6 +4063,7 @@ body {
   border: 1px solid rgba(255, 255, 255, 0.13);
   border-radius: 1rem;
   background: rgba(12, 14, 18, 0.58);
+  box-shadow: var(--aura-shadow);
   backdrop-filter: blur(16px);
 }
 
@@ -4082,6 +4116,7 @@ body {
   border: 1px solid rgba(255, 255, 255, 0.13);
   border-radius: 1.25rem;
   background: rgba(10, 11, 15, 0.62);
+  box-shadow: var(--aura-shadow);
   backdrop-filter: blur(18px);
 }
 
@@ -4097,6 +4132,7 @@ body {
   border: 1px solid rgba(255, 255, 255, 0.12);
   border-radius: 1.25rem;
   background: rgba(10, 12, 16, 0.54);
+  box-shadow: var(--aura-shadow);
   backdrop-filter: blur(18px);
 }
 
@@ -4123,6 +4159,7 @@ body {
   border: 1px solid rgba(255, 255, 255, 0.13);
   border-radius: 1.25rem;
   background: rgba(10, 12, 16, 0.52);
+  box-shadow: var(--aura-shadow);
   backdrop-filter: blur(18px);
 }
 
@@ -4146,7 +4183,7 @@ body {
   border: 1px solid rgba(255, 255, 255, 0.14);
   border-radius: 1.5rem;
   background: rgba(10, 12, 16, 0.62);
-  box-shadow: 0 2rem 6rem rgba(0, 0, 0, 0.24);
+  box-shadow: 0 2rem 6rem rgba(0, 0, 0, 0.24), var(--aura-shadow);
   backdrop-filter: blur(22px) saturate(120%);
 }
 
@@ -4272,7 +4309,7 @@ body {
   border: 1px solid rgba(255, 255, 255, 0.13);
   border-radius: 1.5rem;
   background: rgba(8, 10, 14, 0.58);
-  box-shadow: 0 2rem 6rem rgba(0, 0, 0, 0.24);
+  box-shadow: 0 2rem 6rem rgba(0, 0, 0, 0.24), var(--aura-shadow);
   backdrop-filter: blur(20px) saturate(120%);
   -webkit-backdrop-filter: blur(20px) saturate(120%);
 }

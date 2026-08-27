@@ -4,6 +4,7 @@ import { Footer } from "@/components/layout/Footer";
 import { SectionLabel } from "@/components/ui/SectionLabel";
 import { Arrow } from "@/components/ui/Arrow";
 import { faqItems } from "@/data/faq";
+import { CardAura } from "@/components/motion/CardAura";
 import { getSiteUrl } from "@/lib/site-url";
 
 const title = "Вопросы и ответы - Даниил Чекулаев";
@@ -41,6 +42,7 @@ export default function FaqPage() {
 
   return (
     <>
+      <CardAura />
       <a className="skip-link" href="#main">Перейти к содержанию</a>
       <Header />
       <main id="main">

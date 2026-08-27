@@ -12,6 +12,7 @@ import { Lighthouse } from "@/components/scenes/Lighthouse";
 import { Contact } from "@/components/sections/Contact";
 import { DesktopSmoothScroll } from "@/components/motion/DesktopSmoothScroll";
 import { ScrollToHashOnLoad } from "@/components/motion/ScrollToHashOnLoad";
+import { CardAura } from "@/components/motion/CardAura";
 import { getSiteUrl } from "@/lib/site-url";
 
 export default function Home() {
@@ -31,6 +32,7 @@ export default function Home() {
     <>
       <DesktopSmoothScroll />
       <ScrollToHashOnLoad />
+      <CardAura />
       <a className="skip-link" href="#main">Перейти к содержанию</a>
       <Header />
       <main id="main">
