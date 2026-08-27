@@ -116,8 +116,10 @@ export function CardAura() {
         index += 1;
       });
 
-      // Пока волна ещё не улеглась, крутимся дальше даже без новой прокрутки.
-      frame = onScreen.size > 0 ? window.requestAnimationFrame(render) : 0;
+      // Волна улеглась и прокрутка стоит - засыпаем: крутить rAF ради
+      // неизменной картинки незачем. Разбудит слушатель прокрутки.
+      const settled = delta === 0 && activity === 0;
+      frame = onScreen.size > 0 && !settled ? window.requestAnimationFrame(render) : 0;
     };
 
     const wake = () => {
@@ -151,9 +153,11 @@ export function CardAura() {
       );
 
       [...cards, ...sticky].forEach((card) => observer?.observe(card));
+      window.addEventListener("scroll", wake, { passive: true });
     };
 
     const stop = () => {
+      window.removeEventListener("scroll", wake);
       observer?.disconnect();
       observer = undefined;
       if (frame) window.cancelAnimationFrame(frame);

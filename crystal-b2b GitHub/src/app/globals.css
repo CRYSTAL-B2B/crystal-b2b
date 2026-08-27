@@ -4019,6 +4019,63 @@ body {
     3.4rem var(--aura-y2) 7rem -1.4rem rgba(var(--aura-cobalt), calc(var(--aura, 0) * 0.26));
 }
 
+/* Фоновая аура за карточками - вторым слоем к подсветке по краям.
+ *
+ * Сфера здесь одна на секцию, а не на карточку: иначе на странице оказалось бы
+ * больше сорока светящихся слоёв. Так же устроено и у чат-интерфейсов, откуда
+ * приём взят, - там аура одна на окно.
+ *
+ * Размытия нет намеренно: радиальный градиент мягкий сам по себе, а filter:blur
+ * поверх уже работающих backdrop-filter на карточках стоил бы кадров. Движение
+ * идёт только через transform - его считает видеокарта, без пересчёта страницы.
+ */
+.metrics-grid,
+.case-list,
+.competency-grid,
+.principles-grid {
+  position: relative;
+  isolation: isolate;
+}
+
+.metrics-grid::before,
+.case-list::before,
+.competency-grid::before,
+.principles-grid::before {
+  content: "";
+  position: absolute;
+  z-index: -1;
+  inset: -18%;
+  background:
+    radial-gradient(36% 44% at 24% 26%, rgba(var(--aura-cobalt), 0.17), transparent 68%),
+    radial-gradient(40% 48% at 76% 74%, rgba(var(--aura-violet), 0.15), transparent 70%),
+    radial-gradient(30% 38% at 62% 18%, rgba(var(--aura-magenta), 0.09), transparent 72%);
+  animation: aura-drift 26s ease-in-out infinite alternate;
+  pointer-events: none;
+  will-change: transform;
+}
+
+/* Вторая секция дышит в противофазе и медленнее - чтобы страница не пульсировала
+   целиком в один такт. */
+.case-list::before,
+.principles-grid::before {
+  animation-duration: 34s;
+  animation-direction: alternate-reverse;
+}
+
+@keyframes aura-drift {
+  from { transform: translate3d(-2%, -1.5%, 0) scale(1); }
+  to { transform: translate3d(2.5%, 2%, 0) scale(1.14); }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .metrics-grid::before,
+  .case-list::before,
+  .competency-grid::before,
+  .principles-grid::before {
+    animation: none;
+  }
+}
+
 .metrics-grid {
   gap: 0.8rem;
   border: 0;
