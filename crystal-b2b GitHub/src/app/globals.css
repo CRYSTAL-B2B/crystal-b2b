@@ -4005,30 +4005,74 @@ body {
   --aura-shadow: 0 0 rgba(0, 0, 0, 0);
 }
 
-/* Свет горит только с той грани, у которой сейчас указатель, и держится
-   на его высоте. --aura-l и --aura-r - яркость левой и правой стороны,
-   --aura-y - вертикальное смещение. Всё задаёт CardAura по позиции курсора
-   или пальца; при удалении указателя значения плавно уходят в ноль. */
+/* Подсветка рамки по курсору.
+ *
+ * Светится сама граница карточки, ярче всего в точке под указателем, и гаснет
+ * по периметру. Кольцо рисуется псевдоэлементом: он залит радиальными
+ * градиентами в точке --px/--py, а маска оставляет от заливки только рамку
+ * толщиной в пиксель. Наружу ничего не разливается - свет живёт на границе.
+ *
+ * Цвета прежние: тёплый янтарь ближе к центру пятна, холодный фиолет по краю.
+ */
 [data-aura] {
+  --px: 50%;
+  --py: 50%;
+  --aura: 0;
   --aura-l: 0;
   --aura-r: 0;
-  --aura-y: 0px;
   --aura-shadow:
-    -1.6rem var(--aura-y) 4rem -1.2rem rgba(var(--aura-amber), calc(var(--aura-l) * 0.4)),
-    -3.4rem var(--aura-y) 7rem -1.4rem rgba(var(--aura-magenta), calc(var(--aura-l) * 0.3)),
-    -0.5rem var(--aura-y) 2rem -1rem rgba(var(--aura-core), calc(var(--aura-l) * 0.22)),
-    1.6rem var(--aura-y) 4rem -1.2rem rgba(var(--aura-violet), calc(var(--aura-r) * 0.38)),
-    3.4rem var(--aura-y) 7rem -1.4rem rgba(var(--aura-cobalt), calc(var(--aura-r) * 0.3)),
-    0.5rem var(--aura-y) 2rem -1rem rgba(var(--aura-core), calc(var(--aura-r) * 0.22));
+    -2rem 0 5rem -1.6rem rgba(var(--aura-amber), calc(var(--aura-l) * 0.2)),
+    2rem 0 5rem -1.6rem rgba(var(--aura-violet), calc(var(--aura-r) * 0.19));
 }
 
-/* На телефоне остаются две полосы вместо шести: каждая тень - это отдельная
-   перерисовка, а разницу в мягкости на такой ширине всё равно не видно. */
+.metric::before,
+.case-row::before,
+.competency-grid article::before,
+.principles-grid article::before,
+.contact-form::before,
+.experience-sticky::before,
+.system-processes-sticky::before {
+  content: "";
+  position: absolute;
+  z-index: 3;
+  inset: 0;
+  padding: 1px;
+  border-radius: inherit;
+  background:
+    radial-gradient(11rem circle at var(--px) var(--py), rgba(var(--aura-core), 0.85), transparent 58%),
+    radial-gradient(17rem circle at var(--px) var(--py), rgba(var(--aura-amber), 0.6), transparent 62%),
+    radial-gradient(26rem circle at var(--px) var(--py), rgba(var(--aura-violet), 0.45), transparent 68%);
+  -webkit-mask:
+    linear-gradient(#000 0 0) content-box,
+    linear-gradient(#000 0 0);
+  -webkit-mask-composite: xor;
+  mask:
+    linear-gradient(#000 0 0) content-box,
+    linear-gradient(#000 0 0);
+  mask-composite: exclude;
+  opacity: var(--aura, 0);
+  pointer-events: none;
+}
+
+/* Карточкам нужна точка отсчёта для кольца. Тем, у кого позиционирование
+   уже задано (relative, sticky), не трогаем. */
+.case-row,
+.competency-grid article,
+.principles-grid article {
+  position: relative;
+}
+
+/* На телефоне кольцо из одного градиента вместо трёх: каждый слой - отдельная
+   перерисовка под маской, а на такой ширине разницы в переливе не видно. */
 @media (max-width: 960px) {
-  [data-aura] {
-    --aura-shadow:
-      -2rem var(--aura-y) 5rem -1.2rem rgba(var(--aura-amber), calc(var(--aura-l) * 0.42)),
-      2rem var(--aura-y) 5rem -1.2rem rgba(var(--aura-violet), calc(var(--aura-r) * 0.4));
+  .metric::before,
+  .case-row::before,
+  .competency-grid article::before,
+  .principles-grid article::before,
+  .contact-form::before,
+  .experience-sticky::before,
+  .system-processes-sticky::before {
+    background: radial-gradient(14rem circle at var(--px) var(--py), rgba(var(--aura-core), 0.7), transparent 62%);
   }
 }
 

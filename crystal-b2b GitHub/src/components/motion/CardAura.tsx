@@ -35,10 +35,22 @@ function clamp01(value: number) {
 /** Насколько должно измениться значение, чтобы его стоило записывать в стиль.
  *  Без этого порога каждая карточка на экране получала бы три записи в кадр
  *  даже стоя погашенной - на мобильном это утраивало пересчёт стилей. */
-const WRITE_STEP = 0.012;
-const WRITE_STEP_Y = 0.8;
+const WRITE_STEP = 0.015;
+/** Замеры показали, что шаг записи на стоимость не влияет - она в перерисовке
+ *  самих градиентов. Поэтому держим мелкий: движение пятна остаётся плавным. */
+const WRITE_STEP_Y = 1.5;
 
-type State = { left: number; right: number; y: number; wl: number; wr: number; wy: number };
+type State = {
+  glow: number;
+  left: number;
+  right: number;
+  /** Последние записанные значения - чтобы не трогать стили впустую. */
+  wg: number;
+  wl: number;
+  wr: number;
+  wx: number;
+  wy: number;
+};
 
 export function CardAura() {
   useEffect(() => {
@@ -55,9 +67,11 @@ export function CardAura() {
     let pointerActive = false;
 
     const clear = (element: HTMLElement) => {
+      element.style.removeProperty("--aura");
       element.style.removeProperty("--aura-l");
       element.style.removeProperty("--aura-r");
-      element.style.removeProperty("--aura-y");
+      element.style.removeProperty("--px");
+      element.style.removeProperty("--py");
       state.delete(element);
       delete element.dataset.aura;
     };
@@ -68,41 +82,51 @@ export function CardAura() {
 
       onScreen.forEach((element) => {
         const rect = element.getBoundingClientRect();
+        let targetGlow = 0;
         let targetLeft = 0;
         let targetRight = 0;
-        let targetY = 0;
 
         if (pointerActive) {
           // Расстояние от указателя до прямоугольника карточки: внутри - ноль.
           const gapX = Math.max(rect.left - pointerX, pointerX - rect.right, 0);
           const gapY = Math.max(rect.top - pointerY, pointerY - rect.bottom, 0);
-          const proximity = clamp01(1 - Math.hypot(gapX, gapY) / reach);
+          targetGlow = clamp01(1 - Math.hypot(gapX, gapY) / reach);
 
-          if (proximity > 0) {
-            // -1 - указатель у левой грани, +1 - у правой.
+          if (targetGlow > 0) {
+            // -1 - указатель у левой грани, +1 - у правой. Нужно только для
+            // слабого наружного оттенка: кольцо само идёт за курсором.
             const side = ((pointerX - (rect.left + rect.width / 2)) / (rect.width / 2)) * SIDE_SHARPNESS;
-            targetLeft = proximity * clamp01(0.5 - side / 2);
-            targetRight = proximity * clamp01(0.5 + side / 2);
-            // Свет держится на высоте указателя, но не убегает за пределы грани.
-            const half = rect.height / 2;
-            const offset = pointerY - (rect.top + half);
-            targetY = Math.max(-half, Math.min(half, offset));
+            targetLeft = targetGlow * clamp01(0.5 - side / 2);
+            targetRight = targetGlow * clamp01(0.5 + side / 2);
           }
         }
 
         // Записанные значения стартуют заведомо «неподходящими», чтобы первая
         // запись прошла в любом случае: сравнение с NaN всегда ложно и молча
         // отменило бы её навсегда.
-        const current = state.get(element)
-          ?? { left: 0, right: 0, y: 0, wl: -1, wr: -1, wy: Number.POSITIVE_INFINITY };
+        const current = state.get(element) ?? {
+          glow: 0,
+          left: 0,
+          right: 0,
+          wg: -1,
+          wl: -1,
+          wr: -1,
+          wx: Number.POSITIVE_INFINITY,
+          wy: Number.POSITIVE_INFINITY,
+        };
+        current.glow += (targetGlow - current.glow) * EASING;
         current.left += (targetLeft - current.left) * EASING;
         current.right += (targetRight - current.right) * EASING;
-        current.y += (targetY - current.y) * EASING;
+        if (current.glow < EPSILON) current.glow = 0;
         if (current.left < EPSILON) current.left = 0;
         if (current.right < EPSILON) current.right = 0;
 
         // Пишем только то, что заметно изменилось. Погашенная карточка
         // не трогает стили вовсе, пока указатель к ней не подойдёт.
+        if (Math.abs(current.glow - current.wg) >= WRITE_STEP || (current.glow === 0) !== (current.wg === 0)) {
+          current.wg = current.glow;
+          element.style.setProperty("--aura", current.glow.toFixed(2));
+        }
         if (Math.abs(current.left - current.wl) >= WRITE_STEP || (current.left === 0) !== (current.wl === 0)) {
           current.wl = current.left;
           element.style.setProperty("--aura-l", current.left.toFixed(2));
@@ -111,14 +135,23 @@ export function CardAura() {
           current.wr = current.right;
           element.style.setProperty("--aura-r", current.right.toFixed(2));
         }
-        // Высоту двигаем, только пока с этой карточки вообще идёт свет.
-        if ((current.left > 0 || current.right > 0) && Math.abs(current.y - current.wy) >= WRITE_STEP_Y) {
-          current.wy = current.y;
-          element.style.setProperty("--aura-y", `${current.y.toFixed(0)}px`);
+
+        // Точку пятна двигаем, только пока карточка вообще светится.
+        if (current.glow > 0) {
+          const localX = pointerX - rect.left;
+          const localY = pointerY - rect.top;
+          if (Math.abs(localX - current.wx) >= WRITE_STEP_Y) {
+            current.wx = localX;
+            element.style.setProperty("--px", `${localX.toFixed(0)}px`);
+          }
+          if (Math.abs(localY - current.wy) >= WRITE_STEP_Y) {
+            current.wy = localY;
+            element.style.setProperty("--py", `${localY.toFixed(0)}px`);
+          }
         }
         state.set(element, current);
 
-        if (current.left > 0 || current.right > 0) alive = true;
+        if (current.glow > 0) alive = true;
       });
 
       // Свет везде погас и указателя рядом нет - засыпаем до следующего движения.
