@@ -4072,7 +4072,18 @@ body {
   .contact-form::before,
   .experience-sticky::before,
   .system-processes-sticky::before {
-    background: radial-gradient(21rem circle at var(--px) var(--py), rgba(var(--aura-core), 0.7), transparent 62%);
+    background:
+      radial-gradient(16.5rem circle at var(--px) var(--py), rgba(var(--aura-core), 0.85), transparent 58%),
+      radial-gradient(25.5rem circle at var(--px) var(--py), rgba(var(--aura-amber), 0.82), transparent 64%),
+      radial-gradient(39rem circle at var(--px) var(--py), rgba(var(--aura-violet), 0.68), transparent 70%);
+  }
+
+  /* Наружный ореол на телефоне тоже в полную силу: экран меньше, свет
+     от соседних карточек не накладывается, приглушать нечего. */
+  [data-aura] {
+    --aura-shadow:
+      -2rem 0 5rem -1.6rem rgba(var(--aura-amber), calc(var(--aura-l) * 0.36)),
+      2rem 0 5rem -1.6rem rgba(var(--aura-violet), calc(var(--aura-r) * 0.34));
   }
 }
 
