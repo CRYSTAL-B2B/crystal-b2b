@@ -4005,13 +4005,18 @@ body {
   --aura-shadow: 0 0 rgba(0, 0, 0, 0);
 }
 
+/* --aura-y1 / --aura-y2 сдвигают свечение вдоль грани. Стороны идут
+   в противофазе, поэтому свет перекатывается вокруг карточки, а не пульсирует
+   целиком. Смещение задаёт CardAura по ходу прокрутки и гасит на остановке. */
 [data-aura] {
+  --aura-y1: 0px;
+  --aura-y2: 0px;
   --aura-shadow:
     0 0 1.6rem -0.4rem rgba(var(--aura-core), calc(var(--aura, 0) * 0.2)),
-    -1.6rem 0 4rem -1.2rem rgba(var(--aura-amber), calc(var(--aura, 0) * 0.34)),
-    -3.4rem 0 7rem -1.4rem rgba(var(--aura-magenta), calc(var(--aura, 0) * 0.26)),
-    1.6rem 0 4rem -1.2rem rgba(var(--aura-violet), calc(var(--aura, 0) * 0.32)),
-    3.4rem 0 7rem -1.4rem rgba(var(--aura-cobalt), calc(var(--aura, 0) * 0.26));
+    -1.6rem var(--aura-y1) 4rem -1.2rem rgba(var(--aura-amber), calc(var(--aura, 0) * 0.34)),
+    -3.4rem var(--aura-y1) 7rem -1.4rem rgba(var(--aura-magenta), calc(var(--aura, 0) * 0.26)),
+    1.6rem var(--aura-y2) 4rem -1.2rem rgba(var(--aura-violet), calc(var(--aura, 0) * 0.32)),
+    3.4rem var(--aura-y2) 7rem -1.4rem rgba(var(--aura-cobalt), calc(var(--aura, 0) * 0.26));
 }
 
 .metrics-grid {
