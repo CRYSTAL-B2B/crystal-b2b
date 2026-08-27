@@ -4005,18 +4005,31 @@ body {
   --aura-shadow: 0 0 rgba(0, 0, 0, 0);
 }
 
-/* --aura-y1 / --aura-y2 сдвигают свечение вдоль грани. Стороны идут
-   в противофазе, поэтому свет перекатывается вокруг карточки, а не пульсирует
-   целиком. Смещение задаёт CardAura по ходу прокрутки и гасит на остановке. */
+/* Свет горит только с той грани, у которой сейчас указатель, и держится
+   на его высоте. --aura-l и --aura-r - яркость левой и правой стороны,
+   --aura-y - вертикальное смещение. Всё задаёт CardAura по позиции курсора
+   или пальца; при удалении указателя значения плавно уходят в ноль. */
 [data-aura] {
-  --aura-y1: 0px;
-  --aura-y2: 0px;
+  --aura-l: 0;
+  --aura-r: 0;
+  --aura-y: 0px;
   --aura-shadow:
-    0 0 1.6rem -0.4rem rgba(var(--aura-core), calc(var(--aura, 0) * 0.2)),
-    -1.6rem var(--aura-y1) 4rem -1.2rem rgba(var(--aura-amber), calc(var(--aura, 0) * 0.34)),
-    -3.4rem var(--aura-y1) 7rem -1.4rem rgba(var(--aura-magenta), calc(var(--aura, 0) * 0.26)),
-    1.6rem var(--aura-y2) 4rem -1.2rem rgba(var(--aura-violet), calc(var(--aura, 0) * 0.32)),
-    3.4rem var(--aura-y2) 7rem -1.4rem rgba(var(--aura-cobalt), calc(var(--aura, 0) * 0.26));
+    -1.6rem var(--aura-y) 4rem -1.2rem rgba(var(--aura-amber), calc(var(--aura-l) * 0.4)),
+    -3.4rem var(--aura-y) 7rem -1.4rem rgba(var(--aura-magenta), calc(var(--aura-l) * 0.3)),
+    -0.5rem var(--aura-y) 2rem -1rem rgba(var(--aura-core), calc(var(--aura-l) * 0.22)),
+    1.6rem var(--aura-y) 4rem -1.2rem rgba(var(--aura-violet), calc(var(--aura-r) * 0.38)),
+    3.4rem var(--aura-y) 7rem -1.4rem rgba(var(--aura-cobalt), calc(var(--aura-r) * 0.3)),
+    0.5rem var(--aura-y) 2rem -1rem rgba(var(--aura-core), calc(var(--aura-r) * 0.22));
+}
+
+/* На телефоне остаются две полосы вместо шести: каждая тень - это отдельная
+   перерисовка, а разницу в мягкости на такой ширине всё равно не видно. */
+@media (max-width: 960px) {
+  [data-aura] {
+    --aura-shadow:
+      -2rem var(--aura-y) 5rem -1.2rem rgba(var(--aura-amber), calc(var(--aura-l) * 0.42)),
+      2rem var(--aura-y) 5rem -1.2rem rgba(var(--aura-violet), calc(var(--aura-r) * 0.4));
+  }
 }
 
 /* Фоновая аура за карточками - вторым слоем к подсветке по краям.
