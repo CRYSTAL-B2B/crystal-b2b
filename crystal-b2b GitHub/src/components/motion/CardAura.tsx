@@ -78,7 +78,8 @@ export function CardAura() {
 
     const render = () => {
       let alive = false;
-      const reach = window.innerWidth < NARROW_WIDTH ? REACH_NARROW : REACH_DESKTOP;
+      const narrow = window.innerWidth < NARROW_WIDTH;
+      const reach = narrow ? REACH_NARROW : REACH_DESKTOP;
 
       onScreen.forEach((element) => {
         const rect = element.getBoundingClientRect();
@@ -138,8 +139,15 @@ export function CardAura() {
 
         // Точку пятна двигаем, только пока карточка вообще светится.
         if (current.glow > 0) {
-          const localX = pointerX - rect.left;
-          const localY = pointerY - rect.top;
+          let localX = pointerX - rect.left;
+          let localY = pointerY - rect.top;
+          // На телефоне палец накрывает место касания, и свечение под ним
+          // не видно. Поэтому пятно уходит на противоположную грань той же
+          // карточки - зеркально относительно её центра.
+          if (narrow) {
+            localX = rect.width - localX;
+            localY = rect.height - localY;
+          }
           if (Math.abs(localX - current.wx) >= WRITE_STEP_Y) {
             current.wx = localX;
             element.style.setProperty("--px", `${localX.toFixed(0)}px`);

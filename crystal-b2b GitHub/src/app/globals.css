@@ -4039,9 +4039,9 @@ body {
   padding: 1px;
   border-radius: inherit;
   background:
-    radial-gradient(11rem circle at var(--px) var(--py), rgba(var(--aura-core), 0.85), transparent 58%),
-    radial-gradient(17rem circle at var(--px) var(--py), rgba(var(--aura-amber), 0.6), transparent 62%),
-    radial-gradient(26rem circle at var(--px) var(--py), rgba(var(--aura-violet), 0.45), transparent 68%);
+    radial-gradient(16.5rem circle at var(--px) var(--py), rgba(var(--aura-core), 0.85), transparent 58%),
+    radial-gradient(25.5rem circle at var(--px) var(--py), rgba(var(--aura-amber), 0.6), transparent 62%),
+    radial-gradient(39rem circle at var(--px) var(--py), rgba(var(--aura-violet), 0.45), transparent 68%);
   -webkit-mask:
     linear-gradient(#000 0 0) content-box,
     linear-gradient(#000 0 0);
@@ -4072,7 +4072,7 @@ body {
   .contact-form::before,
   .experience-sticky::before,
   .system-processes-sticky::before {
-    background: radial-gradient(14rem circle at var(--px) var(--py), rgba(var(--aura-core), 0.7), transparent 62%);
+    background: radial-gradient(21rem circle at var(--px) var(--py), rgba(var(--aura-core), 0.7), transparent 62%);
   }
 }
 
