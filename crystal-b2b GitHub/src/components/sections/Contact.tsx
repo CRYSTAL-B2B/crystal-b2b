@@ -2,6 +2,8 @@
 
 import { useState } from "react";
 import { ContactForm } from "@/components/sections/ContactForm";
+import { BookingTrigger } from "@/components/booking/BookingTrigger";
+import { bookingCopy } from "@/data/booking";
 import { SectionLabel } from "@/components/ui/SectionLabel";
 
 const QUALIFIER_OPTIONS = [
@@ -44,7 +46,11 @@ export function Contact() {
               ))}
             </div>
           </div>
-          <ContactForm qualifiers={qualifiers} />
+          <div className="contact-actions">
+            <BookingTrigger placement="contact" />
+            <p className="contact-or" aria-hidden="true"><span>{bookingCopy.or}</span></p>
+            <ContactForm qualifiers={qualifiers} />
+          </div>
         </div>
       </div>
     </section>

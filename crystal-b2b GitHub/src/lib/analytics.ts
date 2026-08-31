@@ -8,7 +8,12 @@ export type AnalyticsEvent =
   | "contact_success"
   | "contact_error"
   | "resume_download"
-  | "navigation_contact";
+  | "navigation_contact"
+  | "booking_cta_click"
+  | "booking_modal_open"
+  | "booking_modal_close"
+  | "booking_calendar_loaded"
+  | "booking_external_open";
 
 type AnalyticsPayload = Record<string, string | number | boolean | undefined>;
 

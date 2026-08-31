@@ -5154,8 +5154,280 @@ body {
   --font-ui: -apple-system, BlinkMacSystemFont, "SF Pro Display", "Inter Tight Variable", "Arial", sans-serif;
 }
 
-body[data-navigation-open="true"] {
+body[data-navigation-open="true"],
+body[data-booking-open="true"] {
   overflow: hidden;
+}
+
+/* ============================================================
+   Запись на созвон
+   Блок в секции контактов + окно с календарём Google внутри.
+   ============================================================ */
+
+.contact-actions {
+  display: grid;
+  gap: var(--space-md);
+}
+
+.booking-block {
+  display: grid;
+  gap: 0.9rem;
+  padding: clamp(1.35rem, 2.8vw, 2.2rem);
+  border: 1px solid rgba(255, 255, 255, 0.14);
+  border-radius: 1.5rem;
+  background: rgba(10, 12, 16, 0.62);
+  backdrop-filter: blur(22px) saturate(120%);
+  -webkit-backdrop-filter: blur(22px) saturate(120%);
+}
+
+.booking-eyebrow {
+  margin: 0;
+  color: var(--muted);
+  font-family: "IBM Plex Mono", monospace;
+  font-size: 0.62rem;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+}
+
+.booking-action {
+  display: grid;
+  gap: 0.45rem;
+  padding: 0;
+  border: 0;
+  background: transparent;
+  color: inherit;
+  cursor: pointer;
+  text-align: left;
+  font: inherit;
+  transition: color 200ms var(--ease-out);
+}
+
+.booking-action-title {
+  display: flex;
+  gap: 0.6rem;
+  align-items: center;
+  color: var(--white);
+  font-size: clamp(1.5rem, 2.4vw, 2.15rem);
+  font-weight: 560;
+  line-height: 1.05;
+  letter-spacing: -0.035em;
+  text-transform: uppercase;
+}
+
+.booking-action-lead {
+  color: var(--blue-soft);
+  font-size: clamp(1rem, 1.4vw, 1.2rem);
+  line-height: 1.35;
+}
+
+/* У Arrow нет собственного размера - проект задаёт его явно в каждом месте,
+   иначе flex растягивает стрелку на всю доступную ширину. */
+.booking-action-title svg {
+  width: 0.85em;
+  height: 0.85em;
+  flex: 0 0 auto;
+  transition: transform 240ms var(--ease-out);
+}
+
+.booking-action:hover .booking-action-title,
+.booking-action:focus-visible .booking-action-title {
+  color: var(--blue-soft);
+}
+
+.booking-action:hover .booking-action-title svg,
+.booking-action:focus-visible .booking-action-title svg {
+  transform: translateX(0.25em);
+}
+
+.booking-meta {
+  margin: 0;
+  color: var(--muted);
+  font-family: "IBM Plex Mono", monospace;
+  font-size: 0.62rem;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+}
+
+/* Разделитель «или» между записью и формой. */
+.contact-or {
+  display: flex;
+  gap: 1rem;
+  align-items: center;
+  margin: 0;
+  color: var(--muted);
+  font-family: "IBM Plex Mono", monospace;
+  font-size: 0.6rem;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+}
+
+.contact-or::before,
+.contact-or::after {
+  content: "";
+  flex: 1;
+  height: 1px;
+  background: var(--line);
+}
+
+/* ---------- окно ---------- */
+
+.booking-overlay {
+  position: fixed;
+  z-index: 500;
+  inset: 0;
+  display: flex;
+  padding: clamp(0.75rem, 3vw, 2.5rem);
+  align-items: center;
+  justify-content: center;
+  background: rgba(4, 5, 7, 0.78);
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
+}
+
+.booking-overlay[hidden] {
+  display: none;
+}
+
+.booking-dialog {
+  display: flex;
+  width: min(100%, 1200px);
+  max-height: 90vh;
+  flex-direction: column;
+  overflow: hidden;
+  border: 1px solid rgba(255, 255, 255, 0.14);
+  border-radius: 1.5rem;
+  background: #0b0d11;
+  box-shadow: 0 3rem 8rem rgba(0, 0, 0, 0.55);
+}
+
+.booking-overlay[data-open="true"] .booking-dialog {
+  animation: booking-in 320ms var(--ease-out) both;
+}
+
+@keyframes booking-in {
+  from { opacity: 0; transform: translate3d(0, 1.2rem, 0) scale(0.985); }
+  to { opacity: 1; transform: none; }
+}
+
+.booking-dialog-head {
+  display: flex;
+  padding: clamp(1.1rem, 2.4vw, 1.75rem);
+  gap: 1rem;
+  align-items: flex-start;
+  justify-content: space-between;
+  border-bottom: 1px solid var(--line);
+}
+
+.booking-dialog-head h2 {
+  margin: 0 0 0.4rem;
+  color: var(--white);
+  font-size: clamp(1.25rem, 2.2vw, 1.85rem);
+  font-weight: 540;
+  line-height: 1.1;
+  letter-spacing: -0.035em;
+  text-transform: uppercase;
+}
+
+.booking-dialog-head p {
+  margin: 0;
+  color: var(--muted);
+  font-family: "IBM Plex Mono", monospace;
+  font-size: 0.62rem;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+}
+
+.booking-close {
+  display: flex;
+  width: 2.5rem;
+  height: 2.5rem;
+  flex: 0 0 auto;
+  align-items: center;
+  justify-content: center;
+  color: var(--muted);
+  border: 1px solid var(--line);
+  border-radius: 50%;
+  background: transparent;
+  cursor: pointer;
+  font-size: 0.9rem;
+  transition: color 180ms ease, border-color 180ms ease, background 180ms ease;
+}
+
+.booking-close:hover,
+.booking-close:focus-visible {
+  color: var(--white);
+  border-color: rgba(255, 255, 255, 0.4);
+  background: rgba(255, 255, 255, 0.06);
+}
+
+.booking-calendar {
+  position: relative;
+  flex: 1 1 auto;
+  min-height: 0;
+  overflow: auto;
+  background: #ffffff;
+}
+
+.booking-calendar-loading {
+  position: absolute;
+  inset: 0;
+  display: flex;
+  margin: 0;
+  align-items: center;
+  justify-content: center;
+  color: #5b6472;
+  font-family: "IBM Plex Mono", monospace;
+  font-size: 0.7rem;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+}
+
+.booking-calendar-frame {
+  display: block;
+  width: 100%;
+  height: 100%;
+  min-height: 34rem;
+  border: 0;
+}
+
+.booking-dialog-foot {
+  padding: clamp(0.9rem, 2vw, 1.35rem) clamp(1.1rem, 2.4vw, 1.75rem);
+  border-top: 1px solid var(--line);
+}
+
+.booking-dialog-foot a {
+  color: var(--blue-soft);
+  font-size: 0.9rem;
+  text-decoration-color: rgba(151, 197, 255, 0.4);
+  text-underline-offset: 0.18em;
+}
+
+@media (max-width: 768px) {
+  .booking-overlay {
+    padding: 0;
+  }
+
+  .booking-dialog {
+    width: 100%;
+    height: 100dvh;
+    max-height: 100dvh;
+    border: 0;
+    border-radius: 0;
+  }
+
+  .booking-calendar-frame {
+    min-height: 26rem;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .booking-overlay[data-open="true"] .booking-dialog {
+    animation: none;
+  }
+
+  .booking-action-title svg {
+    transition: none;
+  }
 }
 
 .site-header {
