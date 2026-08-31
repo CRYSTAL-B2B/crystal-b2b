@@ -73,7 +73,8 @@ export function DesktopSmoothScroll() {
         event.shiftKey ||
         event.deltaY === 0 ||
         Math.abs(event.deltaX) > Math.abs(event.deltaY) ||
-        document.body.dataset.navigationOpen === "true"
+        document.body.dataset.navigationOpen === "true" ||
+        document.body.dataset.modalOpen === "true"
       ) {
         return;
       }

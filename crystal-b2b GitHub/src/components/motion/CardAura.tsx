@@ -8,7 +8,7 @@ const CARD_SELECTOR = [
   ".case-row",
   ".competency-grid article",
   ".principles-grid article",
-  ".contact-form",
+  ".contact-section .contact-form",
   ".experience-sticky",
   ".system-processes-sticky",
 ].join(", ");

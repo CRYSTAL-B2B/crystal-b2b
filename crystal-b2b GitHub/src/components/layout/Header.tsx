@@ -4,14 +4,21 @@ import Link from "next/link";
 import { useEffect, useRef, useState } from "react";
 import { navigation } from "@/data/site";
 import { contactLinks } from "@/data/contacts";
-import { trackEvent } from "@/lib/analytics";
 import { Arrow } from "@/components/ui/Arrow";
+import { BookingButton } from "@/components/booking/BookingButton";
+import { useBooking } from "@/components/booking/BookingProvider";
+import { LeadButton } from "@/components/contact/LeadButton";
+import { bookingCopy } from "@/data/booking";
+import { leadCopy } from "@/data/lead";
 
 export function Header() {
   const [open, setOpen] = useState(false);
   const [scrolled, setScrolled] = useState(false);
   const menuRef = useRef<HTMLDivElement>(null);
   const buttonRef = useRef<HTMLButtonElement>(null);
+  // Без адреса расписания кнопки записи нет - нумерация пунктов меню сдвигается.
+  const { available: bookingAvailable } = useBooking();
+  const leadIndex = navigation.length + (bookingAvailable ? 2 : 1);
 
   useEffect(() => {
     const updateScrolled = () => setScrolled(window.scrollY > 12);
@@ -47,13 +54,14 @@ export function Header() {
       <nav className="desktop-nav" aria-label="Основная навигация">
         {navigation.map((item) => <Link key={item.href} href={item.href}>{item.label}</Link>)}
       </nav>
-      <Link
-        className="header-contact"
-        href="/#contact"
-        onClick={() => trackEvent("navigation_contact")}
-      >
-        Обсудить задачу <Arrow />
-      </Link>
+      <div className="header-actions">
+        <BookingButton placement="header" className="header-book">
+          {bookingCopy.action}
+        </BookingButton>
+        <LeadButton placement="header" className="header-contact" event="navigation_contact">
+          {leadCopy.action} <Arrow />
+        </LeadButton>
+      </div>
       <button
         ref={buttonRef}
         className="menu-toggle"
@@ -72,15 +80,14 @@ export function Header() {
               <span>0{index + 1}</span>{item.label}
             </Link>
           ))}
-          <Link
-            href="/#contact"
-            onClick={() => {
-              trackEvent("navigation_contact");
-              setOpen(false);
-            }}
-          >
-            <span>0{navigation.length + 1}</span>Обсудить задачу
-          </Link>
+          {/* Меню остаётся открытым под окном: так фокус после закрытия
+              возвращается на ту же строку, с которой окно открыли. */}
+          <BookingButton placement="menu" className="mobile-menu-item">
+            <span>0{navigation.length + 1}</span>{bookingCopy.action}
+          </BookingButton>
+          <LeadButton placement="menu" className="mobile-menu-item" event="navigation_contact">
+            <span>0{leadIndex}</span>{leadCopy.action}
+          </LeadButton>
         </nav>
         <div className="mobile-menu-contacts">
           {contactLinks.map((contact) => (

@@ -5,6 +5,8 @@ import { useEffect, useRef } from "react";
 import { ViewportVideo } from "@/components/motion/ViewportVideo";
 import { Arrow } from "@/components/ui/Arrow";
 import { TrackedLink } from "@/components/ui/TrackedLink";
+import { LeadButton } from "@/components/contact/LeadButton";
+import { leadCopy } from "@/data/lead";
 import { useReducedMotion } from "@/hooks/useReducedMotion";
 
 export function Hero() {
@@ -83,9 +85,13 @@ export function Hero() {
           измеримой системе.
         </p>
         <div className="hero-actions">
-          <TrackedLink className="button button-primary" href="#contact" event="hero_cta_click">
-            Обсудить задачу <Arrow />
-          </TrackedLink>
+          <LeadButton
+            className="button button-primary"
+            placement="hero"
+            event="hero_cta_click"
+          >
+            {leadCopy.action} <Arrow />
+          </LeadButton>
           <TrackedLink className="text-link" href="#results" event="results_click">
             Смотреть результаты <Arrow />
           </TrackedLink>

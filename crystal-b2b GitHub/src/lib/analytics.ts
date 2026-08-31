@@ -13,7 +13,9 @@ export type AnalyticsEvent =
   | "booking_modal_open"
   | "booking_modal_close"
   | "booking_calendar_loaded"
-  | "booking_external_open";
+  | "booking_external_open"
+  | "lead_modal_open"
+  | "lead_modal_close";
 
 type AnalyticsPayload = Record<string, string | number | boolean | undefined>;
 

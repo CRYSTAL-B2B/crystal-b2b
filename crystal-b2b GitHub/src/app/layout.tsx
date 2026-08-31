@@ -4,6 +4,8 @@ import "@fontsource-variable/inter-tight";
 import "@fontsource/ibm-plex-mono/cyrillic-400.css";
 import "./globals.css";
 import { getSiteUrl } from "@/lib/site-url";
+import { BookingProvider } from "@/components/booking/BookingProvider";
+import { LeadProvider } from "@/components/contact/LeadProvider";
 
 const siteUrl = getSiteUrl();
 const yandexMetrikaId = process.env.NEXT_PUBLIC_YANDEX_METRIKA_ID;
@@ -68,7 +70,10 @@ export default function RootLayout({ children }: Readonly<{ children: React.Reac
             {/* /Yandex.Metrika counter */}
           </>
         ) : null}
-        {children}
+        {/* Окна записи и заявки - по одному на страницу, кнопок к ним много. */}
+        <BookingProvider>
+          <LeadProvider>{children}</LeadProvider>
+        </BookingProvider>
       </body>
     </html>
   );

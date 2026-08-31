@@ -30,17 +30,15 @@ export function getBookingUrls(): BookingUrls | null {
 }
 
 export const bookingCopy = {
-  eyebrow: "Быстрый следующий шаг",
   action: "Определить курс",
-  lead: "Выбрать время для созвона",
-  meta: "30 минут · онлайн",
+  /** Подпись под кнопками формы - поясняет, что даёт вторая кнопка. */
+  note: "Созвон - 30 минут, онлайн.",
   modalTitle: "Выберите удобное время",
   modalSubtitle: "30 минут · онлайн",
   external: "Открыть страницу записи",
   loading: "Загружаем календарь…",
   close: "Закрыть",
-  or: "или",
 } as const;
 
 /** Где именно нажали - уходит в аналитику вместе с событием. */
-export type BookingPlacement = "hero" | "contact" | "header";
+export type BookingPlacement = "hero" | "contact" | "header" | "menu";
