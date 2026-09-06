@@ -5,6 +5,7 @@ import { cases, metrics } from "@/data/site";
 import { SectionLabel } from "@/components/ui/SectionLabel";
 import { Arrow } from "@/components/ui/Arrow";
 import { CaseVisual } from "@/components/sections/CaseVisual";
+import { ArtifactButton } from "@/components/cases/ArtifactButton";
 import { trackEvent } from "@/lib/analytics";
 import type { CaseStudy } from "@/data/site";
 
@@ -103,6 +104,15 @@ export function Proof() {
                   ) : null}
                   {caseStudy.visual ? (
                     <CaseVisual visual={caseStudy.visual} company={caseStudy.company} />
+                  ) : null}
+                  {caseStudy.artifact ? (
+                    <div className="case-artifact">
+                      <ArtifactButton
+                        artifact={caseStudy.artifact}
+                        company={caseStudy.company}
+                        caseId={caseStudy.id}
+                      />
+                    </div>
                   ) : null}
                 </div>
               </details>

@@ -5359,6 +5359,39 @@ body[data-modal-open="true"] {
   overscroll-behavior: contain;
 }
 
+/* ---------- артефакт кейса ---------- */
+
+.case-artifact {
+  grid-column: 1 / -1;
+  margin-top: 0.5rem;
+}
+
+.case-artifact-button {
+  min-width: min(100%, 17rem);
+}
+
+/* Артефакт свёрстан под широкий экран - показываем целиком в масштабе.
+   Высоту рамке задаёт скрипт: она равна высоте страницы после уменьшения,
+   иначе под уменьшенной картинкой осталась бы пустота в полтора экрана. */
+.artifact-body {
+  padding: clamp(0.75rem, 1.8vw, 1.25rem);
+  overflow: auto;
+  overscroll-behavior: contain;
+  background: #0b0d11;
+}
+
+.artifact-frame {
+  position: relative;
+  overflow: hidden;
+  border-radius: 0.75rem;
+}
+
+.artifact-page {
+  display: block;
+  border: 0;
+  transform-origin: 0 0;
+}
+
 .modal-lead {
   margin: 0;
   color: rgba(245, 245, 247, 0.72);

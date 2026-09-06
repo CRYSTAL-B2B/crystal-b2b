@@ -2,6 +2,7 @@ export type AnalyticsEvent =
   | "hero_cta_click"
   | "results_click"
   | "case_view"
+  | "case_artifact_open"
   | "contact_start"
   | "contact_submit"
   | "contact_success"
