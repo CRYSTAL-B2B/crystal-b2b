@@ -2629,58 +2629,6 @@ svg {
   line-height: 1.6;
 }
 
-.contact-system-note {
-  display: grid;
-  margin-top: var(--space-lg);
-  gap: 0;
-  border-top: 1px solid var(--line);
-}
-
-.contact-system-note-item {
-  display: flex;
-  align-items: center;
-  gap: 0.7rem;
-  padding: 0.85rem 0;
-  color: var(--muted);
-  border-bottom: 1px solid var(--line);
-  font-family: "IBM Plex Mono", monospace;
-  font-size: 0.58rem;
-  letter-spacing: 0.02em;
-  cursor: pointer;
-  transition: color 180ms ease;
-}
-
-.contact-system-note-item:hover {
-  color: var(--white);
-}
-
-.contact-system-note-item input[type="checkbox"] {
-  flex-shrink: 0;
-  width: 0.85rem;
-  height: 0.85rem;
-  margin: 0;
-  border: 1px solid var(--line);
-  border-radius: 0.2rem;
-  appearance: none;
-  background: transparent;
-  cursor: pointer;
-  transition: background 180ms ease, border-color 180ms ease;
-}
-
-.contact-system-note-item input[type="checkbox"]:checked {
-  background: var(--warm);
-  border-color: var(--warm);
-}
-
-.contact-system-note-item input[type="checkbox"]:focus-visible {
-  outline: 2px solid var(--blue);
-  outline-offset: 2px;
-}
-
-.contact-system-note-item:has(input:checked) {
-  color: var(--white);
-}
-
 .contact-form {
   position: relative;
   display: grid;
@@ -3807,7 +3755,6 @@ body {
 .principles-grid span,
 .beacon-copy p,
 .beacon-static-summary p,
-.contact-system-note-item,
 .form-field label,
 .site-footer {
   font-size: var(--type-micro);
@@ -5454,12 +5401,6 @@ body[data-modal-open="true"] {
 
 .modal-body .contact-form::before {
   display: none;
-}
-
-/* В секции отступ отделяет галочки от текста над ними, в окне ту же роль
-   играет промежуток сетки - иначе между блоками провал в полтора экрана. */
-.modal-body .contact-system-note {
-  margin-top: 0;
 }
 
 .modal-body .form-field label {

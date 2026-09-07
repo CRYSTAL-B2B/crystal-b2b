@@ -21,8 +21,13 @@ declare global {
 
 type FormStatus = "idle" | "sending" | "success" | "error";
 
+/**
+ * Уточняющие галочки убраны с сайта, но поле остаётся в теле запроса пустым:
+ * так n8n получает ту же форму данных, что и раньше, и его узлы не падают.
+ */
+const NO_QUALIFIERS: string[] = [];
+
 interface ContactFormProps {
-  qualifiers: string[];
   /** Префикс идентификаторов полей: форма бывает на странице не одна. */
   formId?: string;
   /** Откуда отправлена заявка - уходит в аналитику. */
@@ -34,7 +39,6 @@ interface ContactFormProps {
 }
 
 export function ContactForm({
-  qualifiers,
   formId = "contact",
   placement = "contact",
   secondaryAction,
@@ -103,7 +107,7 @@ export function ContactForm({
       task: formData.get("task"),
       company: formData.get("company"),
       turnstileToken: formData.get("cf-turnstile-response"),
-      qualifiers,
+      qualifiers: NO_QUALIFIERS,
     };
     const validation = validateLead(raw);
 
