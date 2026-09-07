@@ -41,7 +41,7 @@ export function Proof() {
         <div className="container">
           <SectionLabel index="06">Подтверждённые результаты</SectionLabel>
           <div className="proof-intro">
-            <h2 id="results-title">Маркетинг влияет на рост бизнеса только когда имеет точные данные.</h2>
+            <h2 id="results-title">Маркетинг способен влиять на рост бизнеса только когда имеет точные данные.</h2>
             <p>Видеть ситуацию целиком без искажений - возможность находить точки роста бизнеса.</p>
           </div>
           <div className="metrics-grid">
