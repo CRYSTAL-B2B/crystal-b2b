@@ -5392,6 +5392,47 @@ body[data-modal-open="true"] {
   transform-origin: 0 0;
 }
 
+/* Экраны продукта. Вертикальные идут парами - поодиночке телефон во всю
+   ширину окна выглядит плакатом; широкие занимают строку целиком. */
+.artifact-gallery {
+  display: grid;
+  gap: clamp(1rem, 2.2vw, 1.75rem);
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+}
+
+.artifact-gallery figure {
+  display: grid;
+  gap: 0.6rem;
+  margin: 0;
+  align-content: start;
+}
+
+.artifact-gallery figure[data-shape="landscape"] {
+  grid-column: 1 / -1;
+}
+
+.artifact-gallery img {
+  width: 100%;
+  height: auto;
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  border-radius: 0.75rem;
+}
+
+.artifact-gallery figcaption {
+  color: var(--muted);
+  font-family: "IBM Plex Mono", monospace;
+  font-size: 0.6rem;
+  line-height: 1.5;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+}
+
+@media (max-width: 640px) {
+  .artifact-gallery {
+    grid-template-columns: minmax(0, 1fr);
+  }
+}
+
 .modal-lead {
   margin: 0;
   color: rgba(245, 245, 247, 0.72);

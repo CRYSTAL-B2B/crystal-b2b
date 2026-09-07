@@ -140,15 +140,32 @@ export type CaseVisual = {
  * а не рисунок. Страница лежит в public/ и открывается в рамке с полным
  * запретом скриптов - поэтому она нерабочая по устройству, а не по договорённости.
  */
-export type CaseArtifact = {
-  /** Адрес страницы внутри public/. */
+export type CaseArtifactShot = {
   src: string;
-  /** Что человек видит - строка под заголовком окна. */
-  caption: string;
-  /** Ширина и высота вёрстки: по ним считается масштаб под экран. */
+  /** Что на экране - идёт и в подпись под снимком, и в alt. */
+  label: string;
   width: number;
   height: number;
 };
+
+export type CaseArtifact =
+  | {
+      /** Страница продукта: показывается живая вёрстка, а не снимок. */
+      kind: "page";
+      /** Адрес страницы внутри public/. */
+      src: string;
+      /** Что человек видит - строка под заголовком окна. */
+      caption: string;
+      /** Ширина и высота вёрстки: по ним считается масштаб под экран. */
+      width: number;
+      height: number;
+    }
+  | {
+      /** Набор экранов - когда живой вёрстки нет, а показать есть что. */
+      kind: "gallery";
+      caption: string;
+      shots: readonly CaseArtifactShot[];
+    };
 
 export type CaseStudy = {
   id: string;
@@ -244,6 +261,48 @@ export const cases: readonly CaseStudy[] = [
         { value: "99%", caption: "точность на уровне инженера-сметчика" },
       ],
     },
+    artifact: {
+      kind: "gallery",
+      caption: "Экраны продукта · демонстрационные данные",
+      shots: [
+        {
+          src: "/demo/smetika/02-worker-object-card-light.webp",
+          label: "Объект у мастера: задачи и их статусы",
+          width: 720,
+          height: 1556,
+        },
+        {
+          src: "/demo/smetika/03-worker-task-detail-light.webp",
+          label: "Карточка задачи: что сделать и чем отчитаться",
+          width: 720,
+          height: 1556,
+        },
+        {
+          src: "/demo/smetika/04-worker-photo-capture-light.webp",
+          label: "Фотоотчёт прямо с площадки",
+          width: 720,
+          height: 1556,
+        },
+        {
+          src: "/demo/smetika/06-foreman-acceptance-light.webp",
+          label: "Приёмка прораба: принять работу или вернуть",
+          width: 720,
+          height: 1560,
+        },
+        {
+          src: "/demo/smetika/11-project-overview-tablet-light.webp",
+          label: "Обзор объекта: прогресс, команда, сроки",
+          width: 1400,
+          height: 1050,
+        },
+        {
+          src: "/demo/smetika/10-owner-finance-dashboard-desktop-light.webp",
+          label: "Финансы объекта у владельца",
+          width: 1400,
+          height: 876,
+        },
+      ],
+    },
   },
   {
     id: "ai-lab",
@@ -280,6 +339,7 @@ export const cases: readonly CaseStudy[] = [
       "Один контур на несколько продуктов: арендатор переключается без отдельной установки.",
     ],
     artifact: {
+      kind: "page",
       src: "/demo/bi-dashboard/index.html",
       caption: "Сквозная аналитика · демонстрационные данные",
       width: 1440,

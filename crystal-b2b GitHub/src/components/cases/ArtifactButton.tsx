@@ -1,5 +1,6 @@
 "use client";
 
+import Image from "next/image";
 import { useCallback, useEffect, useRef, useState } from "react";
 import { Modal } from "@/components/modal/Modal";
 import { Arrow } from "@/components/ui/Arrow";
@@ -15,15 +16,13 @@ interface ArtifactButtonProps {
 /**
  * Кнопка «Посмотреть интерфейс» и окно с артефактом кейса.
  *
- * Страница открывается в рамке с полным запретом скриптов: она не выполняет
- * код, не ходит в сеть и никуда не уводит по ссылкам. Это одновременно и
- * изоляция, и обещанная нерабочесть - и заодно экономия, скрипты вообще
- * не скачиваются.
+ * Артефакт бывает двух видов: живая страница продукта или набор экранов.
+ * Оболочка окна и кнопка общие, различается только содержимое.
  */
 export function ArtifactButton({ artifact, company, caseId }: ArtifactButtonProps) {
   const [open, setOpen] = useState(false);
-  // Рамка появляется в разметке только после первого открытия - до него
-  // страница артефакта не грузится вовсе.
+  // Содержимое появляется в разметке только после первого открытия -
+  // до него ни страница, ни снимки не грузятся вовсе.
   const [mounted, setMounted] = useState(false);
 
   const close = useCallback(() => setOpen(false), []);
@@ -52,23 +51,29 @@ export function ArtifactButton({ artifact, company, caseId }: ArtifactButtonProp
           subtitle={artifact.caption}
           closeLabel="Закрыть"
         >
-          <ArtifactFrame artifact={artifact} title={`Интерфейс: ${company}`} />
+          {artifact.kind === "page" ? (
+            <ArtifactPage artifact={artifact} title={`Интерфейс: ${company}`} />
+          ) : (
+            <ArtifactGallery artifact={artifact} />
+          )}
         </Modal>
       ) : null}
     </>
   );
 }
 
-interface ArtifactFrameProps {
-  artifact: CaseArtifact;
-  title: string;
-}
+type PageArtifact = Extract<CaseArtifact, { kind: "page" }>;
+type GalleryArtifact = Extract<CaseArtifact, { kind: "gallery" }>;
 
 /**
- * Артефакт свёрстан под широкий экран, а окно бывает любой ширины. Поэтому
- * страница показывается целиком в масштабе: уменьшается, но не ломается.
+ * Страница продукта свёрстана под широкий экран, а окно бывает любой ширины.
+ * Показываем целиком в масштабе: уменьшается, но не ломается.
+ *
+ * Пустой sandbox - максимальный запрет: страница не выполняет код, никуда не
+ * уводит по ссылкам и не скачивает скрипты. Некликабельность получается
+ * устройством рамки, а не договорённостью.
  */
-function ArtifactFrame({ artifact, title }: ArtifactFrameProps) {
+function ArtifactPage({ artifact, title }: { artifact: PageArtifact; title: string }) {
   const boxRef = useRef<HTMLDivElement>(null);
   const [scale, setScale] = useState(0);
 
@@ -90,7 +95,6 @@ function ArtifactFrame({ artifact, title }: ArtifactFrameProps) {
         ref={boxRef}
         style={scale ? { height: `${Math.round(artifact.height * scale)}px` } : undefined}
       >
-        {/* Пустой sandbox - максимальный запрет: ни скриптов, ни переходов. */}
         <iframe
           className="artifact-page"
           src={artifact.src}
@@ -103,6 +107,32 @@ function ArtifactFrame({ artifact, title }: ArtifactFrameProps) {
             transform: `scale(${scale || 1})`,
           }}
         />
+      </div>
+    </div>
+  );
+}
+
+/** Набор экранов: вертикальные идут парами, широкие - во всю ширину окна. */
+function ArtifactGallery({ artifact }: { artifact: GalleryArtifact }) {
+  return (
+    <div className="artifact-body" data-native-scroll="true">
+      <div className="artifact-gallery">
+        {artifact.shots.map((shot) => (
+          <figure
+            key={shot.src}
+            data-shape={shot.height > shot.width ? "portrait" : "landscape"}
+          >
+            <Image
+              src={shot.src}
+              alt={shot.label}
+              width={shot.width}
+              height={shot.height}
+              loading="lazy"
+              sizes="(max-width: 768px) 100vw, 45rem"
+            />
+            <figcaption>{shot.label}</figcaption>
+          </figure>
+        ))}
       </div>
     </div>
   );
