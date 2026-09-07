@@ -73,7 +73,6 @@ export function Hero() {
           className="hero-image hero-video"
           src="/media/video/01-hero.mp4"
         />
-        <div className="hero-scrim" />
       </div>
       <div className="hero-copy">
         <h1 id="hero-title">

@@ -272,18 +272,6 @@ svg {
   overflow: hidden;
 }
 
-.hero::after {
-  content: "";
-  position: absolute;
-  z-index: 2;
-  inset: 0;
-  opacity: 0.1;
-  background-image: radial-gradient(rgba(255, 255, 255, 0.38) 0.55px, transparent 0.65px);
-  background-size: 5px 5px;
-  mix-blend-mode: soft-light;
-  pointer-events: none;
-}
-
 .hero-media {
   --media-x: 0px;
   --media-y: 0px;
@@ -315,14 +303,6 @@ svg {
 
 .hero-video[data-ready="true"] {
   opacity: 1;
-}
-
-.hero-scrim {
-  position: absolute;
-  inset: 0;
-  background:
-    linear-gradient(90deg, rgba(2, 3, 5, 0.9) 0%, rgba(2, 3, 5, 0.78) 29%, rgba(2, 3, 5, 0.26) 54%, rgba(2, 3, 5, 0.02) 78%),
-    linear-gradient(180deg, rgba(2, 3, 5, 0.34) 0%, transparent 34%, rgba(2, 3, 5, 0.44) 100%);
 }
 
 .hero-copy {
@@ -661,11 +641,19 @@ svg {
   color: rgba(255, 255, 255, 0.2);
 }
 
+/* Подсказка о прокрутке стоит по центру нижней кромки экрана. Позиционируется
+   абсолютно, а не ячейкой сетки: сетка героя выравнивает по колонкам с текстом,
+   и центр строки не совпал бы с центром экрана. */
 .scroll-cue {
+  position: absolute;
+  z-index: 5;
+  right: 0;
+  bottom: clamp(1.25rem, 3.2vh, 2.6rem);
+  left: 0;
   display: flex;
   gap: 0.8rem;
   align-items: center;
-  justify-self: end;
+  justify-content: center;
   color: rgba(255, 255, 255, 0.58);
   font-family: "IBM Plex Mono", monospace;
   font-size: 0.55rem;
@@ -3105,17 +3093,6 @@ svg {
     padding: 7.8rem 1rem 3.2rem;
   }
 
-  .hero::before {
-    content: "";
-    position: absolute;
-    z-index: 1;
-    inset: 0;
-    background:
-      linear-gradient(90deg, rgba(2, 3, 5, 0.9) 0%, rgba(2, 3, 5, 0.66) 62%, rgba(2, 3, 5, 0.18) 100%),
-      linear-gradient(180deg, rgba(2, 3, 5, 0.4), transparent 34%, rgba(2, 3, 5, 0.62));
-    pointer-events: none;
-  }
-
   .hero-copy {
     position: relative;
     z-index: 5;
@@ -3145,7 +3122,7 @@ svg {
 
   .hero-image {
     object-position: 63% 50%;
-    filter: saturate(0.9) contrast(1.04) brightness(0.88);
+    filter: saturate(0.9) contrast(1.04);
     transform: translate3d(0, 0, 0) scale(1.05);
   }
 
@@ -5650,12 +5627,6 @@ body[data-modal-open="true"] {
   color: #fff;
 }
 
-.hero-scrim {
-  background:
-    linear-gradient(90deg, rgba(2, 3, 5, 0.63) 0%, rgba(2, 3, 5, 0.546) 29%, rgba(2, 3, 5, 0.182) 54%, rgba(2, 3, 5, 0.014) 78%),
-    linear-gradient(180deg, rgba(2, 3, 5, 0.294) 0%, rgba(2, 3, 5, 0.126) 26%, transparent 50%, rgba(2, 3, 5, 0.112) 66%, rgba(2, 3, 5, 0.434) 87%, rgba(2, 3, 5, 0.672) 100%);
-}
-
 .editorial-bridge::after,
 .economic-thesis::after,
 .metrics-section::after,
@@ -5778,19 +5749,6 @@ body[data-modal-open="true"] {
   }
 }
 
-@media (max-width: 768px) {
-  .hero-scrim {
-    background:
-      linear-gradient(90deg, rgba(2, 3, 5, 0.585) 0%, rgba(2, 3, 5, 0.507) 29%, rgba(2, 3, 5, 0.169) 54%, rgba(2, 3, 5, 0.013) 78%),
-      linear-gradient(180deg, rgba(2, 3, 5, 0.273) 0%, rgba(2, 3, 5, 0.117) 26%, transparent 50%, rgba(2, 3, 5, 0.104) 66%, rgba(2, 3, 5, 0.403) 87%, rgba(2, 3, 5, 0.624) 100%);
-  }
-
-  .hero::before {
-    background:
-      linear-gradient(90deg, rgba(2, 3, 5, 0.585) 0%, rgba(2, 3, 5, 0.429) 62%, rgba(2, 3, 5, 0.117) 100%),
-      linear-gradient(180deg, rgba(2, 3, 5, 0.299) 0%, rgba(2, 3, 5, 0.117) 30%, transparent 52%, rgba(2, 3, 5, 0.13) 68%, rgba(2, 3, 5, 0.598) 100%);
-  }
-}
 
 /* Control the Flow moves as a perspective crawl, paced directly by scroll. */
 .scroll-scene[data-motion-ready="true"].flow-scene {
