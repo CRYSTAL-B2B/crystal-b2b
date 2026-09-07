@@ -10,11 +10,22 @@ interface LeadButtonProps {
   className: string;
   /** Событие места, где стоит кнопка - в дополнение к событию открытия окна. */
   event?: AnalyticsEvent;
+  /** Из какого кейса пришли - уходит в аналитику вместе с открытием. */
+  caseId?: string;
+  /** Что сделать перед открытием: например, закрыть окно, из которого нажали. */
+  onSelect?: () => void;
   children?: ReactNode;
 }
 
 /** Кнопка «Обсудить задачу»: открывает форму в окне, не уводя со страницы. */
-export function LeadButton({ placement, className, event, children }: LeadButtonProps) {
+export function LeadButton({
+  placement,
+  className,
+  event,
+  caseId,
+  onSelect,
+  children,
+}: LeadButtonProps) {
   const { open } = useLead();
 
   return (
@@ -24,7 +35,8 @@ export function LeadButton({ placement, className, event, children }: LeadButton
       aria-haspopup="dialog"
       onClick={() => {
         if (event) trackEvent(event);
-        open(placement);
+        onSelect?.();
+        open(placement, caseId);
       }}
     >
       {children ?? leadCopy.action}

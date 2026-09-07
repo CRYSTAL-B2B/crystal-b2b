@@ -17,6 +17,8 @@ export const QUALIFIER_GROUP_LABEL =
 
 export const leadCopy = {
   action: "Обсудить задачу",
+  /** Призыв в карточке кейса и в окне артефакта - там разговор уже про результат. */
+  cta: "Хочу так же!",
   modalTitle: "Обсудить задачу",
   modalLead:
     "Расскажите, где сейчас находится узкое место: спрос, лиды, CRM, продажи, аналитика или масштабирование.",
@@ -24,4 +26,4 @@ export const leadCopy = {
 } as const;
 
 /** Откуда открыли форму - уходит в аналитику вместе с событием. */
-export type LeadPlacement = "hero" | "header" | "menu";
+export type LeadPlacement = "hero" | "header" | "menu" | "case" | "artifact";

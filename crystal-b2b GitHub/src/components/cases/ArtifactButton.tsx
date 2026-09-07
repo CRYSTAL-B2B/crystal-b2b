@@ -4,6 +4,8 @@ import Image from "next/image";
 import { useCallback, useEffect, useRef, useState } from "react";
 import { Modal } from "@/components/modal/Modal";
 import { Arrow } from "@/components/ui/Arrow";
+import { LeadButton } from "@/components/contact/LeadButton";
+import { leadCopy } from "@/data/lead";
 import { trackEvent } from "@/lib/analytics";
 import type { CaseArtifact } from "@/data/site";
 
@@ -50,6 +52,18 @@ export function ArtifactButton({ artifact, company, caseId }: ArtifactButtonProp
           title={company}
           subtitle={artifact.caption}
           closeLabel="Закрыть"
+          footer={
+            // Окно артефакта закрывается перед открытием формы: два окна друг
+            // на друге спорили бы за фокус и за порядок наложения.
+            <LeadButton
+              className="button button-primary modal-cta"
+              placement="artifact"
+              caseId={caseId}
+              onSelect={close}
+            >
+              {leadCopy.cta} <Arrow />
+            </LeadButton>
+          }
         >
           {artifact.kind === "page" ? (
             <ArtifactPage artifact={artifact} title={`Интерфейс: ${company}`} />

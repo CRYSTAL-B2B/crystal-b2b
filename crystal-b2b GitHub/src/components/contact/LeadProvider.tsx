@@ -6,7 +6,8 @@ import type { LeadPlacement } from "@/data/lead";
 import { trackEvent } from "@/lib/analytics";
 
 interface LeadContextValue {
-  open: (placement: LeadPlacement) => void;
+  /** caseId - когда форму открыли из кейса: видно, какой кейс привёл заявку. */
+  open: (placement: LeadPlacement, caseId?: string) => void;
 }
 
 const LeadContext = createContext<LeadContextValue>({ open: () => {} });
@@ -26,11 +27,11 @@ export function LeadProvider({ children }: { children: ReactNode }) {
   const [mounted, setMounted] = useState(false);
   const [placement, setPlacement] = useState<LeadPlacement>("header");
 
-  const openModal = useCallback((next: LeadPlacement) => {
+  const openModal = useCallback((next: LeadPlacement, caseId?: string) => {
     setPlacement(next);
     setMounted(true);
     setOpen(true);
-    trackEvent("lead_modal_open", { placement: next });
+    trackEvent("lead_modal_open", { placement: next, ...(caseId ? { case_id: caseId } : {}) });
   }, []);
 
   const close = useCallback(() => {
