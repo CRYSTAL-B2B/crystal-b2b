@@ -41,8 +41,8 @@ export function Proof() {
         <div className="container">
           <SectionLabel index="06">Подтверждённые результаты</SectionLabel>
           <div className="proof-intro">
-            <h2 id="results-title">Всё это имеет смысл только тогда, когда влияет на рост бизнеса.</h2>
-            <p>Подтверждённые результаты из разных проектов - без смешивания контекста.</p>
+            <h2 id="results-title">Маркетинг влияет на рост бизнеса только когда имеет точные данные.</h2>
+            <p>Видеть ситуацию целиком без искажений - возможность находить точки роста бизнеса.</p>
           </div>
           <div className="metrics-grid">
             {metrics.map((metric, index) => (
