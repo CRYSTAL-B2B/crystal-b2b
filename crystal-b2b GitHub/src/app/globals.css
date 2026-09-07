@@ -5872,3 +5872,19 @@ body[data-modal-open="true"] {
 .architecture-trace-map {
   display: none;
 }
+
+/* Читаемость первого экрана на телефоне.
+   На широком экране видео остаётся чистым: там текст и так лежит на тёмной
+   части кадра (замер - медиана 20:1). На узком куб занимает середину, и
+   подзаголовок идёт прямо по светлому стеклу. Один слабый градиент снизу
+   вверх поднимает эту зону, не трогая верх кадра. */
+@media (max-width: 768px) {
+  .hero::before {
+    content: "";
+    position: absolute;
+    z-index: 1;
+    inset: 0;
+    background: linear-gradient(to top, rgba(2, 3, 5, 0.72) 0%, rgba(2, 3, 5, 0.52) 42%, rgba(2, 3, 5, 0.22) 66%, transparent 88%);
+    pointer-events: none;
+  }
+}
