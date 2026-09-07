@@ -17,7 +17,7 @@ export function Contact() {
         <div className="contact-layout">
           <div className="contact-copy">
             <h2 id="contact-title">Давайте определим курс.</h2>
-            <p>Расскажите, где сейчас находится узкое место: спрос, лиды, CRM, продажи, аналитика или масштабирование.</p>
+            <p>Расскажите, какая у вас бизнес-ниша, где сейчас находится узкое место: спрос, лиды, CRM, продажи, аналитика или масштабирование.</p>
           </div>
           <ContactForm
             note={bookingAvailable ? bookingCopy.note : undefined}

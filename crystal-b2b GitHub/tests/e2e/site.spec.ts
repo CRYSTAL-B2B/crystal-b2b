@@ -40,10 +40,13 @@ test("верхняя навигация использует имя, систе�
   );
   expect(desktopNavSize).toBeGreaterThanOrEqual(15);
 
+  // Проверяем цвет всех подписей, а не их количество: полей в форме
+  // прибавляется, и жёсткий список ломался бы от каждого нового.
   const formLabelColors = await page.locator(".contact-form .form-field:not(.honeypot) label").evaluateAll(
     (labels) => labels.map((label) => getComputedStyle(label).color),
   );
-  expect(formLabelColors).toEqual(["rgb(255, 255, 255)", "rgb(255, 255, 255)", "rgb(255, 255, 255)"]);
+  expect(formLabelColors.length).toBeGreaterThanOrEqual(3);
+  expect([...new Set(formLabelColors)]).toEqual(["rgb(255, 255, 255)"]);
 
   const visibleText = await page.locator("body").innerText();
   expect(visibleText).not.toMatch(/[\u2014\u2192]/);

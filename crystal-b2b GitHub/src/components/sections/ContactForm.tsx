@@ -104,6 +104,7 @@ export function ContactForm({
     const raw = {
       name: formData.get("name"),
       contact: formData.get("contact"),
+      site: formData.get("site"),
       task: formData.get("task"),
       company: formData.get("company"),
       turnstileToken: formData.get("cf-turnstile-response"),
@@ -145,6 +146,7 @@ export function ContactForm({
           placement,
           name: validation.data.name,
           contact: validation.data.contact,
+          site: validation.data.site || "",
           task: validation.data.task || "",
           company: validation.data.company || "",
           qualifiers: validation.data.qualifiers,
@@ -214,6 +216,20 @@ export function ContactForm({
           />
         </div>
         {errors.contact ? <p className="field-error" id={`${formId}-contact-error`}>{errors.contact}</p> : null}
+      </div>
+      <div className="form-field form-field-wide">
+        <label htmlFor={`${formId}-site`}>Ваш сайт <span className="field-optional">(если есть)</span></label>
+        <input
+          id={`${formId}-site`}
+          name="site"
+          type="text"
+          inputMode="url"
+          autoComplete="url"
+          aria-invalid={Boolean(errors.site)}
+          aria-describedby={errors.site ? `${formId}-site-error` : undefined}
+          placeholder="example.ru"
+        />
+        {errors.site ? <p className="field-error" id={`${formId}-site-error`}>{errors.site}</p> : null}
       </div>
       <div className="form-field form-field-wide">
         <label htmlFor={`${formId}-task`}>Задача</label>

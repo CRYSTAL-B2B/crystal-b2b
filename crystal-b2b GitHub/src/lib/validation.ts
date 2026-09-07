@@ -1,6 +1,8 @@
 export type LeadPayload = {
   name: string;
   contact: string;
+  /** Сайт компании - необязательный, пишут как придётся. */
+  site?: string;
   task?: string;
   company?: string;
   turnstileToken: string;
@@ -26,6 +28,7 @@ export function validateLead(input: unknown): {
   const data: LeadPayload = {
     name: clean(source.name),
     contact: clean(source.contact),
+    site: clean(source.site),
     task: clean(source.task),
     company: clean(source.company),
     turnstileToken: clean(source.turnstileToken),
@@ -40,6 +43,9 @@ export function validateLead(input: unknown): {
   } else if (!PHONE_PATTERN.test(data.contact) || phoneDigitCount(data.contact) < 10 || phoneDigitCount(data.contact) > 15) {
     errors.contact = "Введите корректный номер телефона.";
   }
+  // Адрес не проверяем на формат: пишут и «example.ru», и «мой сайт в инстаграме»,
+  // и отказ по формату здесь потерял бы заявку из-за необязательного поля.
+  if ((data.site?.length ?? 0) > 200) errors.site = "Адрес сайта не должен быть длиннее 200 символов.";
   if ((data.task?.length ?? 0) > 2000) errors.task = "Описание задачи не должно быть длиннее 2000 символов.";
   if (!data.turnstileToken) errors.turnstileToken = "Обновите страницу и попробуйте снова.";
 
