@@ -18,7 +18,7 @@ export function Header() {
   const buttonRef = useRef<HTMLButtonElement>(null);
   // Без адреса расписания кнопки записи нет - нумерация пунктов меню сдвигается.
   const { available: bookingAvailable } = useBooking();
-  const leadIndex = navigation.length + (bookingAvailable ? 2 : 1);
+  const bookingIndex = navigation.length + (bookingAvailable ? 2 : 1);
 
   useEffect(() => {
     const updateScrolled = () => setScrolled(window.scrollY > 12);
@@ -55,9 +55,6 @@ export function Header() {
         {navigation.map((item) => <Link key={item.href} href={item.href}>{item.label}</Link>)}
       </nav>
       <div className="header-actions">
-        <BookingButton placement="header" className="header-book">
-          {bookingCopy.action}
-        </BookingButton>
         <LeadButton placement="header" className="header-contact" event="navigation_contact">
           {leadCopy.action} <Arrow />
         </LeadButton>
@@ -82,12 +79,12 @@ export function Header() {
           ))}
           {/* Меню остаётся открытым под окном: так фокус после закрытия
               возвращается на ту же строку, с которой окно открыли. */}
-          <BookingButton placement="menu" className="mobile-menu-item">
-            <span>0{navigation.length + 1}</span>{bookingCopy.action}
-          </BookingButton>
-          <LeadButton placement="menu" className="mobile-menu-item" event="navigation_contact">
-            <span>0{leadIndex}</span>{leadCopy.action}
+          <LeadButton placement="menu" className="mobile-menu-item mobile-menu-item-primary" event="navigation_contact">
+            <span>0{navigation.length + 1}</span>{leadCopy.action}
           </LeadButton>
+          <BookingButton placement="menu" className="mobile-menu-item">
+            <span>0{bookingIndex}</span>{bookingCopy.action}
+          </BookingButton>
         </nav>
         <div className="mobile-menu-contacts">
           {contactLinks.map((contact) => (

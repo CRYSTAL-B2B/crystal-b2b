@@ -52,7 +52,7 @@ export function getBookingUrls(): BookingUrls | null {
 }
 
 export const bookingCopy = {
-  action: "Определить курс",
+  action: "Выбрать время звонка",
   /** Подпись под кнопками формы - поясняет, что даёт вторая кнопка. */
   note: "Созвон - 30 минут, онлайн.",
   modalTitle: "Выберите удобное время",

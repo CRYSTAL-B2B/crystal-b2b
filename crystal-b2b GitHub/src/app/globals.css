@@ -5150,31 +5150,6 @@ body[data-modal-open="true"] {
   justify-self: end;
 }
 
-.header-book {
-  display: flex;
-  min-height: 2.15rem;
-  padding: 0.38rem 0.9rem;
-  align-items: center;
-  color: #f5f5f7;
-  border: 1px solid rgba(255, 255, 255, 0.24);
-  border-radius: 100vmax;
-  background: transparent;
-  cursor: pointer;
-  font-family: var(--font-ui);
-  font-size: 0.76rem;
-  font-weight: 560;
-  letter-spacing: -0.012em;
-  white-space: nowrap;
-  transition: color 180ms ease, background 180ms ease, border-color 180ms ease;
-}
-
-.header-book:hover,
-.header-book:focus-visible {
-  color: #f5f5f7;
-  border-color: rgba(255, 255, 255, 0.55);
-  background: rgba(255, 255, 255, 0.1);
-}
-
 /* Кнопки шапки уступают место меню-гамбургеру. Правило продублировано здесь:
    объявление .header-actions идёт ниже раннего медиазапроса и перебивало его. */
 @media (max-width: 960px) {
@@ -5867,4 +5842,32 @@ body[data-modal-open="true"] {
     background: linear-gradient(to bottom, rgba(2, 3, 5, 0.72) 0%, rgba(2, 3, 5, 0.52) 42%, rgba(2, 3, 5, 0.22) 66%, transparent 88%);
     pointer-events: none;
   }
+}
+
+/* ---------- главное действие в мобильном меню ---------- */
+
+/* «Обсудить задачу» - светлая плашка среди строк списка: на тёмном фоне меню
+   она читается как кнопка, а не как ещё один пункт навигации. Горизонтальный
+   padding задан свой: у обычного пункта его нет, и текст упирался бы в край
+   плашки. Нижняя граница снята - у кнопки её быть не должно. */
+.mobile-menu-item-primary {
+  margin: 1.1rem 0 0.6rem;
+  padding-right: 1.35rem;
+  padding-left: 1.35rem;
+  color: #08090b;
+  border-bottom: 0;
+  border-radius: 100vmax;
+  background: #f5f5f7;
+  transition: background 180ms ease;
+}
+
+/* Номер пункта на светлой плашке: --blue-soft рассчитан на тёмный фон и
+   здесь читался бы едва-едва. */
+.mobile-menu-item-primary span {
+  color: rgba(8, 9, 11, 0.5);
+}
+
+.mobile-menu-item-primary:hover,
+.mobile-menu-item-primary:focus-visible {
+  background: var(--blue-soft);
 }
