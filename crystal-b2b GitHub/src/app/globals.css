@@ -3537,13 +3537,21 @@ svg {
     grid-column: 1;
   }
 
+  /* Grid вместо flex-column: у flex-контейнера с wrap подпись уходила
+     на вторую линию, а в column-раскладке линия ложится правее - текст
+     оказывался за краем экрана. */
   .form-submit {
-    align-items: flex-start;
-    flex-direction: column;
+    display: grid;
+    gap: 1rem;
+    align-items: start;
   }
 
   .form-submit-actions {
     width: 100%;
+  }
+
+  .form-submit p {
+    max-width: 100%;
   }
 
   .button-contact,
