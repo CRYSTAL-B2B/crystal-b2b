@@ -1,7 +1,11 @@
+import Image from "next/image";
 import { competencies, experience, principles } from "@/data/site";
 import { SectionLabel } from "@/components/ui/SectionLabel";
+import { hasPortrait, portrait } from "@/lib/portrait";
 
 export function Expertise() {
+  const showPortrait = hasPortrait();
+
   return (
     <>
       <section className="expertise-section" aria-labelledby="expertise-title">
@@ -27,6 +31,16 @@ export function Expertise() {
           <SectionLabel index="09">Опыт</SectionLabel>
           <div className="experience-layout">
             <div className="experience-sticky">
+              {showPortrait ? (
+                <Image
+                  className="experience-portrait"
+                  src={portrait.src}
+                  width={portrait.width}
+                  height={portrait.height}
+                  alt={portrait.alt}
+                  loading="lazy"
+                />
+              ) : null}
               <p className="experience-number">11+</p>
               <h2 id="experience-title">лет в маркетинге сложных продуктов и B2B.</h2>
             </div>

@@ -8,6 +8,7 @@ import { EconomicThesis } from "@/components/sections/EconomicThesis";
 import { ConnectedSystem } from "@/components/scenes/ConnectedSystem";
 import { Proof } from "@/components/sections/Proof";
 import { Offer } from "@/components/sections/Offer";
+import { Testimonials } from "@/components/sections/Testimonials";
 import { Expertise } from "@/components/sections/Expertise";
 import { Lighthouse } from "@/components/scenes/Lighthouse";
 import { Contact } from "@/components/sections/Contact";
@@ -15,9 +16,13 @@ import { DesktopSmoothScroll } from "@/components/motion/DesktopSmoothScroll";
 import { ScrollToHashOnLoad } from "@/components/motion/ScrollToHashOnLoad";
 import { CardAura } from "@/components/motion/CardAura";
 import { getSiteUrl } from "@/lib/site-url";
+import { hasPortrait, portrait } from "@/lib/portrait";
 
 export default function Home() {
   const siteUrl = getSiteUrl();
+  // Ссылка на фотографию уходит в разметку Person, только если файл есть:
+  // адрес на несуществующий портрет поисковик засчитает за битую ссылку.
+  const portraitUrl = siteUrl && hasPortrait() ? new URL(portrait.src, siteUrl).toString() : null;
   const structuredData = {
     "@context": "https://schema.org",
     "@type": "Person",
@@ -27,6 +32,7 @@ export default function Home() {
     knowsAbout: ["B2B-маркетинг", "CRM-маркетинг", "Лидогенерация", "Маркетинговая аналитика", "Автоматизация маркетинга"],
     sameAs: ["https://t.me/DAmarketolog"],
     ...(siteUrl ? { url: siteUrl.toString() } : {}),
+    ...(portraitUrl ? { image: portraitUrl } : {}),
   };
 
   return (
@@ -64,6 +70,7 @@ export default function Home() {
         <ConnectedSystem />
         <Proof />
         <Offer />
+        <Testimonials />
         <Expertise />
         <Lighthouse />
         <Contact />

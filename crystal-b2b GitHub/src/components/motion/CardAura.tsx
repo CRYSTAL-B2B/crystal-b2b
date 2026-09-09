@@ -9,6 +9,7 @@ const CARD_SELECTOR = [
   ".competency-grid article",
   ".principles-grid article",
   ".offer-grid article",
+  ".testimonials-grid article",
   ".contact-section .contact-form",
   ".experience-sticky",
   ".system-processes-sticky",

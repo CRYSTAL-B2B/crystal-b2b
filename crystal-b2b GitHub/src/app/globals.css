@@ -3977,6 +3977,7 @@ body {
 .competency-grid article::before,
 .principles-grid article::before,
 .offer-grid article::before,
+.testimonials-grid article::before,
 .contact-form::before,
 .experience-sticky::before,
 .system-processes-sticky::before {
@@ -4007,7 +4008,8 @@ body {
 .case-row,
 .competency-grid article,
 .principles-grid article,
-.offer-grid article {
+.offer-grid article,
+.testimonials-grid article {
   position: relative;
 }
 
@@ -4019,6 +4021,7 @@ body {
   .competency-grid article::before,
   .principles-grid article::before,
   .offer-grid article::before,
+  .testimonials-grid article::before,
   .contact-form::before,
   .experience-sticky::before,
   .system-processes-sticky::before {
@@ -4051,7 +4054,8 @@ body {
 .case-list,
 .competency-grid,
 .principles-grid,
-.offer-grid {
+.offer-grid,
+.testimonials-grid {
   position: relative;
   isolation: isolate;
 }
@@ -4060,7 +4064,8 @@ body {
 .case-list::before,
 .competency-grid::before,
 .principles-grid::before,
-.offer-grid::before {
+.offer-grid::before,
+.testimonials-grid::before {
   content: "";
   position: absolute;
   z-index: -1;
@@ -4092,7 +4097,8 @@ body {
   .case-list::before,
   .competency-grid::before,
   .principles-grid::before,
-  .offer-grid::before {
+  .offer-grid::before,
+  .testimonials-grid::before {
     animation: none;
   }
 }
@@ -6073,5 +6079,122 @@ body[data-modal-open="true"] {
   .offer-footer {
     align-items: stretch;
     flex-direction: column;
+  }
+}
+
+/* ---------- отзывы ---------- */
+
+/* Секция появляется, только когда в src/data/testimonials.ts есть записи.
+   Фон - тот же приём, что у соседей, но без фотоподложки: отзывы идут сразу
+   после форматов работы, и вторая фотография подряд утяжелила бы полосу. */
+.testimonials-section {
+  position: relative;
+  padding: var(--space-2xl) 0;
+  isolation: isolate;
+  color: var(--white);
+  background: #0b0d11;
+  overflow: clip;
+}
+
+.testimonials-section > .container {
+  position: relative;
+  z-index: 2;
+}
+
+.testimonials-section .section-label {
+  color: rgba(245, 245, 247, 0.62);
+}
+
+.testimonials-section .section-label span {
+  color: var(--blue-soft);
+}
+
+.testimonials-title {
+  max-width: 60rem;
+  margin: var(--space-lg) 0 0;
+  font-size: var(--type-heading);
+  font-weight: 540;
+  line-height: 1.03;
+  letter-spacing: -0.045em;
+}
+
+/* auto-fit, а не фиксированное число колонок: отзывов может прийти два или
+   три, и в обоих случаях ряд должен выглядеть намеренным, а не недобранным. */
+.testimonials-grid {
+  display: grid;
+  margin-top: var(--space-lg);
+  gap: 0.8rem;
+  grid-template-columns: repeat(auto-fit, minmax(19rem, 1fr));
+}
+
+.testimonial-card {
+  display: flex;
+  padding: 1.75rem;
+  flex-direction: column;
+  gap: 1.5rem;
+  border: 1px solid rgba(255, 255, 255, 0.13);
+  border-radius: 1.25rem;
+  background: rgba(10, 12, 16, 0.52);
+  box-shadow: var(--aura-shadow);
+  backdrop-filter: blur(18px);
+}
+
+.testimonial-card blockquote {
+  margin: 0;
+  color: rgba(255, 255, 255, 0.88);
+  font-size: 1rem;
+  line-height: 1.65;
+}
+
+.testimonial-card footer {
+  margin-top: auto;
+  padding-top: 1.2rem;
+  border-top: 1px solid rgba(255, 255, 255, 0.14);
+}
+
+.testimonial-author {
+  margin: 0;
+  font-size: 0.95rem;
+  font-weight: 560;
+}
+
+.testimonial-role {
+  margin: 0.3rem 0 0;
+  color: rgba(245, 245, 247, 0.62);
+  font-family: "IBM Plex Mono", monospace;
+  font-size: 0.7rem;
+  line-height: 1.5;
+}
+
+@media (max-width: 768px) {
+  .testimonials-grid {
+    gap: 0.65rem;
+    grid-template-columns: 1fr;
+  }
+
+  .testimonial-card {
+    padding: 1.35rem;
+  }
+}
+
+/* ---------- фотография в блоке опыта ---------- */
+
+/* Портрет появляется, только если файл лежит в public - см. src/lib/portrait.ts.
+   Явные width/height в разметке плюс aspect-ratio здесь: место под картинку
+   занимается до загрузки, и блок не дёргается. */
+.experience-portrait {
+  display: block;
+  width: 100%;
+  max-width: 15rem;
+  height: auto;
+  margin-bottom: 1.4rem;
+  aspect-ratio: 4 / 5;
+  border-radius: 1rem;
+  object-fit: cover;
+}
+
+@media (max-width: 960px) {
+  .experience-portrait {
+    max-width: 11rem;
   }
 }
