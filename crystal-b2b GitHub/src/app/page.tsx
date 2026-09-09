@@ -7,6 +7,7 @@ import { ControlFlow } from "@/components/scenes/ControlFlow";
 import { EconomicThesis } from "@/components/sections/EconomicThesis";
 import { ConnectedSystem } from "@/components/scenes/ConnectedSystem";
 import { Proof } from "@/components/sections/Proof";
+import { Offer } from "@/components/sections/Offer";
 import { Expertise } from "@/components/sections/Expertise";
 import { Lighthouse } from "@/components/scenes/Lighthouse";
 import { Contact } from "@/components/sections/Contact";
@@ -62,6 +63,7 @@ export default function Home() {
         />
         <ConnectedSystem />
         <Proof />
+        <Offer />
         <Expertise />
         <Lighthouse />
         <Contact />

@@ -17,4 +17,4 @@ export const leadCopy = {
 } as const;
 
 /** Откуда открыли форму - уходит в аналитику вместе с событием. */
-export type LeadPlacement = "hero" | "header" | "menu" | "case" | "artifact";
+export type LeadPlacement = "hero" | "header" | "menu" | "case" | "artifact" | "offer";
