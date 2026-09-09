@@ -19,7 +19,7 @@
   --space-md: clamp(1.75rem, 1.25rem + 1.5vw, 3.25rem);
   --space-lg: clamp(3.25rem, 2.2rem + 3vw, 6.5rem);
   --space-xl: clamp(5.5rem, 3.6rem + 6vw, 11rem);
-  --space-2xl: clamp(8rem, 5rem + 9vw, 17rem);
+  --space-2xl: clamp(5rem, 3.2rem + 5.5vw, 10rem);
   --radius-sm: 0.45rem;
   --radius-md: 1rem;
   --ease-out: cubic-bezier(0.16, 1, 0.3, 1);
@@ -773,7 +773,7 @@ svg {
 
 .scroll-scene[data-motion-ready="true"].process-scene { height: 680vh; }
 .scroll-scene[data-motion-ready="true"].flow-scene { height: 620vh; }
-.scroll-scene[data-motion-ready="true"].architecture-scene { height: 160vh; }
+.scroll-scene[data-motion-ready="true"].architecture-scene { height: 130vh; }
 .scroll-scene[data-motion-ready="true"].lighthouse-scene { height: 620vh; }
 
 .scroll-stage {
@@ -3122,7 +3122,7 @@ svg {
 
   .scroll-scene[data-motion-ready="true"].process-scene { height: 520vh; }
   .scroll-scene[data-motion-ready="true"].flow-scene { height: 480vh; }
-  .scroll-scene[data-motion-ready="true"].architecture-scene { height: 119vh; }
+  .scroll-scene[data-motion-ready="true"].architecture-scene { height: 105vh; }
   .scroll-scene[data-motion-ready="true"].lighthouse-scene { height: 480vh; }
 
   .scroll-stage {
@@ -5718,8 +5718,13 @@ body[data-modal-open="true"] {
 
 
 /* Control the Flow moves as a perspective crawl, paced directly by scroll. */
+/* Высота снижена со 184,5 до 160svh ради длины страницы. Обе сцены - эта и
+   маяк - режутся на одну и ту же величину: у них намеренно одинаковая высота,
+   и на пиксель прокрутки должно приходиться одинаковое движение. Ниже 160svh
+   не опускать: на четыре состояния остаётся меньше 135 px прокрутки каждому,
+   и текст начинает пролетать быстрее, чем читается. */
 .scroll-scene[data-motion-ready="true"].flow-scene {
-  height: 184.5svh;
+  height: 160svh;
 }
 
 .flow-copy-stack {
@@ -5763,7 +5768,7 @@ body[data-modal-open="true"] {
    height and identical masked window, so text travels the same distance per
    pixel of scroll. */
 .scroll-scene[data-motion-ready="true"].lighthouse-scene {
-  height: 184.5svh;
+  height: 160svh;
 }
 
 .lighthouse-scene[data-motion-ready="true"] .beacon-copy-stack {
@@ -5803,12 +5808,15 @@ body[data-modal-open="true"] {
 }
 
 @media (max-width: 960px) {
+  /* На узком экране шаг прокрутки короче, поэтому сцене нужно больше высоты,
+     чем на десктопе. Срезано с 204 до 180svh - в той же пропорции, что и
+     десктопные 184,5 -> 160. */
   .scroll-scene[data-motion-ready="true"].flow-scene {
-    height: 204svh;
+    height: 180svh;
   }
 
   .scroll-scene[data-motion-ready="true"].lighthouse-scene {
-    height: 204svh;
+    height: 180svh;
   }
 
   .flow-copy-stack,

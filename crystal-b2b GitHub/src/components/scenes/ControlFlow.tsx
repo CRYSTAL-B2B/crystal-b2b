@@ -6,6 +6,7 @@ import { ViewportVideo } from "@/components/motion/ViewportVideo";
 import { SectionLabel } from "@/components/ui/SectionLabel";
 import { getGsap } from "@/lib/gsap";
 import { useReducedMotion } from "@/hooks/useReducedMotion";
+import { sectionNumber } from "@/data/section-numbers";
 
 export function ControlFlow() {
   const sectionRef = useRef<HTMLElement>(null);
@@ -84,7 +85,7 @@ export function ControlFlow() {
     <section ref={sectionRef} className="scroll-scene flow-scene" data-flow-state="loss" aria-labelledby="flow-title">
       <div className="scroll-stage flow-stage">
         <div className="scene-chrome">
-          <SectionLabel index="03">Управление потоком</SectionLabel>
+          <SectionLabel index={sectionNumber("flow")}>Управление потоком</SectionLabel>
         </div>
 
         <div className="flow-visual" aria-hidden="true">

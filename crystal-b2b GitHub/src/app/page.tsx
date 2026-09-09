@@ -17,6 +17,7 @@ import { ScrollToHashOnLoad } from "@/components/motion/ScrollToHashOnLoad";
 import { CardAura } from "@/components/motion/CardAura";
 import { getSiteUrl } from "@/lib/site-url";
 import { hasPortrait, portrait } from "@/lib/portrait";
+import { sectionNumber } from "@/data/section-numbers";
 
 export default function Home() {
   const siteUrl = getSiteUrl();
@@ -44,16 +45,22 @@ export default function Home() {
       <Header />
       <main id="main">
         <Hero />
+        {/* Доказательства идут сразу за первым экраном: цифры и кейсы стояли
+            на 9 583 и 11 466 px, и половину пути человек читал рассуждения,
+            не увидев ни одного подтверждения. */}
+        <Proof />
+        <Offer />
+        <Testimonials />
         <EditorialBridge
           id="system"
-          index="01"
+          index={sectionNumber("system")}
           label="Что такое система"
           title={<>Система - это не набор инструментов. <br /><em>Это процессы, которые работают в синергии.</em></>}
           body={<>Исследование формирует решение. Стратегия задаёт направление. Маркетинг создаёт спрос. CRM управляет движением лида. Продажи превращают его в выручку. Аналитика возвращает данные обратно в систему.</>}
         />
         <SystemProcesses />
         <EditorialBridge
-          index="02"
+          index={sectionNumber("control")}
           label="Данные и контроль"
           title={<>Связать процессы недостаточно. <br /><em>Нужно видеть, что происходит между ними.</em></>}
           body={<>Каждый контакт, переход, реакция, потеря и сделка создают данные. Управляемость этим потоком позволяет извлекать больше результата из уже существующего спроса.</>}
@@ -61,16 +68,7 @@ export default function Home() {
         />
         <ControlFlow />
         <EconomicThesis />
-        <EditorialBridge
-          index="03"
-          label="Видеть систему целиком"
-          title={<>Чем сложнее система, <br /><em>тем важнее видеть её целиком.</em></>}
-          body={<>Изменение одного процесса меняет нагрузку, данные и результат следующих. Поэтому оптимизировать маркетинг, CRM, продажи и аналитику в полной изоляции друг от друга недостаточно.</>}
-        />
         <ConnectedSystem />
-        <Proof />
-        <Offer />
-        <Testimonials />
         <Expertise />
         <Lighthouse />
         <Contact />

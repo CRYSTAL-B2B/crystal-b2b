@@ -10,6 +10,7 @@ import { LeadButton } from "@/components/contact/LeadButton";
 import { leadCopy } from "@/data/lead";
 import { trackEvent } from "@/lib/analytics";
 import type { CaseStudy } from "@/data/site";
+import { sectionNumber } from "@/data/section-numbers";
 
 function renderResult(result: string, resultLink: CaseStudy["resultLink"]) {
   if (!resultLink || !result.includes(resultLink.text)) return result;
@@ -39,7 +40,7 @@ export function Proof() {
     <>
       <section className="metrics-section" id="results" aria-labelledby="results-title">
         <div className="container">
-          <SectionLabel index="06">Подтверждённые результаты</SectionLabel>
+          <SectionLabel index={sectionNumber("results")}>Подтверждённые результаты</SectionLabel>
           <div className="proof-intro">
             <h2 id="results-title">Маркетинг способен влиять на рост бизнеса только когда имеет точные данные.</h2>
             <p>Видеть ситуацию целиком без искажений - возможность находить точки роста бизнеса.</p>
@@ -60,7 +61,7 @@ export function Proof() {
       <section className="cases-section" id="cases" aria-labelledby="cases-title">
         <div className="container">
           <div className="cases-heading">
-            <SectionLabel index="07">Кейсы</SectionLabel>
+            <SectionLabel index={sectionNumber("cases")}>Кейсы</SectionLabel>
             <h2 id="cases-title">Измеримый результат создают не инструменты,<br />а точные системные изменения.</h2>
           </div>
           <div className="case-filters" role="group" aria-label="Фильтр кейсов по категории">

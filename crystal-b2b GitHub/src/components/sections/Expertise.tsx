@@ -2,6 +2,7 @@ import Image from "next/image";
 import { competencies, experience, principles } from "@/data/site";
 import { SectionLabel } from "@/components/ui/SectionLabel";
 import { hasPortrait, portrait } from "@/lib/portrait";
+import { sectionNumber } from "@/data/section-numbers";
 
 export function Expertise() {
   const showPortrait = hasPortrait();
@@ -10,7 +11,7 @@ export function Expertise() {
     <>
       <section className="expertise-section" aria-labelledby="expertise-title">
         <div className="container">
-          <SectionLabel index="08">Карта компетенций</SectionLabel>
+          <SectionLabel index={sectionNumber("competencies")}>Карта компетенций</SectionLabel>
           <div className="expertise-intro">
             <h2 id="expertise-title">От исследования рынка до обратной связи по выручке.</h2>
             <p>Использую AI там, где он сокращает цикл, снижает ручную работу или улучшает качество решения.</p>
@@ -28,7 +29,7 @@ export function Expertise() {
 
       <section className="experience-section" id="experience" aria-labelledby="experience-title">
         <div className="container">
-          <SectionLabel index="09">Опыт</SectionLabel>
+          <SectionLabel index={sectionNumber("experience")}>Опыт</SectionLabel>
           <div className="experience-layout">
             <div className="experience-sticky">
               {showPortrait ? (
@@ -58,7 +59,7 @@ export function Expertise() {
 
       <section className="philosophy-section" aria-labelledby="philosophy-title">
         <div className="container">
-          <SectionLabel index="10">Принципы работы</SectionLabel>
+          <SectionLabel index={sectionNumber("principles")}>Принципы работы</SectionLabel>
           <h2 id="philosophy-title">
             Маркетинг должен отвечать не на вопрос «сколько было кликов»,
             <em>а на вопрос «какие изменения в бизнесе принесут дополнительную прибыль».</em>

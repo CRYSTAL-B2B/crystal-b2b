@@ -1,7 +1,9 @@
+/** Порядок повторяет порядок блоков на странице - см. src/app/page.tsx. */
 export const navigation = [
-  { label: "Система", href: "/#system" },
   { label: "Результаты", href: "/#results" },
   { label: "Кейсы", href: "/#cases" },
+  { label: "Форматы", href: "/#offer" },
+  { label: "Система", href: "/#system" },
   { label: "Опыт", href: "/#experience" },
   { label: "FAQ", href: "/faq" },
 ] as const;

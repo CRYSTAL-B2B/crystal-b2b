@@ -5,6 +5,7 @@ import { useEffect, useRef, useState, type CSSProperties } from "react";
 import { SectionLabel } from "@/components/ui/SectionLabel";
 import { processes } from "@/data/site";
 import { useReducedMotion } from "@/hooks/useReducedMotion";
+import { sectionNumber } from "@/data/section-numbers";
 
 const mapPositions = [
   { x: "18%", y: "28%" },
@@ -66,7 +67,7 @@ export function SystemProcesses() {
     >
       <div className="container">
         <div className="system-processes-chrome">
-          <SectionLabel index="02">Система - процессы</SectionLabel>
+          <SectionLabel index={sectionNumber("processes")}>Система - процессы</SectionLabel>
           <p>Одна системная линия / восемь взаимозависимых процессов</p>
         </div>
 

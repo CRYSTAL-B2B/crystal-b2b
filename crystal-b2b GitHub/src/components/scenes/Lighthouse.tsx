@@ -5,6 +5,7 @@ import { useLayoutEffect, useRef } from "react";
 import { SectionLabel } from "@/components/ui/SectionLabel";
 import { getGsap } from "@/lib/gsap";
 import { useReducedMotion } from "@/hooks/useReducedMotion";
+import { sectionNumber } from "@/data/section-numbers";
 
 export function Lighthouse() {
   const sectionRef = useRef<HTMLElement>(null);
@@ -87,7 +88,7 @@ export function Lighthouse() {
     <section ref={sectionRef} className="scroll-scene lighthouse-scene" data-lighthouse-state="weather" aria-labelledby="lighthouse-title">
       <div className="scroll-stage lighthouse-stage">
         <div className="scene-chrome">
-          <SectionLabel index="05">Сигнал / курс</SectionLabel>
+          <SectionLabel index={sectionNumber("lighthouse")}>Сигнал / курс</SectionLabel>
         </div>
 
         <div className="beacon-visual" aria-hidden="true">

@@ -3,6 +3,7 @@ import { leadCopy } from "@/data/lead";
 import { SectionLabel } from "@/components/ui/SectionLabel";
 import { Arrow } from "@/components/ui/Arrow";
 import { LeadButton } from "@/components/contact/LeadButton";
+import { sectionNumber } from "@/data/section-numbers";
 
 /** Формат без состава работ на странице не появляется - см. src/data/offer.ts. */
 export function Offer() {
@@ -11,7 +12,7 @@ export function Offer() {
   return (
     <section className="offer-section" id="offer" aria-labelledby="offer-title">
       <div className="container">
-        <SectionLabel index="03">Форматы работы</SectionLabel>
+        <SectionLabel index={sectionNumber("offer")}>Форматы работы</SectionLabel>
         <div className="offer-intro">
           <h2 id="offer-title">{offerCopy.title}</h2>
           <p>{offerCopy.lede}</p>

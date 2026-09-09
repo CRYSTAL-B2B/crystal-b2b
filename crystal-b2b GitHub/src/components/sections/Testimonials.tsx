@@ -1,5 +1,6 @@
 import { testimonials, testimonialsCopy } from "@/data/testimonials";
 import { SectionLabel } from "@/components/ui/SectionLabel";
+import { sectionNumber } from "@/data/section-numbers";
 
 /** Нет согласованных отзывов - нет и секции: заглушкам в проде не место. */
 export function Testimonials() {
@@ -8,7 +9,7 @@ export function Testimonials() {
   return (
     <section className="testimonials-section" id="testimonials" aria-labelledby="testimonials-title">
       <div className="container">
-        <SectionLabel index="04">Отзывы</SectionLabel>
+        <SectionLabel index={sectionNumber("testimonials")}>Отзывы</SectionLabel>
         <h2 id="testimonials-title" className="testimonials-title">{testimonialsCopy.title}</h2>
         <div className="testimonials-grid">
           {testimonials.map((testimonial) => (

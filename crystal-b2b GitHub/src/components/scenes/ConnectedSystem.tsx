@@ -6,6 +6,7 @@ import { ViewportVideo } from "@/components/motion/ViewportVideo";
 import { SectionLabel } from "@/components/ui/SectionLabel";
 import { getGsap } from "@/lib/gsap";
 import { useReducedMotion } from "@/hooks/useReducedMotion";
+import { sectionNumber } from "@/data/section-numbers";
 
 const traces = [
   { id: "content", label: "Путь контента", route: "КОНТЕНТ - СПРОС - ПОСАДОЧНАЯ СТРАНИЦА - ЛИД - CRM - ПРОДАЖИ" },
@@ -66,7 +67,7 @@ export function ConnectedSystem() {
     <section ref={sectionRef} className="scroll-scene architecture-scene" aria-labelledby="architecture-title">
       <div className="scroll-stage architecture-stage">
         <div className="scene-chrome">
-          <SectionLabel index="04">Связанная система</SectionLabel>
+          <SectionLabel index={sectionNumber("connected")}>Связанная система</SectionLabel>
         </div>
 
         <div className="architecture-layout">
