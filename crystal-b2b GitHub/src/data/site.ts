@@ -3,8 +3,8 @@ export const navigation = [
   { label: "Система", href: "/#system" },
   { label: "Результаты", href: "/#results" },
   { label: "Форматы", href: "/#offer" },
-  { label: "Опыт", href: "/#experience" },
   { label: "Кейсы", href: "/#cases" },
+  { label: "Опыт", href: "/#experience" },
   { label: "FAQ", href: "/faq" },
 ] as const;
 
@@ -66,7 +66,7 @@ export const processes: readonly Process[] = [
   {
     id: "optimization",
     name: "Оптимизация",
-    purpose: "Вернуть данные в решения и перераспределить ресурсы",
+    purpose: "Вернуть данные и перераспределить ресурсы",
     mechanics: ["Сигнал", "Гипотеза", "Эксперимент", "Обучение", "Обратная связь"],
   },
 ] as const;

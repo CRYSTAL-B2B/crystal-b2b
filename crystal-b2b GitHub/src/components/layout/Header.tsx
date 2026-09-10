@@ -5,6 +5,7 @@ import { useEffect, useRef, useState } from "react";
 import { navigation } from "@/data/site";
 import { contactLinks } from "@/data/contacts";
 import { Arrow } from "@/components/ui/Arrow";
+import { ContactIcon } from "@/components/ui/ContactIcon";
 import { BookingButton } from "@/components/booking/BookingButton";
 import { useBooking } from "@/components/booking/BookingProvider";
 import { LeadButton } from "@/components/contact/LeadButton";
@@ -91,7 +92,9 @@ export function Header() {
         </nav>
         <div className="mobile-menu-contacts">
           {contactLinks.map((contact) => (
-            <a key={contact.href} href={contact.href}>{contact.label}</a>
+            <a key={contact.href} href={contact.href}>
+              <ContactIcon name={contact.icon} />{contact.label}
+            </a>
           ))}
         </div>
       </div>

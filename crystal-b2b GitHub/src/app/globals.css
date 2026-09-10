@@ -6282,3 +6282,24 @@ body[data-modal-open="true"] {
     white-space: nowrap;
   }
 }
+
+/* ---------- иконки каналов связи ---------- */
+
+/* Ссылка становится inline-flex, чтобы иконка встала на одну линию с текстом
+   по центру, а подчёркивание в подвале прошло под всей строкой целиком. */
+.site-footer-contacts a,
+.mobile-menu-contacts a {
+  display: inline-flex;
+  gap: 0.45rem;
+  align-items: center;
+}
+
+/* Размер в em, а не в rem: иконка держится за кегль своей строки и растёт
+   вместе с ним, где бы этот текст ни выводился. */
+.site-footer-contacts a svg,
+.mobile-menu-contacts a svg {
+  width: 1.05em;
+  height: 1.05em;
+  flex-shrink: 0;
+  opacity: 0.75;
+}

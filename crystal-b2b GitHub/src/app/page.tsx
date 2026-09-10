@@ -76,10 +76,10 @@ export default function Home() {
         <ControlFlow />
         <EconomicThesis />
         <ConnectedSystem />
-        <Competencies />
-        <Experience />
         <Cases />
         <Principles />
+        <Experience />
+        <Competencies />
         <Lighthouse />
         <Contact />
       </main>

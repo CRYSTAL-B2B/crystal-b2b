@@ -22,10 +22,10 @@ const SECTION_ORDER = [
   "flow",
   "economics",
   "connected",
-  "competencies",
-  "experience",
   "cases",
   "principles",
+  "experience",
+  "competencies",
   "lighthouse",
   "contact",
 ] as const;
