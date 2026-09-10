@@ -55,6 +55,9 @@ export function Header() {
         {navigation.map((item) => <Link key={item.href} href={item.href}>{item.label}</Link>)}
       </nav>
       <div className="header-actions">
+        <BookingButton placement="header" className="header-book">
+          {bookingCopy.action}
+        </BookingButton>
         <LeadButton placement="header" className="header-contact" event="navigation_contact">
           {leadCopy.action} <Arrow />
         </LeadButton>

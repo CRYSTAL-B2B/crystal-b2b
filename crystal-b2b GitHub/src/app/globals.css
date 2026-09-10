@@ -5162,6 +5162,34 @@ body[data-modal-open="true"] {
   justify-self: end;
 }
 
+/* Вторая кнопка шапки - запись на созвон. Обведённая, а не залитая: главным
+   действием остаётся «Обсудить задачу», и две одинаково яркие кнопки рядом
+   снова делили бы внимание. */
+.header-book {
+  display: flex;
+  min-height: 2.15rem;
+  padding: 0.38rem 0.9rem;
+  align-items: center;
+  color: #f5f5f7;
+  border: 1px solid rgba(255, 255, 255, 0.24);
+  border-radius: 100vmax;
+  background: transparent;
+  cursor: pointer;
+  font-family: var(--font-ui);
+  font-size: 0.76rem;
+  font-weight: 560;
+  letter-spacing: -0.012em;
+  white-space: nowrap;
+  transition: color 180ms ease, background 180ms ease, border-color 180ms ease;
+}
+
+.header-book:hover,
+.header-book:focus-visible {
+  color: #f5f5f7;
+  border-color: rgba(255, 255, 255, 0.55);
+  background: rgba(255, 255, 255, 0.1);
+}
+
 /* Кнопки шапки уступают место меню-гамбургеру. Правило продублировано здесь:
    объявление .header-actions идёт ниже раннего медиазапроса и перебивало его. */
 @media (max-width: 960px) {
@@ -6204,5 +6232,53 @@ body[data-modal-open="true"] {
 @media (max-width: 960px) {
   .experience-portrait {
     max-width: 11rem;
+  }
+}
+
+/* ---------- шапка в узком диапазоне ---------- */
+
+/* Между 961 и 1150 px в шапку не влезали шесть пунктов навигации и две кнопки:
+   «Выбрать время созвона» наезжала на «FAQ», а «Обсудить задачу» переносилась
+   в две строки. Гамбургер в этом диапазоне ещё не появляется (он с 960 px),
+   поэтому прятать кнопку нельзя - её нужно поджать.
+
+   Правило намеренно стоит в конце файла: ранний медиазапрос на строке 2817
+   с таким же gap перебивается поздним объявлением .desktop-nav и не работает. */
+/* Колонки шапки заданы как 1fr auto 1fr, то есть боковые равны по ширине.
+   Имя слева короткое, а две кнопки справа - широкие, и в свою колонку они не
+   влезали: прижатые к правому краю, они переполняли её влево и наезжали на
+   навигацию. Здесь боковые колонки идут по содержимому, а середину занимает
+   навигация - свободное место уходит туда, где оно нужно. Типографику этот
+   запрос не трогает: до 1150 px её менять незачем. */
+@media (max-width: 1250px) {
+  .site-header {
+    grid-template-columns: auto minmax(0, 1fr) auto;
+  }
+
+  .desktop-nav {
+    justify-content: center;
+  }
+}
+
+@media (max-width: 1150px) {
+  .desktop-nav {
+    gap: 0.85rem;
+    font-size: 0.8rem;
+  }
+
+  .header-actions {
+    gap: 0.4rem;
+  }
+
+  .header-book {
+    padding: 0.38rem 0.7rem;
+    font-size: 0.71rem;
+  }
+
+  /* Без этого кнопка ломается на две строки и вырастает по высоте,
+     растягивая всю шапку. */
+  .header-contact {
+    font-size: 0.78rem;
+    white-space: nowrap;
   }
 }
