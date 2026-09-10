@@ -104,5 +104,20 @@ NEXT_PUBLIC_SITE_URL=https://b2b-system.pro npm run build
 `crystal-b2b.duckdns.org` на порту 3012. После переезда на GitHub Pages
 сборка стала статической, скрипта `start` в `package.json` нет, и юнит
 падал в бесконечном авторестарте, пока 2026-09-10 его не переписали под
-предпросмотр. Конфиг nginx `crystal-b2b.duckdns.org` всё ещё проксирует
-на 3012 и остался от той схемы — DNS домена сюда больше не ведёт.
+предпросмотр.
+
+Конфиг nginx `crystal-b2b.duckdns.org`, проксировавший на 3012, удалён
+2026-09-10 вместе с симлинком в `sites-enabled`. Копия лежит в
+`/root/backups/nginx-crystal-b2b-duckdns-2026-09-10.tar.gz` — вместе с
+renewal-конфигом certbot, на случай если понадобится вернуть.
+
+Сертификат Let's Encrypt для этого домена **не удалён**: он лежит в
+`/etc/letsencrypt/live/crystal-b2b.duckdns.org` и действителен до
+2026-11-14. Пока certbot его только пропускает («skipped»), но около
+15 октября начнётся попытка обновления — она провалится, потому что DNS
+домена сюда не ведёт и ACME-проверку пройти нечем. Чтобы в логи не пошли
+ошибки, сертификат стоит отозвать и удалить:
+
+```bash
+certbot delete --cert-name crystal-b2b.duckdns.org
+```
