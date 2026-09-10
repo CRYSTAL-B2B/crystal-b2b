@@ -16,8 +16,8 @@ export function Results() {
       <div className="container">
         <SectionLabel index={sectionNumber("results")}>Подтверждённые результаты</SectionLabel>
         <div className="proof-intro">
-          <h2 id="results-title">Маркетинг способен влиять на рост бизнеса только когда имеет точные данные.</h2>
-          <p>Видеть ситуацию целиком без искажений - возможность находить точки роста бизнеса.</p>
+          <h2 id="results-title">Маркетинг способен влиять на рост бизнеса только когда владеет точными данными.</h2>
+          <p>Видеть ситуацию целиком без искажений - это возможность находить точки роста бизнеса.</p>
         </div>
         <div className="metrics-grid">
           {metrics.map((metric, index) => (

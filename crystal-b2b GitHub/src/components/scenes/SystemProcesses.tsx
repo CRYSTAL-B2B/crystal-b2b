@@ -68,7 +68,7 @@ export function SystemProcesses() {
       <div className="container">
         <div className="system-processes-chrome">
           <SectionLabel index={sectionNumber("processes")}>Система - процессы</SectionLabel>
-          <p>Одна системная линия / восемь взаимозависимых процессов</p>
+          <p>Одна система / восемь взаимозависимых процессов</p>
         </div>
 
         <div className="system-processes-layout">
@@ -112,8 +112,8 @@ export function SystemProcesses() {
             </div>
 
             <div className="system-processes-thesis">
-              <p>Не набор инструментов.</p>
-              <h2 id="process-title">Одна работающая система:</h2>
+              <p>Проходит все этапы развития.</p>
+              <h2 id="process-title">Одна зрелая система:</h2>
             </div>
           </div>
 
