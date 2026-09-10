@@ -1,0 +1,34 @@
+[Unit]
+# Предпросмотр статической сборки лендинга b2b-system.pro.
+#
+# Живой сайт лежит на GitHub Pages, а не здесь: этот сервис нужен, чтобы
+# смотреть собранную страницу до деплоя. Раздаётся каталог out/, который
+# создаёт `npm run build` в подпапке «crystal-b2b GitHub» - ровно тот же
+# артефакт, что уходит в Pages.
+#
+# Прежняя версия юнита осталась от времён, когда сайт крутился на этом
+# сервере через `next start`: она указывала на корень репозитория, вызывала
+# отсутствующий скрипт npm run start и падала каждые пять секунд в
+# бесконечном авторестарте. Сборка статическая (output: "export"), сервера
+# приложения у неё нет вовсе, поэтому запускается раздача файлов.
+Description=CRYSTAL CUBE - предпросмотр статической сборки b2b-system.pro
+After=network-online.target
+Wants=network-online.target
+
+[Service]
+Type=simple
+WorkingDirectory=/root/projects/CRYSTAL CUBE/crystal-b2b GitHub
+# Порт открыт на всех интерфейсах: предпросмотр смотрят с других машин по
+# адресу сервера. Заголовок noindex задаётся в preview-serve.json - страница
+# доступна публично, и в поиск ей попадать незачем.
+ExecStart=/usr/bin/node "/root/projects/CRYSTAL CUBE/crystal-b2b GitHub/node_modules/serve/build/main.js" out --listen tcp://0.0.0.0:3011 --config "/root/projects/CRYSTAL CUBE/crystal-b2b GitHub/preview-serve.json" --no-request-logging --no-clipboard --no-port-switching
+Restart=always
+RestartSec=5
+TimeoutStopSec=20
+KillSignal=SIGINT
+NoNewPrivileges=true
+PrivateTmp=true
+UMask=0027
+
+[Install]
+WantedBy=multi-user.target
