@@ -20,6 +20,14 @@
   --space-lg: clamp(3.25rem, 2.2rem + 3vw, 6.5rem);
   --space-xl: clamp(5.5rem, 3.6rem + 6vw, 11rem);
   --space-2xl: clamp(5rem, 3.2rem + 5.5vw, 10rem);
+  /* Технические подписи, номера и метки. Шрифт задан здесь одной строкой:
+     до 2026-09-10 «IBM Plex Mono» был вписан в 59 правил по всему файлу.
+     Запасной вариант - системный моноширинный: подключён только JetBrains,
+     и указывать в цепочке шрифт, которого в сборке нет, смысла не имеет. */
+  --font-mono: "JetBrains Mono", monospace;
+  /* Единый кегль для всего текста этим шрифтом - вдвое больше прежнего
+     преобладающего 0.7rem. Раньше кегли расходились от 0.42 до 0.72rem. */
+  --type-mono: 1.4rem;
   --radius-sm: 0.45rem;
   --radius-md: 1rem;
   --ease-out: cubic-bezier(0.16, 1, 0.3, 1);
@@ -117,7 +125,7 @@ svg {
   gap: 0.8rem;
   align-items: center;
   color: var(--muted);
-  font-family: "IBM Plex Mono", monospace;
+  font-family: var(--font-mono);
   font-size: 0.68rem;
   line-height: 1;
   letter-spacing: 0.12em;
@@ -225,7 +233,7 @@ svg {
 .desktop-nav {
   display: flex;
   gap: clamp(1.25rem, 2.6vw, 2.7rem);
-  font-family: "IBM Plex Mono", monospace;
+  font-family: var(--font-mono);
   font-size: 0.68rem;
   letter-spacing: 0.06em;
   text-transform: uppercase;
@@ -315,7 +323,7 @@ svg {
 .eyebrow {
   margin-bottom: clamp(1.6rem, 4vh, 3.2rem);
   color: rgba(255, 255, 255, 0.66);
-  font-family: "IBM Plex Mono", monospace;
+  font-family: var(--font-mono);
   font-size: clamp(0.62rem, 0.57rem + 0.17vw, 0.75rem);
   letter-spacing: 0.11em;
 }
@@ -510,7 +518,7 @@ svg {
 .artifact-node b,
 .artifact-node small,
 .orchestration-core {
-  font-family: "IBM Plex Mono", monospace;
+  font-family: var(--font-mono);
   font-size: clamp(0.32rem, 0.45vw, 0.58rem);
   letter-spacing: 0.05em;
 }
@@ -606,7 +614,7 @@ svg {
   grid-template-columns: 1fr auto;
   gap: 0.2rem 1rem;
   border-top: 1px solid rgba(255, 255, 255, 0.28);
-  font-family: "IBM Plex Mono", monospace;
+  font-family: var(--font-mono);
   font-size: 0.52rem;
   letter-spacing: 0.06em;
 }
@@ -629,7 +637,7 @@ svg {
   display: flex;
   gap: 1.5rem;
   color: rgba(255, 255, 255, 0.5);
-  font-family: "IBM Plex Mono", monospace;
+  font-family: var(--font-mono);
   font-size: 0.62rem;
   letter-spacing: 0.06em;
   text-transform: uppercase;
@@ -655,7 +663,7 @@ svg {
   align-items: center;
   justify-content: center;
   color: rgba(255, 255, 255, 0.58);
-  font-family: "IBM Plex Mono", monospace;
+  font-family: var(--font-mono);
   font-size: 0.55rem;
   letter-spacing: 0.08em;
   text-transform: uppercase;
@@ -807,7 +815,7 @@ svg {
 
 .scene-chrome > p {
   color: rgba(255, 255, 255, 0.58);
-  font-family: "IBM Plex Mono", monospace;
+  font-family: var(--font-mono);
   font-size: 0.55rem;
   letter-spacing: 0.07em;
   text-transform: uppercase;
@@ -866,7 +874,7 @@ svg {
   padding-top: 0.55rem;
   color: rgba(255, 255, 255, 0.5);
   border-top: 1px solid rgba(255, 255, 255, 0.22);
-  font-family: "IBM Plex Mono", monospace;
+  font-family: var(--font-mono);
   font-size: 0.5rem;
   letter-spacing: 0.1em;
 }
@@ -928,7 +936,7 @@ svg {
 
 .process-index {
   color: rgba(255, 255, 255, 0.58);
-  font-family: "IBM Plex Mono", monospace;
+  font-family: var(--font-mono);
   font-size: 0.58rem;
 }
 
@@ -968,7 +976,7 @@ svg {
   color: rgba(255, 255, 255, 0.64);
   border: 1px solid rgba(87, 214, 223, 0.18);
   background: rgba(87, 214, 223, 0.04);
-  font-family: "IBM Plex Mono", monospace;
+  font-family: var(--font-mono);
   font-size: clamp(0.43rem, 0.4rem + 0.12vw, 0.58rem);
   text-transform: uppercase;
 }
@@ -1077,7 +1085,7 @@ svg {
   padding-top: 0.55rem;
   color: rgba(255, 255, 255, 0.48);
   border-top: 1px solid rgba(255, 255, 255, 0.2);
-  font-family: "IBM Plex Mono", monospace;
+  font-family: var(--font-mono);
   font-size: 0.5rem;
   letter-spacing: 0.08em;
 }
@@ -1142,7 +1150,7 @@ svg {
   gap: 0.2rem 1rem;
   border: 1px solid rgba(255, 255, 255, 0.13);
   background: rgba(10, 12, 16, 0.88);
-  font-family: "IBM Plex Mono", monospace;
+  font-family: var(--font-mono);
   transform: translateY(-50%);
 }
 
@@ -1189,7 +1197,7 @@ svg {
   color: rgba(255, 255, 255, 0.68);
   border: 1px solid rgba(87, 214, 223, 0.2);
   background: rgba(11, 25, 30, 0.8);
-  font-family: "IBM Plex Mono", monospace;
+  font-family: var(--font-mono);
   font-size: 0.5rem;
 }
 
@@ -1207,7 +1215,7 @@ svg {
   grid-template-columns: auto 1fr;
   gap: 0.4rem 0.8rem;
   color: rgba(255, 255, 255, 0.62);
-  font-family: "IBM Plex Mono", monospace;
+  font-family: var(--font-mono);
   font-size: 0.48rem;
   letter-spacing: 0.05em;
   transform: translateY(20px);
@@ -1280,7 +1288,7 @@ svg {
 .flow-static-summary p {
   margin-bottom: 0.8rem;
   color: var(--cyan);
-  font-family: "IBM Plex Mono", monospace;
+  font-family: var(--font-mono);
   font-size: 0.6rem;
   letter-spacing: 0.08em;
 }
@@ -1345,7 +1353,7 @@ svg {
   gap: 1rem;
   justify-content: flex-end;
   color: var(--muted);
-  font-family: "IBM Plex Mono", monospace;
+  font-family: var(--font-mono);
   font-size: 0.62rem;
   letter-spacing: 0.08em;
 }
@@ -1438,7 +1446,7 @@ svg {
   padding-top: 0.5rem;
   color: rgba(255, 255, 255, 0.46);
   border-top: 1px solid rgba(255, 255, 255, 0.2);
-  font-family: "IBM Plex Mono", monospace;
+  font-family: var(--font-mono);
   font-size: 0.48rem;
   letter-spacing: 0.09em;
 }
@@ -1487,7 +1495,7 @@ svg {
   display: grid;
   grid-template-columns: auto 1fr;
   gap: 0.1rem 0.55rem;
-  font-family: "IBM Plex Mono", monospace;
+  font-family: var(--font-mono);
   text-transform: uppercase;
   transform: translateZ(10px);
 }
@@ -1547,7 +1555,7 @@ svg {
   border: 1px solid rgba(87, 214, 223, 0.6);
   background: rgba(12, 28, 34, 0.94);
   box-shadow: 0 0 34px rgba(87, 214, 223, 0.18);
-  font-family: "IBM Plex Mono", monospace;
+  font-family: var(--font-mono);
   transform: rotateX(58deg) rotateZ(-36deg) translateZ(120px);
 }
 
@@ -1567,7 +1575,7 @@ svg {
   padding: 0.55rem 0.7rem;
   border: 1px solid rgba(255, 255, 255, 0.17);
   background: rgba(15, 17, 22, 0.88);
-  font-family: "IBM Plex Mono", monospace;
+  font-family: var(--font-mono);
   font-size: 0.48rem;
   letter-spacing: 0.06em;
 }
@@ -1631,7 +1639,7 @@ svg {
   color: var(--white);
   border-left: 2px solid var(--cyan);
   background: rgba(6, 11, 14, 0.86);
-  font-family: "IBM Plex Mono", monospace;
+  font-family: var(--font-mono);
   font-size: 0.52rem;
   opacity: 0;
   transform: translateY(12px);
@@ -1649,7 +1657,7 @@ svg {
 .architecture-kicker {
   margin-bottom: 1.3rem;
   color: var(--blue-soft);
-  font-family: "IBM Plex Mono", monospace;
+  font-family: var(--font-mono);
   font-size: 0.58rem;
   letter-spacing: 0.1em;
 }
@@ -1702,7 +1710,7 @@ svg {
 
 .trace-controls small {
   color: rgba(255, 255, 255, 0.62);
-  font-family: "IBM Plex Mono", monospace;
+  font-family: var(--font-mono);
   font-size: 0.43rem;
   line-height: 1.5;
 }
@@ -1795,7 +1803,7 @@ svg {
 
 .metric-company {
   color: var(--muted);
-  font-family: "IBM Plex Mono", monospace;
+  font-family: var(--font-mono);
   font-size: 0.58rem;
   letter-spacing: 0.08em;
   text-transform: uppercase;
@@ -1812,7 +1820,7 @@ svg {
 .metric-unit {
   margin-top: 0.6rem;
   color: var(--blue);
-  font-family: "IBM Plex Mono", monospace;
+  font-family: var(--font-mono);
   font-size: 0.72rem;
   text-transform: uppercase;
 }
@@ -1879,7 +1887,7 @@ svg {
   border-radius: 100vmax;
   background: transparent;
   cursor: pointer;
-  font-family: "IBM Plex Mono", monospace;
+  font-family: var(--font-mono);
   font-size: 0.68rem;
   letter-spacing: 0.04em;
   text-transform: uppercase;
@@ -1925,7 +1933,7 @@ svg {
 .case-index,
 .case-title small {
   color: var(--muted);
-  font-family: "IBM Plex Mono", monospace;
+  font-family: var(--font-mono);
   font-size: 0.6rem;
 }
 
@@ -1991,7 +1999,7 @@ svg {
   display: block;
   margin-bottom: 0.8rem;
   color: var(--muted);
-  font-family: "IBM Plex Mono", monospace;
+  font-family: var(--font-mono);
   font-size: 0.58rem;
   text-transform: uppercase;
 }
@@ -2031,7 +2039,7 @@ svg {
 .case-visual-caption {
   margin-bottom: 1.1rem;
   color: var(--muted);
-  font-family: "IBM Plex Mono", monospace;
+  font-family: var(--font-mono);
   font-size: 0.58rem;
   text-transform: uppercase;
 }
@@ -2173,7 +2181,7 @@ svg {
   display: flex;
   gap: 0.8rem;
   color: var(--blue-soft);
-  font-family: "IBM Plex Mono", monospace;
+  font-family: var(--font-mono);
   font-size: 0.68rem;
   letter-spacing: 0.08em;
   text-transform: uppercase;
@@ -2251,7 +2259,7 @@ svg {
 
 .experience-years {
   color: var(--blue-soft);
-  font-family: "IBM Plex Mono", monospace;
+  font-family: var(--font-mono);
   font-size: 0.65rem;
 }
 
@@ -2264,7 +2272,7 @@ svg {
 .experience-role {
   margin-top: 0.5rem;
   color: var(--cyan);
-  font-family: "IBM Plex Mono", monospace;
+  font-family: var(--font-mono);
   font-size: 0.62rem;
   text-transform: uppercase;
 }
@@ -2327,7 +2335,7 @@ svg {
 
 .principles-grid span {
   color: rgba(255, 255, 255, 0.82);
-  font-family: "IBM Plex Mono", monospace;
+  font-family: var(--font-mono);
   font-size: 0.6rem;
 }
 
@@ -2392,7 +2400,7 @@ svg {
   bottom: 2.5rem;
   margin: 0;
   color: rgba(255, 255, 255, 0.46);
-  font-family: "IBM Plex Mono", monospace;
+  font-family: var(--font-mono);
   font-size: 0.5rem;
   letter-spacing: 0.1em;
 }
@@ -2543,7 +2551,7 @@ svg {
   right: 8%;
   bottom: 7%;
   color: rgba(255, 255, 255, 0.62);
-  font-family: "IBM Plex Mono", monospace;
+  font-family: var(--font-mono);
   font-size: 0.48rem;
   line-height: 1.6;
   letter-spacing: 0.08em;
@@ -2581,7 +2589,7 @@ svg {
 .beacon-static-summary p {
   margin-bottom: 1rem;
   color: var(--warm);
-  font-family: "IBM Plex Mono", monospace;
+  font-family: var(--font-mono);
   font-size: 0.58rem;
   letter-spacing: 0.09em;
 }
@@ -2650,7 +2658,7 @@ svg {
 
 .form-field label {
   color: var(--muted);
-  font-family: "IBM Plex Mono", monospace;
+  font-family: var(--font-mono);
   font-size: 0.58rem;
   letter-spacing: 0.05em;
   text-transform: uppercase;
@@ -2776,7 +2784,7 @@ svg {
   align-items: center;
   color: rgba(255, 255, 255, 0.5);
   background: var(--ink);
-  font-family: "IBM Plex Mono", monospace;
+  font-family: var(--font-mono);
   font-size: 0.58rem;
   letter-spacing: 0.05em;
   text-transform: uppercase;
@@ -2870,7 +2878,7 @@ svg {
     border: 0;
     background: transparent;
     cursor: pointer;
-    font-family: "IBM Plex Mono", monospace;
+    font-family: var(--font-mono);
     font-size: 0.65rem;
     text-transform: uppercase;
   }
@@ -2940,7 +2948,7 @@ svg {
   .mobile-menu a span,
   .mobile-menu-item span {
     color: var(--blue-soft);
-    font-family: "IBM Plex Mono", monospace;
+    font-family: var(--font-mono);
     font-size: 0.55rem;
   }
 
@@ -4377,7 +4385,7 @@ body {
 
 .system-processes-chrome > p {
   color: rgba(245, 245, 247, 0.46);
-  font-family: "IBM Plex Mono", monospace;
+  font-family: var(--font-mono);
   font-size: var(--type-micro);
   letter-spacing: 0.07em;
   text-transform: uppercase;
@@ -4435,7 +4443,7 @@ body {
   padding-top: 0.5rem;
   color: rgba(245, 245, 247, 0.5);
   border-top: 1px solid rgba(255, 255, 255, 0.2);
-  font-family: "IBM Plex Mono", monospace;
+  font-family: var(--font-mono);
   font-size: var(--type-nano);
   letter-spacing: 0.08em;
 }
@@ -4446,7 +4454,7 @@ body {
 
 .system-processes-thesis > p {
   color: rgba(245, 245, 247, 0.56);
-  font-family: "IBM Plex Mono", monospace;
+  font-family: var(--font-mono);
   font-size: var(--type-micro);
   letter-spacing: 0.06em;
   text-transform: uppercase;
@@ -4481,7 +4489,7 @@ body {
 .system-processes-index {
   padding-top: 0;
   color: rgba(245, 245, 247, 0.42);
-  font-family: "IBM Plex Mono", monospace;
+  font-family: var(--font-mono);
   font-size: var(--type-subheading);
   font-weight: 530;
   line-height: 1;
@@ -4518,7 +4526,7 @@ body {
   display: inline-flex;
   align-items: center;
   color: rgba(181, 213, 255, 0.64);
-  font-family: "IBM Plex Mono", monospace;
+  font-family: var(--font-mono);
   font-size: var(--type-nano);
   letter-spacing: 0.025em;
   text-transform: uppercase;
@@ -4630,7 +4638,7 @@ body {
   border-radius: 50%;
   background: rgba(5, 8, 12, 0.76);
   box-shadow: 0 0 0 0 rgba(100, 210, 255, 0);
-  font-family: "IBM Plex Mono", monospace;
+  font-family: var(--font-mono);
   font-size: 0.42rem;
   letter-spacing: 0.04em;
   transform: translate(-50%, -50%) scale(0.7);
@@ -4683,7 +4691,7 @@ body {
   padding-top: 0.5rem;
   color: rgba(245, 245, 247, 0.58);
   border-top: 1px solid rgba(255, 255, 255, 0.24);
-  font-family: "IBM Plex Mono", monospace;
+  font-family: var(--font-mono);
   font-size: var(--type-nano);
   letter-spacing: 0.08em;
   transition: color 360ms var(--ease-out);
@@ -4756,7 +4764,7 @@ body {
 .beacon-map-label {
   position: absolute;
   color: rgba(245, 245, 247, 0.76);
-  font-family: "IBM Plex Mono", monospace;
+  font-family: var(--font-mono);
   font-size: var(--type-nano);
   letter-spacing: 0.08em;
   transition: opacity 480ms var(--ease-out), color 480ms var(--ease-out), transform 620ms var(--ease-out);
@@ -4967,7 +4975,7 @@ body {
   min-height: 2.6rem;
   margin: 1rem 0 0;
   color: rgba(181, 213, 255, 0.74);
-  font-family: "IBM Plex Mono", monospace;
+  font-family: var(--font-mono);
   font-size: var(--type-nano);
   line-height: 1.55;
   letter-spacing: 0.045em;
@@ -5267,7 +5275,7 @@ body[data-modal-open="true"] {
 .modal-head p {
   margin: 0;
   color: var(--muted);
-  font-family: "IBM Plex Mono", monospace;
+  font-family: var(--font-mono);
   font-size: 0.62rem;
   letter-spacing: 0.08em;
   text-transform: uppercase;
@@ -5398,7 +5406,7 @@ body[data-modal-open="true"] {
 
 .artifact-gallery figcaption {
   color: var(--muted);
-  font-family: "IBM Plex Mono", monospace;
+  font-family: var(--font-mono);
   font-size: 0.6rem;
   line-height: 1.5;
   letter-spacing: 0.04em;
@@ -5462,7 +5470,7 @@ body[data-modal-open="true"] {
   align-items: center;
   justify-content: center;
   color: #5b6472;
-  font-family: "IBM Plex Mono", monospace;
+  font-family: var(--font-mono);
   font-size: 0.7rem;
   letter-spacing: 0.08em;
   text-transform: uppercase;
@@ -5720,7 +5728,7 @@ body[data-modal-open="true"] {
   .mobile-menu a span,
   .mobile-menu-item span {
     color: rgba(181, 213, 255, 0.72);
-    font-family: "IBM Plex Mono", monospace;
+    font-family: var(--font-mono);
   }
 
   .mobile-menu-contacts {
@@ -5736,7 +5744,7 @@ body[data-modal-open="true"] {
     min-height: 0;
     border-bottom: 0;
     color: rgba(245, 245, 247, 0.62);
-    font-family: "IBM Plex Mono", monospace;
+    font-family: var(--font-mono);
     font-size: 0.78rem;
     font-weight: 400;
     letter-spacing: -0.01em;
@@ -6004,7 +6012,7 @@ body[data-modal-open="true"] {
 
 .offer-card > span {
   color: rgba(255, 255, 255, 0.82);
-  font-family: "IBM Plex Mono", monospace;
+  font-family: var(--font-mono);
   font-size: 0.6rem;
 }
 
@@ -6019,7 +6027,7 @@ body[data-modal-open="true"] {
 .offer-audience {
   margin: 0.7rem 0 0;
   color: var(--blue-soft);
-  font-family: "IBM Plex Mono", monospace;
+  font-family: var(--font-mono);
   font-size: 0.72rem;
   line-height: 1.5;
 }
@@ -6059,7 +6067,7 @@ body[data-modal-open="true"] {
   padding-top: 1.2rem;
   border-top: 1px solid rgba(255, 255, 255, 0.14);
   color: rgba(245, 245, 247, 0.62);
-  font-family: "IBM Plex Mono", monospace;
+  font-family: var(--font-mono);
   font-size: 0.68rem;
   letter-spacing: 0.02em;
   text-transform: uppercase;
@@ -6197,7 +6205,7 @@ body[data-modal-open="true"] {
 .testimonial-role {
   margin: 0.3rem 0 0;
   color: rgba(245, 245, 247, 0.62);
-  font-family: "IBM Plex Mono", monospace;
+  font-family: var(--font-mono);
   font-size: 0.7rem;
   line-height: 1.5;
 }
@@ -6302,4 +6310,167 @@ body[data-modal-open="true"] {
   height: 1.05em;
   flex-shrink: 0;
   opacity: 0.75;
+}
+
+/* ---------- единый кегль технических подписей ---------- */
+
+/* Весь текст моношрифтом идёт одним размером - var(--type-mono).
+   Кегли расходились от 0.42rem (номера на карте процессов) до 0.72rem, и
+   мелкие подписи было не прочитать. Правило стоит в конце файла осознанно:
+   размеры заданы в пяти десятках правил по всему файлу, включая медиазапросы,
+   и перебить их все можно только последним объявлением.
+
+   .desktop-nav, .menu-toggle, .site-footer и пункты мобильного меню в список
+   не входят: у них объявлен моношрифт, но позже он перебит на var(--font-ui),
+   и по факту они набраны системным гротеском - размер им менять незачем.
+   Проверено в браузере, а не по CSS. */
+.section-label,
+.eyebrow,
+.artifact-node b,
+.artifact-node small,
+.orchestration-core,
+.visual-readout,
+.hero-proof,
+.scroll-cue,
+.scene-chrome > p,
+.process-origin > span,
+.process-index,
+.process-mechanics span,
+.flow-frame-caption,
+.flow-input-readout,
+.flow-output-readout,
+.flow-control-node,
+.flow-competitor,
+.flow-statement p,
+.flow-static-summary p,
+.economic-formula,
+.architecture-frame-caption,
+.architecture-label,
+.orchestration-hub,
+.architecture-satellite,
+.cause-note,
+.architecture-kicker,
+.trace-controls small,
+.metric-company,
+.metric-unit,
+.case-filters button,
+.case-index,
+.case-title small,
+.case-body small,
+.case-visual-caption,
+.competency-grid article > p,
+.experience-years,
+.experience-role,
+.principles-grid span,
+.beacon-frame-caption,
+.beacon-coordinate,
+.beacon-copy p,
+.beacon-static-summary p,
+.form-field label,
+.site-footer-contacts a,
+.system-processes-chrome > p,
+.system-processes-visual > span,
+.system-processes-thesis > p,
+.system-processes-mechanics span,
+.system-processes-core,
+.system-processes-node,
+.system-processes-frame-caption,
+.flow-node,
+.flow-loss,
+.flow-proof,
+.beacon-map-label,
+.trace-status,
+.modal-head p,
+.artifact-gallery figcaption,
+.booking-calendar-loading,
+.offer-card > span,
+.offer-audience,
+.offer-meta,
+.testimonial-role,
+/* Ниже - те, у кого на узком экране есть свой медиазапрос с меньшим кеглем:
+   без явного перечисления они оставались мельче остальных. */
+.section-label span,
+.section-label p,
+.site-footer,
+.mobile-menu a span,
+.mobile-menu-item span,
+.mobile-menu-contacts a,
+.system-processes-index {
+  font-size: var(--type-mono);
+}
+
+/* Длинные метки набраны капсом с разрядкой, и на новом кегле часть из них
+   перестаёт влезать в одну строку. Разрядка убрана, переносы разрешены -
+   иначе строки уезжали бы за край своей рамки. */
+.flow-node,
+.flow-loss,
+.flow-proof,
+.beacon-map-label,
+.system-processes-mechanics span,
+.process-mechanics span,
+.system-processes-core,
+.system-processes-node {
+  letter-spacing: 0;
+  white-space: normal;
+}
+
+/* Подпись под переключателями маршрута - самая длинная строка этим шрифтом.
+   На новом кегле она перестала влезать в свою колонку: разрядка снята,
+   переносы разрешены. */
+.trace-status {
+  letter-spacing: 0;
+  overflow-wrap: anywhere;
+}
+
+/* На узком экране «камера» сцены намеренно растянута за края контейнера
+   (right/left: -8%), чтобы держать перспективу. Подпись лежит прямо в ней и
+   вместе с ней уезжала за границы экрана - на прежнем мелком кегле это было
+   незаметно, на новом обрезало первые символы строк. Отступы возвращают
+   текст в видимую часть, геометрию самой сцены не трогая. */
+@media (max-width: 768px) {
+  .trace-status {
+    padding-inline: 9%;
+  }
+}
+
+/* Контакты в мобильном меню набраны без переносов - на прежнем кегле строка
+   «E-mail: daniil@smetika.pro» влезала целиком, на новом выходит за край.
+   Перенос разрешён; иконка остаётся на первой строке (flex-shrink: 0). */
+@media (max-width: 390px) {
+  .mobile-menu-contacts a {
+    white-space: normal;
+  }
+}
+
+/* Подвал на узком экране. Он собран как grid «1fr auto»: слева имя и
+   контакты, справа год. На новом кегле сумма колонок перестала укладываться
+   в 360 px - страница получала 4 px горизонтальной прокрутки. Теперь на узких
+   экранах подвал идёт одной колонкой, а адреса могут переноситься. */
+@media (max-width: 768px) {
+  .site-footer {
+    grid-template-columns: 1fr;
+  }
+
+  .site-footer p:last-child {
+    justify-self: start;
+  }
+
+  .site-footer-contacts {
+    flex-direction: column;
+  }
+
+  .site-footer-contacts a {
+    overflow-wrap: anywhere;
+  }
+}
+
+/* На 320 px самые длинные слова меток («Позиционирование»,
+   «Квалифицировать») не влезают в колонку целиком. Разрыв внутри слова -
+   не украшение, но единственный способ удержать единый кегль на такой
+   ширине; альтернативой было бы уменьшать шрифт именно здесь. */
+@media (max-width: 360px) {
+  .system-processes-mechanics span,
+  .process-mechanics span {
+    overflow-wrap: anywhere;
+  }
 }

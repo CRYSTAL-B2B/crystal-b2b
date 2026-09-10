@@ -1,7 +1,11 @@
 import type { Metadata } from "next";
 import Script from "next/script";
 import "@fontsource-variable/inter-tight";
-import "@fontsource/ibm-plex-mono/cyrillic-400.css";
+// Технические подписи: JetBrains Mono. Моноширинный, как и прежний IBM Plex
+// Mono - номера и метки остаются выровненными, - но с крупной высотой строчных
+// и потому разборчивее в мелком кегле. Кириллический сабсет, вес 400: другие
+// начертания этому тексту не нужны.
+import "@fontsource/jetbrains-mono/cyrillic-400.css";
 import "./globals.css";
 import { getSiteUrl } from "@/lib/site-url";
 import { BookingProvider } from "@/components/booking/BookingProvider";
