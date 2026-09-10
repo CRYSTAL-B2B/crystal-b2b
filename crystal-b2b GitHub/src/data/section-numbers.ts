@@ -13,18 +13,18 @@ import { testimonials } from "@/data/testimonials";
  * src/app/page.tsx. Меняете порядок на странице - меняйте и здесь.
  */
 const SECTION_ORDER = [
-  "results",
-  "cases",
-  "offer",
-  "testimonials",
   "system",
   "processes",
+  "results",
+  "offer",
+  "testimonials",
   "control",
   "flow",
   "economics",
   "connected",
   "competencies",
   "experience",
+  "cases",
   "principles",
   "lighthouse",
   "contact",

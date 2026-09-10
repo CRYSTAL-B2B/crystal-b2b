@@ -6,10 +6,13 @@ import { SystemProcesses } from "@/components/scenes/SystemProcesses";
 import { ControlFlow } from "@/components/scenes/ControlFlow";
 import { EconomicThesis } from "@/components/sections/EconomicThesis";
 import { ConnectedSystem } from "@/components/scenes/ConnectedSystem";
-import { Proof } from "@/components/sections/Proof";
+import { Results } from "@/components/sections/Results";
+import { Cases } from "@/components/sections/Cases";
 import { Offer } from "@/components/sections/Offer";
 import { Testimonials } from "@/components/sections/Testimonials";
-import { Expertise } from "@/components/sections/Expertise";
+import { Competencies } from "@/components/sections/Competencies";
+import { Experience } from "@/components/sections/Experience";
+import { Principles } from "@/components/sections/Principles";
 import { Lighthouse } from "@/components/scenes/Lighthouse";
 import { Contact } from "@/components/sections/Contact";
 import { DesktopSmoothScroll } from "@/components/motion/DesktopSmoothScroll";
@@ -45,12 +48,13 @@ export default function Home() {
       <Header />
       <main id="main">
         <Hero />
-        {/* Доказательства идут сразу за первым экраном: цифры и кейсы стояли
-            на 9 583 и 11 466 px, и половину пути человек читал рассуждения,
-            не увидев ни одного подтверждения. */}
-        <Proof />
-        <Offer />
-        <Testimonials />
+        {/* Порядок задан владельцем. Названные им блоки идут ровно так, как он
+            перечислил; четыре неназванных (процессы, экономический тезис,
+            связанная система, сигнал) стоят там, где к ним ведёт
+            повествование: сцена процессов сразу за «Что такое система», тезис
+            и связанная система - за «Управлением потоком», сигнал - перед
+            контактом. Порядок обязан совпадать с SECTION_ORDER в
+            src/data/section-numbers.ts, иначе поедут номера подписей. */}
         <EditorialBridge
           id="system"
           index={sectionNumber("system")}
@@ -59,6 +63,9 @@ export default function Home() {
           body={<>Исследование формирует решение. Стратегия задаёт направление. Маркетинг создаёт спрос. CRM управляет движением лида. Продажи превращают его в выручку. Аналитика возвращает данные обратно в систему.</>}
         />
         <SystemProcesses />
+        <Results />
+        <Offer />
+        <Testimonials />
         <EditorialBridge
           index={sectionNumber("control")}
           label="Данные и контроль"
@@ -69,7 +76,10 @@ export default function Home() {
         <ControlFlow />
         <EconomicThesis />
         <ConnectedSystem />
-        <Expertise />
+        <Competencies />
+        <Experience />
+        <Cases />
+        <Principles />
         <Lighthouse />
         <Contact />
       </main>
