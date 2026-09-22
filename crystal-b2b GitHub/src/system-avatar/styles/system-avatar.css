@@ -59,13 +59,15 @@ body[data-modal-open="true"] .avatar-bubble, body[data-navigation-open="true"] .
 /* One-screen Hero: preserve its content and scale the complete copy together. */
 .hero { display:block; height:100svh; min-height:100svh; padding-top:var(--hero-content-top, min(398px,48svh)); padding-bottom:24px; }
 .hero .hero-copy { max-width:54rem; transform:scale(var(--hero-copy-scale,1)); transform-origin:top left; }
-.hero h1 { font-size:clamp(38px,3.7vw,54px); max-width:23ch; line-height:1.04; }
+/* Кегль заголовка - та же шкала --type-hero, что на проде (70,56 px на 1440).
+   Собственный clamp здесь давал 53 px и мельчил первый экран. */
+.hero h1 { font-size:var(--type-hero); max-width:23ch; line-height:1.04; }
 .hero .hero-supporting { margin-top:16px; font-size:clamp(18px,1.4vw,22px); max-width:40rem; }
 .hero .hero-lede { margin-top:10px; font-size:16px; line-height:1.4; max-width:39rem; }
 .hero .hero-actions { margin-top:22px; gap:14px 22px; }
 @media(max-width:768px) {
  .hero { padding-top:var(--hero-content-top, min(296px,45svh)); }
- .hero h1 { font-size:clamp(28px,8vw,38px); max-width:24ch; }
+ .hero h1 { font-size:var(--type-hero); max-width:24ch; }
  .hero .hero-supporting { margin-top:12px;font-size:17px; }
  .hero .hero-lede { margin-top:8px;font-size:14px; }
  .hero .hero-actions { margin-top:16px;gap:8px 16px; }
