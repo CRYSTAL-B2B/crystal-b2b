@@ -18,10 +18,12 @@ export function Hero() {
   useEffect(() => {
     const hero = heroRef.current, copy = copyRef.current;
     if (!hero || !copy) return;
-    const avatar = document.querySelector<HTMLElement>('.system-avatar');
     const header = document.querySelector<HTMLElement>('.site-header');
+    const avatar = document.querySelector<HTMLElement>('.system-avatar');
     const motionPreference = matchMedia('(prefers-reduced-motion: reduce)');
     const pointerPreference = matchMedia('(hover: hover) and (pointer: fine)');
+    // Тот же запрос, по которому dockController выбирает мобильный док.
+    const mobileDock = matchMedia('(max-width: 768px), (pointer: coarse)');
     let frame = 0, disposed = false;
     const fit = () => {
       frame = 0;
@@ -34,9 +36,13 @@ export function Hero() {
         media.style.setProperty('--hero-cover-scale', String(cover));
       }
       const headerHeight = header?.getBoundingClientRect().height ?? 72;
-      const avatarHeight = avatar?.getBoundingClientRect().height ?? 196;
-      const top = headerHeight + avatarHeight + 32;
-      const available = Math.max(1, height - top - 24);
+      // Аватар ушёл к правому краю и текст больше не перекрывает, поэтому
+      // копия начинается сразу под шапкой, а не под аватаром.
+      const top = headerHeight + 32;
+      // На мобильном аватар стоит в правом нижнем углу - держим под него полосу,
+      // иначе на невысоких экранах (375x667 и ниже) он накрывает кнопки.
+      const reserved = mobileDock.matches ? (avatar?.getBoundingClientRect().height ?? 196) + 14 : 0;
+      const available = Math.max(1, height - top - 24 - reserved);
       hero.style.setProperty('--hero-content-top', `${top}px`);
       // Keep the available line width while scaling, rather than shrinking text into a narrow column.
       const fits = (scale: number) => { copy.style.width = `${100 / scale}%`; return copy.offsetHeight * scale <= available; };
@@ -53,13 +59,14 @@ export function Hero() {
     };
     const schedule = () => { if (!disposed && !frame) frame = requestAnimationFrame(fit); };
     const observer = new ResizeObserver(schedule);
-    observer.observe(copy); if (avatar) observer.observe(avatar); if (header) observer.observe(header);
+    observer.observe(copy); if (header) observer.observe(header); if (avatar) observer.observe(avatar);
     window.addEventListener('resize', schedule);
     motionPreference.addEventListener('change', schedule);
     pointerPreference.addEventListener('change', schedule);
+    mobileDock.addEventListener('change', schedule);
     window.visualViewport?.addEventListener('resize', schedule);
     void document.fonts.ready.then(schedule); schedule();
-    return () => { disposed = true; cancelAnimationFrame(frame); observer.disconnect(); window.removeEventListener('resize', schedule); motionPreference.removeEventListener('change', schedule); pointerPreference.removeEventListener('change', schedule); window.visualViewport?.removeEventListener('resize', schedule); };
+    return () => { disposed = true; cancelAnimationFrame(frame); observer.disconnect(); window.removeEventListener('resize', schedule); motionPreference.removeEventListener('change', schedule); pointerPreference.removeEventListener('change', schedule); mobileDock.removeEventListener('change', schedule); window.visualViewport?.removeEventListener('resize', schedule); };
   }, []);
 
   useEffect(() => {

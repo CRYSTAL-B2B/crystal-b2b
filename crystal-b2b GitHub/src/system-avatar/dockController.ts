@@ -10,7 +10,10 @@ export function createDockController(root: HTMLElement, handle: HTMLButtonElemen
   const mobile = matchMedia(`(max-width: ${config.avatar.mobileBreakpoint}px), (pointer: coarse)`);
   const probe = root.querySelector<HTMLElement>('.avatar-safe-probe')!;
   const header = document.querySelector<HTMLElement>('.site-header');
-  let dock: Dock = { edge: 'left', offset: 0 };
+  // По умолчанию аватар держится правого края: на десктопе - вверху, на
+  // мобильном - внизу. Слева в первом экране идёт текст, и с прежним левым
+  // верхом аватар вставал прямо над ним.
+  let dock: Dock = mobile.matches ? { edge: 'right', offset: 1 } : { edge: 'right', offset: 0 };
   try { dock = parseDock(localStorage.getItem(config.avatar.storageKey)) ?? dock; } catch { /* storage is optional */ }
   const position: Point = { x: 0, y: 0 };
   let target = { ...position }, size = { width: 0, height: 0 };

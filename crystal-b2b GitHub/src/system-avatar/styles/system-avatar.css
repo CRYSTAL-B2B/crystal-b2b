@@ -1,7 +1,9 @@
 .system-avatar {
   --avatar-size: var(--avatar-desktop-size, 282px);
   position: fixed; top: 0; left: 0; width: var(--avatar-size); height: var(--avatar-size);
-  z-index: var(--avatar-z, 40); transform: translate3d(20px, 92px, 0);
+  /* Стартовая позиция до гидратации совпадает с дефолтным доком из
+     dockController (правый верх), чтобы аватар не прыгал через весь экран. */
+  z-index: var(--avatar-z, 40); transform: translate3d(calc(100vw - var(--avatar-size) - 20px), 92px, 0);
   background: transparent; contain: layout style;
 }
 .avatar-safe-probe { position: absolute; width: 0; height: 0; visibility: hidden; pointer-events: none; padding: env(safe-area-inset-top) env(safe-area-inset-right) env(safe-area-inset-bottom) env(safe-area-inset-left); }
@@ -21,7 +23,8 @@ body[data-modal-open="true"] .system-avatar, body[data-navigation-open="true"] .
 .hero .hero-lede { margin-top: .85rem; max-width: 35rem; }
 @media (min-width: 769px) { .hero { padding-top: max(25.5rem,20vh); } }
 @media (max-width: 768px), (pointer: coarse) {
- .system-avatar { --avatar-size: var(--avatar-mobile-size,196px); transform: translate3d(14px,82px,0); }
+ /* На мобильном дефолтный док - правый низ. */
+ .system-avatar { --avatar-size: var(--avatar-mobile-size,196px); transform: translate3d(calc(100vw - var(--avatar-size) - 14px), calc(100svh - var(--avatar-size) - 14px), 0); }
 }
 @media (max-width: 768px) {
  .hero { padding-top: 20rem; padding-bottom: 5.5rem; }
@@ -57,7 +60,7 @@ body[data-modal-open="true"] .avatar-bubble, body[data-navigation-open="true"] .
 .system-avatar[data-image-fallback="true"] .avatar-poster { inset:0;width:100%;height:100%; }
 @media (prefers-reduced-motion: reduce) { .avatar-video { display:none;transition:none; } }
 /* One-screen Hero: preserve its content and scale the complete copy together. */
-.hero { display:block; height:100svh; min-height:100svh; padding-top:var(--hero-content-top, min(398px,48svh)); padding-bottom:24px; }
+.hero { display:block; height:100svh; min-height:100svh; padding-top:var(--hero-content-top, 104px); padding-bottom:24px; }
 .hero .hero-copy { max-width:54rem; transform:scale(var(--hero-copy-scale,1)); transform-origin:top left; }
 /* Кегль заголовка - та же шкала --type-hero, что на проде (70,56 px на 1440).
    Собственный clamp здесь давал 53 px и мельчил первый экран. */
@@ -66,7 +69,7 @@ body[data-modal-open="true"] .avatar-bubble, body[data-navigation-open="true"] .
 .hero .hero-lede { margin-top:10px; font-size:16px; line-height:1.4; max-width:39rem; }
 .hero .hero-actions { margin-top:22px; gap:14px 22px; }
 @media(max-width:768px) {
- .hero { padding-top:var(--hero-content-top, min(296px,45svh)); }
+ .hero { padding-top:var(--hero-content-top, 100px); }
  .hero h1 { font-size:var(--type-hero); max-width:24ch; }
  .hero .hero-supporting { margin-top:12px;font-size:17px; }
  .hero .hero-lede { margin-top:8px;font-size:14px; }

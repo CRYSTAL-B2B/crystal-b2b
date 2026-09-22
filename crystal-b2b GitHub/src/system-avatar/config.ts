@@ -3,7 +3,10 @@ export const AVATAR_CONFIG = {
     desktopSize: 282, mobileSize: 196, mobileBreakpoint: 768,
     desktopMargin: 20, mobileMargin: 14, dragThreshold: 5,
     dragSmoothing: .72, snapDuration: .48, minStateDuration: 350,
-    storageKey: 'b2b:avatar:dock:v1', zIndex: 40,
+    // v2: дефолтный угол сменился с левого верхнего на правый - старые
+    // сохранённые позиции сбрасываем, иначе новый дефолт не увидит никто,
+    // кто уже открывал страницу.
+    storageKey: 'b2b:avatar:dock:v2', zIndex: 40,
     shortViewportHeight: 420, shortViewportRatio: .38,
   },
   bubble: {
