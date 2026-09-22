@@ -15,4 +15,4 @@ export const AVATAR_SECTIONS = [
   { id: 'contact', selector: '#contact', label: 'Контакт', description: 'Расскажите о задаче — обсудим, с чего начать и какой формат работы подойдёт.' },
 ] as const;
 export type AvatarSection = typeof AVATAR_SECTIONS[number];
-export type AvatarContext = { section: AvatarSection; title: string };
+export type AvatarContext = { section: AvatarSection };

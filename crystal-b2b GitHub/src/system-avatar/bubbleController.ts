@@ -33,11 +33,15 @@ export function createBubbleController(root: HTMLElement, bubble: HTMLElement, d
   function render() {
     frame = 0; if (destroyed) return;
     const question = mode === 'question';
-    primary.textContent = question ? AVATAR_QUESTION : context?.title ?? AVATAR_QUESTION;
-    secondary.textContent = question ? 'Выберите задачу — откроется форма для обсуждения.' : context?.section.description ?? '';
+    // В режиме секции заголовок не показываем - он и так перед глазами на
+    // экране. Плашка несёт только комментарий к нему и кнопку, поэтому
+    // комментарий занимает место основного текста.
+    primary.textContent = question ? AVATAR_QUESTION : context?.section.description ?? '';
+    secondary.textContent = question ? 'Выберите задачу — откроется форма для обсуждения.' : '';
+    secondary.hidden = !question;
     choices.hidden = !question; cta.hidden = mode !== 'section'; bubble.dataset.mode = mode;
-    if (mode === 'section' && context) { bubble.dataset.section = context.section.id; bubble.dataset.heading = context.title; }
-    else { delete bubble.dataset.section; delete bubble.dataset.heading; }
+    if (mode === 'section' && context) bubble.dataset.section = context.section.id;
+    else delete bubble.dataset.section;
     const next = mode !== 'closed' && !blocked && !dock.moving;
     if (next) place();
     bubble.dataset.progress = next ? '1' : '0';

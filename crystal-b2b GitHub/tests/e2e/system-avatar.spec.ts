@@ -145,7 +145,8 @@ test('only six screens show contextual explanations and CTA, including backscrol
  for(const [id,selector] of [...screens,...[...screens].reverse()]){
   await screen(page,selector);await expect(page.locator(panel)).toHaveAttribute('data-section',id);
   await expect(page.locator(panel)).toHaveAttribute('aria-hidden','false');
-  await expect(page.locator('.avatar-bubble-secondary')).not.toBeEmpty();
+  await expect(page.locator('.avatar-bubble-primary')).not.toBeEmpty();
+  await expect(page.locator('.avatar-bubble-secondary')).toBeHidden();
   await expect(page.locator('.avatar-context-cta')).toBeVisible();await expect(page.locator('.avatar-question-options')).toBeHidden();await safe(page,panel);
  }
  const excluded=await page.locator('main h2').evaluateAll(headings=>headings.filter(h=>!h.closest('#system,#results,#offer,.flow-scene,#cases,#contact')).map(h=>h.closest('section')?.className).filter(Boolean));

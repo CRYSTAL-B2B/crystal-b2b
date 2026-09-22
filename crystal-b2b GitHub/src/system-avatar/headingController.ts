@@ -25,9 +25,7 @@ export function observeHeadings(root: HTMLElement, onContext: (context: AvatarCo
     onContext(null);
     if (target) timer = setTimeout(() => {
       if (destroyed || active !== target.element || root.inert || document.hidden) return;
-      const heading = target.element.querySelector('h2');
-      const title = heading?.innerText.replace(/\s+/g, ' ').trim() || target.section.label;
-      onContext({ section: target.section, title });
+      onContext({ section: target.section });
     }, config.headings.dwellMs);
   }
   function observe() {
