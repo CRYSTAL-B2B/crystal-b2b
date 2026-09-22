@@ -19,8 +19,17 @@ pnpm-debug.log*
 
 /generated/tmp/
 /tmp/
-/assets/generated/
+/assets/
 /b2b_marketing_site_production_pack_v1/
 /glass_background/
 .codebase-memory/
 /output/
+
+.next-avatar/
+
+# Спека аватара и исходники ассетов: нужны при работе, но не нужны сборке -
+# держим на диске, в репозиторий не тащим (это десятки мегабайт бинарников).
+/b2b-system-cinematic-avatar-spec-v2/
+# Ассеты дев-стенда в корне: ранняя итерация аватара, переработана в
+# Pages-варианте. Код стенда в репозитории, его картинки - нет.
+/public/system-avatar/
