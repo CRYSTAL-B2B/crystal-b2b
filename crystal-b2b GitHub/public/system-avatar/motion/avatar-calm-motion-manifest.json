@@ -1,0 +1,55 @@
+{
+  "source": "Generated Video September 20, 2026 - 4_23PM.mp4",
+  "motion_policy": "calm-loop-with-glint-v1",
+  "approval": "Idle excludes the eye flare and open mouth. Click plays the flash from its beginning, then returns to the complete calm loop.",
+  "crop": {
+    "x": 0,
+    "y": 420,
+    "width": 1080,
+    "height": 1080
+  },
+  "exports": [
+    {
+      "label": "idle",
+      "file": "clips/avatar-calm-loop.mp4",
+      "poster": "posters/avatar-idle.webp",
+      "duration": 3.7916666666666665,
+      "frame_count": 91,
+      "loopable": true,
+      "sha256": "b47a7655f68d16a6dcb6fadc6b199d37fa3d65bb7a9bf4c745676ffe4fe9171d",
+      "bytes": 2401010,
+      "source_spans": [
+        [
+          0,
+          63
+        ],
+        [
+          152,
+          192
+        ]
+      ],
+      "construction": "calm-spans-with-six-frame-dissolves",
+      "crossfade_frames": 6,
+      "notes": "Closed mouth; no eye flare. All selected source frames play forward; two 250 ms dissolves."
+    },
+    {
+      "label": "glint",
+      "file": "clips/avatar-glint-onset.mp4",
+      "poster": "posters/avatar-idle.webp",
+      "duration": 1.75,
+      "frame_count": 42,
+      "loopable": false,
+      "sha256": "b12c025a9f499fca743426ac9a8398cebe28e3b722a6a5136afd8d965b17d8a6",
+      "bytes": 1013852,
+      "start": 2.5833333333333335,
+      "end": 4.333333333333333,
+      "source_spans": [
+        [
+          62,
+          104
+        ]
+      ],
+      "notes": "One neutral frame before the first HUD ignition; full rise to the eye flare, cut before mouth opening."
+    }
+  ]
+}

@@ -1,0 +1,37 @@
+{
+  "source": "Generated Video September 20, 2026 - 4_23PM.mp4",
+  "motion_policy": "full-master-with-reactions-v1",
+  "approval": "User requested all 192 source frames as a continuous loop and a click-triggered eye glint. Heading bubbles must not trigger separate mouth animation.",
+  "crop": {
+    "x": 0,
+    "y": 420,
+    "width": 1080,
+    "height": 1080
+  },
+  "exports": [
+    {
+      "label": "idle",
+      "file": "clips/avatar-full-loop.mp4",
+      "poster": "posters/avatar-idle.webp",
+      "start": 0.0,
+      "end": 8.0,
+      "duration": 8.0,
+      "frame_count": 192,
+      "loopable": true,
+      "sha256": "3ea91ba265cf3636182ebf2f460fbe193285cd9b541af81f3a3a6542c9133128",
+      "bytes": 2844599
+    },
+    {
+      "label": "glint",
+      "file": "clips/avatar-glint.mp4",
+      "poster": "posters/avatar-idle.webp",
+      "start": 3.5,
+      "end": 4.5,
+      "duration": 1.0,
+      "frame_count": 24,
+      "loopable": false,
+      "sha256": "2fa8b693bd9b8682017afa1f2de3409c2d303452066cbfdead7ff89bcbe17be3",
+      "bytes": 325473
+    }
+  ]
+}

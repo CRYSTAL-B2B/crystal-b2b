@@ -1,0 +1,166 @@
+{
+  "source": "Generated Video September 20, 2026 - 4_23PM.mp4",
+  "source_relative_path": "../../b2b-system-cinematic-avatar-spec-v2/system-avatar/Generated Video September 20, 2026 - 4_23PM.mp4",
+  "source_sha256": "59d12b228b71cf8b9a985be8d404ee935d17adf272ee3dba5168951b07fdeb8d",
+  "source_duration": 8.0,
+  "source_fps": 24,
+  "source_frame_count": 192,
+  "source_dimensions": {
+    "width": 1080,
+    "height": 1920
+  },
+  "crop": {
+    "x": 0,
+    "y": 420,
+    "width": 1080,
+    "height": 1080,
+    "dynamic_reframing": false
+  },
+  "output": {
+    "width": 720,
+    "height": 720,
+    "fps": 24,
+    "codec": "h264",
+    "pixel_format": "yuv420p",
+    "audio": false,
+    "faststart": true,
+    "alpha": false
+  },
+  "time_convention": "start inclusive, end exclusive; exact cuts use integer frames / 24",
+  "score_definition": "Editorial visual assessments, 1–10, higher is better. mouth_score 10 = closed/still lips. Not calibrated biometrics or automatic facial-landmark scores.",
+  "review": {
+    "decoded_and_reviewed_frames": 192,
+    "per_frame_sheets": "analysis/all-frames-00.jpg … all-frames-07.jpg",
+    "pixel_metrics": "analysis/frame-metrics.csv",
+    "motion_metrics": "analysis/head-motion.json",
+    "loop_candidates": "analysis/loop-candidates.json"
+  },
+  "exports": [
+    {
+      "file": "clips/avatar-idle-loop.mp4",
+      "poster": "posters/avatar-idle.webp",
+      "label": "idle",
+      "start": 7.333333,
+      "end": 8.0,
+      "duration": 2.5,
+      "start_frame": 176,
+      "end_frame_exclusive": 192,
+      "frame_count": 60,
+      "loopable": true,
+      "quality_score": 8.9,
+      "mouth_score": 9.7,
+      "stability_score": 9.5,
+      "notes": "Edited forward/reverse loop using approved closed-mouth idle frames only. Two output frames per source frame; no generated face frames. Not a natural source loop.",
+      "recommended_usage": "Muted continuous resting motion; occasional original cooldown blink; reactions return to this loop.",
+      "poster_source_frame": 191,
+      "bytes": 586835,
+      "sha256": "62d43cc0bac36c1486fb828ec68fee0b969a3398b55f96344adf9c7bb18ff0f9",
+      "construction": "palindrome-approved-idle",
+      "source_clip": "clips/avatar-idle.mp4"
+    },
+    {
+      "file": "clips/avatar-track-right.mp4",
+      "poster": "posters/avatar-track-right.webp",
+      "label": "track-right",
+      "start": 1.0,
+      "end": 1.541667,
+      "duration": 0.541667,
+      "start_frame": 24,
+      "end_frame_exclusive": 37,
+      "frame_count": 13,
+      "loopable": false,
+      "quality_score": 8.1,
+      "mouth_score": 9.5,
+      "stability_score": 8.1,
+      "notes": "Взгляд вправо от зрителя (к стороне монокля). Небольшой продолжающийся поворот головы, рот закрыт. Не зеркалить для track-left.",
+      "recommended_usage": "Короткая однократная реакция на объект справа. Не повторять на каждом pointermove; не проигрывать в loop.",
+      "poster_source_frame": 30,
+      "bytes": 342383,
+      "sha256": "5144782693a1541a8030d35e6a7e439b35843d74fd208634efa63208304633e8"
+    },
+    {
+      "file": "clips/avatar-alert.mp4",
+      "poster": "posters/avatar-alert.webp",
+      "label": "alert",
+      "start": 2.625,
+      "end": 3.0,
+      "duration": 0.375,
+      "start_frame": 63,
+      "end_frame_exclusive": 72,
+      "frame_count": 9,
+      "loopable": false,
+      "quality_score": 8.2,
+      "mouth_score": 9.6,
+      "stability_score": 9.4,
+      "notes": "Тихая активация кольца монокля при неподвижном лице. Обрезано до появления яркой внешней дуги и засветки на кадре 72.",
+      "recommended_usage": "Опциональная короткая реакция при открытии info bubble, только по действию пользователя.",
+      "poster_source_frame": 67,
+      "bytes": 268207,
+      "sha256": "fbf2ca8e69cbc08cfc74b2033c19c58ba1323144965d640b5c06e1f07756813f"
+    },
+    {
+      "file": "clips/avatar-cooldown.mp4",
+      "poster": "posters/avatar-cooldown.webp",
+      "label": "cooldown",
+      "start": 6.333333,
+      "end": 7.333333,
+      "duration": 1.0,
+      "start_frame": 152,
+      "end_frame_exclusive": 176,
+      "frame_count": 24,
+      "loopable": false,
+      "quality_score": 8.7,
+      "mouth_score": 9.6,
+      "stability_score": 8.9,
+      "notes": "Рот уже закрыт; естественное одиночное моргание и исчезновение HUD-уголков. Нет говорящей артикуляции.",
+      "recommended_usage": "Однократно при закрытии info bubble; можно продолжить idle, поскольку интервалы смежные в исходнике.",
+      "poster_source_frame": 158,
+      "bytes": 638592,
+      "sha256": "ec2dd23dae0d6e50f2d85d60d84a666fbfc3f74392dfcf35d6d32712a5ad6d5b"
+    }
+  ],
+  "not_exported": {
+    "track-left": "Убедительного взгляда влево от зрителя нет; зеркалирование меняет сторону монокля.",
+    "lock": "Нейтральный hold дублирует idle; отдельного сильного состояния нет.",
+    "charge": "Засветка монокля и лица слишком сильная для нового UX.",
+    "scan": "Яркие дуги/кольца, затем приоткрытый рот.",
+    "confirm": "Нет отдельного спокойного подтверждения, не следует переименовывать сомнительную артикуляцию.",
+    "sleep": "Только короткие моргания, нет устойчивого состояния сна.",
+    "idle-loop": "Ни одна естественная граница длиной ≥0.5 с не прошла conservative seam gate.",
+    "sleep-loop": "Нет пригодного sleep-интервала."
+  },
+  "loop_assessment": {
+    "clean_natural_loop_found": false,
+    "minimum_candidate_duration": 0.5,
+    "method": "Compare first/last pixel MAE with adjacent-frame p95 in full image, face, mouth, monocle, plus visual review. Reject if any ratio >1.5; no reverse/freeze/morph/crossfade manufactured loops.",
+    "best_idle_candidate": {
+      "start_frame": 180,
+      "end_frame_exclusive": 192,
+      "duration": 0.5,
+      "full_seam_mae": 5.7977,
+      "full_adjacent_p95": 1.168,
+      "full_ratio": 4.964,
+      "face_ratio": 3.191
+    }
+  },
+  "production_recommendation": "partial-video-plus-static-fallback",
+  "minimal_state_set": [
+    "idle",
+    "cooldown"
+  ],
+  "optional_state_set": [
+    "track-right",
+    "alert"
+  ],
+  "ui_notes": [
+    "Static idle poster is the default; videos are one-shot reactions.",
+    "Use muted playsinline preload=none/metadata. Load only after viewport/user intent; reduced motion shows poster.",
+    "cooldown → idle is source-contiguous. Other states are not a matched neutral-in/neutral-out system: test transitions, do not hard-loop or mirror.",
+    "Idle poster is from this video: switching to the earlier differently framed avatar PNG can cause an identity/framing jump.",
+    "The source blue background and halo are baked in; MP4 output is opaque. The fixed square crop removes top/bottom black bars only.",
+    "No widget implementation, site replacement or deployment is part of this extraction."
+  ],
+  "default_idle_mode": "static-poster",
+  "runtime_variant": "living-widget-v2",
+  "analysis_source": "avatar-motion-manifest.json"
+}

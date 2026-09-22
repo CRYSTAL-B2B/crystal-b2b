@@ -1,0 +1,42 @@
+{
+  "version": 1,
+  "mode": "atlas",
+  "basePath": "/system-avatar",
+  "master": "source/avatar-master.png",
+  "states": {
+    "idle": "states/idle.png",
+    "track-left": "states/track-left.png",
+    "track-right": "states/track-right.png",
+    "alert": "states/alert.png",
+    "lock": "states/lock.png",
+    "charge": "states/charge.png",
+    "scan": "states/scan.png",
+    "confirm": "states/confirm.png",
+    "cooldown": "states/cooldown.png",
+    "sleep": "states/sleep.png"
+  },
+  "atlas": {
+    "image": "atlas/avatar-atlas.png",
+    "data": "atlas/avatar-atlas.json"
+  },
+  "eye": {
+    "irisMask": "eye/iris-mask.png",
+    "glowMask": "eye/glow-mask.png",
+    "reticleMask": "eye/reticle-mask.png",
+    "scanRing": "eye/scan-ring.png"
+  },
+  "frame": {
+    "reference": "frame/frame-reference.png"
+  },
+  "anchors": {
+    "eye": {
+      "x": 0.631,
+      "y": 0.465,
+      "note": "Calibrated against the supplied idle sprite; PNG assets are unchanged."
+    }
+  },
+  "fallback": {
+    "state": "idle",
+    "missingAsset": "source/avatar-master.png"
+  }
+}
