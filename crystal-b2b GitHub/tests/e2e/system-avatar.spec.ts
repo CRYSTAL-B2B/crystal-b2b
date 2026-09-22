@@ -1,5 +1,5 @@
 import { expect, test, type Page } from '@playwright/test';
-const key='b2b:avatar:dock:v1';
+const key='b2b:avatar:dock:v2';
 const widget='.system-avatar', panel='.avatar-bubble', handle='.avatar-handle';
 async function start(page:Page){await page.goto('/');await expect(page.locator(widget)).toHaveAttribute('data-ready','true');await expect(page.locator(widget)).toHaveAttribute('data-assets','ready');}
 async function safe(page:Page,selector=widget){
