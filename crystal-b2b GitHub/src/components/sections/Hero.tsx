@@ -24,10 +24,25 @@ export function Hero() {
     const pointerPreference = matchMedia('(hover: hover) and (pointer: fine)');
     // Тот же запрос, по которому dockController выбирает мобильный док.
     const mobileDock = matchMedia('(max-width: 768px), (pointer: coarse)');
+    // Высоту первого экрана меряем в svh - это «малый» вьюпорт, то есть
+    // состояние с раскрытой панелью браузера. В отличие от
+    // visualViewport.height он не растёт, когда при скролле прячется адресная
+    // строка, поэтому копия не прыгает в размере на первом же движении.
+    const probe = document.createElement('div');
+    probe.style.cssText = 'position:fixed;top:0;left:0;width:100px;height:100svh;visibility:hidden;pointer-events:none';
+    document.body.appendChild(probe);
+    // Ширина в 100 px нужна, чтобы отсюда же взять коэффициент зума: rect
+    // учитывает zoom, а offsetHeight копии - нет, и без деления высота
+    // оказалась бы в других единицах, чем то, с чем её сравнивают.
+    const viewportHeight = () => {
+      const rect = probe.getBoundingClientRect();
+      const zoom = rect.width ? rect.width / 100 : 1;
+      return rect.height ? rect.height / zoom : innerHeight;
+    };
     let frame = 0, disposed = false;
     const fit = () => {
       frame = 0;
-      const height = window.visualViewport?.height ?? innerHeight;
+      const height = viewportHeight();
       const media = mediaRef.current;
       if (media) {
         const parallax = !motionPreference.matches && pointerPreference.matches;
@@ -61,13 +76,24 @@ export function Hero() {
     const schedule = () => { if (!disposed && !frame) frame = requestAnimationFrame(fit); };
     const observer = new ResizeObserver(schedule);
     observer.observe(copy); if (header) observer.observe(header); if (avatar) observer.observe(avatar);
-    window.addEventListener('resize', schedule);
+    // Пересчитываем только на настоящее изменение размеров - смену ориентации
+    // или ресайз окна. На мобильном `resize` прилетает и от сворачивания
+    // адресной строки, но ширина и svh при этом те же, так что такие события
+    // отсекаются здесь и до пересчёта не доходят.
+    let lastWidth = innerWidth, lastHeight = viewportHeight();
+    const onResize = () => {
+      const width = innerWidth, height = viewportHeight();
+      if (width === lastWidth && height === lastHeight) return;
+      lastWidth = width; lastHeight = height; schedule();
+    };
+    const orientation = matchMedia('(orientation: portrait)');
+    window.addEventListener('resize', onResize);
+    orientation.addEventListener('change', schedule);
     motionPreference.addEventListener('change', schedule);
     pointerPreference.addEventListener('change', schedule);
     mobileDock.addEventListener('change', schedule);
-    window.visualViewport?.addEventListener('resize', schedule);
     void document.fonts.ready.then(schedule); schedule();
-    return () => { disposed = true; cancelAnimationFrame(frame); observer.disconnect(); window.removeEventListener('resize', schedule); motionPreference.removeEventListener('change', schedule); pointerPreference.removeEventListener('change', schedule); mobileDock.removeEventListener('change', schedule); window.visualViewport?.removeEventListener('resize', schedule); };
+    return () => { disposed = true; cancelAnimationFrame(frame); observer.disconnect(); probe.remove(); window.removeEventListener('resize', onResize); orientation.removeEventListener('change', schedule); motionPreference.removeEventListener('change', schedule); pointerPreference.removeEventListener('change', schedule); mobileDock.removeEventListener('change', schedule); };
   }, []);
 
   useEffect(() => {
