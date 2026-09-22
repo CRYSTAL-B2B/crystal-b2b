@@ -42,7 +42,7 @@ export function Hero() {
       const top = headerHeight + (mobileDock.matches ? 72 : 172);
       // На мобильном аватар стоит в правом нижнем углу - держим под него полосу,
       // иначе на невысоких экранах (375x667 и ниже) он накрывает кнопки.
-      const reserved = mobileDock.matches ? (avatar?.getBoundingClientRect().height ?? 196) + 14 : 0;
+      const reserved = mobileDock.matches ? (avatar?.getBoundingClientRect().height ?? 147) + 14 : 0;
       const available = Math.max(1, height - top - 24 - reserved);
       hero.style.setProperty('--hero-content-top', `${top}px`);
       // Keep the available line width while scaling, rather than shrinking text into a narrow column.

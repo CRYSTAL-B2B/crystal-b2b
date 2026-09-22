@@ -24,7 +24,7 @@ body[data-modal-open="true"] .system-avatar, body[data-navigation-open="true"] .
 @media (min-width: 769px) { .hero { padding-top: max(25.5rem,20vh); } }
 @media (max-width: 768px), (pointer: coarse) {
  /* На мобильном дефолтный док - правый низ. */
- .system-avatar { --avatar-size: var(--avatar-mobile-size,196px); transform: translate3d(calc(100vw - var(--avatar-size) - 14px), calc(100svh - var(--avatar-size) - 14px), 0); }
+ .system-avatar { --avatar-size: var(--avatar-mobile-size,147px); transform: translate3d(calc(100vw - var(--avatar-size) - 14px), calc(100svh - var(--avatar-size) - 14px), 0); }
 }
 @media (max-width: 768px) {
  .hero { padding-top: 20rem; padding-bottom: 5.5rem; }

@@ -1,6 +1,6 @@
 export const AVATAR_CONFIG = {
   avatar: {
-    desktopSize: 282, mobileSize: 196, mobileBreakpoint: 768,
+    desktopSize: 282, mobileSize: 147, mobileBreakpoint: 768,
     desktopMargin: 20, mobileMargin: 14, dragThreshold: 5,
     dragSmoothing: .72, snapDuration: .48, minStateDuration: 350,
     // v2: дефолтный угол сменился с левого верхнего на правый - старые

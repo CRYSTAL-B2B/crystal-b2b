@@ -31,7 +31,7 @@ for(const [edge,x,y] of [['left',-100,480],['right',1540,480],['top',720,-100],[
  const saved=await page.evaluate(k=>JSON.parse(localStorage.getItem(k)!),key);expect(saved.edge).toBe(edge);expect(saved.offset).toBeGreaterThanOrEqual(0);expect(saved.offset).toBeLessThanOrEqual(1);
  await page.reload();await expect(page.locator(widget)).toHaveAttribute('data-edge',edge);await safe(page);
  await page.setViewportSize({width:390,height:844});await page.waitForTimeout(200);await safe(page);await expect(page.locator(widget)).toHaveAttribute('data-edge',edge);
- expect(await page.locator(widget).evaluate(e=>e.getBoundingClientRect().width)).toBe(196);
+ expect(await page.locator(widget).evaluate(e=>e.getBoundingClientRect().width)).toBe(147);
  });
 }
 test('all corners, rapid movement, pointer cancellation and scroll during drag',async({page})=>{
