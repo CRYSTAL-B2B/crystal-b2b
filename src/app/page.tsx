@@ -1,3 +1,4 @@
+import { SystemAvatar } from "@/system-avatar/SystemAvatar";
 import { Header } from "@/components/layout/Header";
 import { Footer } from "@/components/layout/Footer";
 import { TypographySwitcher } from "@/components/ui/TypographySwitcher";
@@ -32,6 +33,7 @@ export default function Home() {
       <a className="skip-link" href="#main">Перейти к содержанию</a>
       <Header />
       <TypographySwitcher />
+      <SystemAvatar />
       <main id="main">
         <Hero />
         <EditorialBridge

@@ -1,4 +1,11 @@
 export type AnalyticsEvent =
+  | "system_avatar_seen"
+  | "system_avatar_target_hover"
+  | "system_avatar_lock"
+  | "system_avatar_scan"
+  | "system_avatar_reveal"
+  | "system_avatar_confirm"
+  | "system_avatar_perf_degraded"
   | "hero_cta_click"
   | "results_click"
   | "case_view"

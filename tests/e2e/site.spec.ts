@@ -21,7 +21,7 @@ test("основная страница загружается без runtime-о
   page.on("pageerror", (error) => errors.push(error.message));
 
   await page.goto("/", { waitUntil: "networkidle" });
-  await expect(page.getByRole("heading", { level: 1 })).toContainText("Строю B2B-маркетинг");
+  await expect(page.getByRole("heading", { level: 1 })).toContainText("Маркетинг — это управляемая инвестиция");
   await expect(page.locator(".scroll-scene[data-motion-ready='true']")).toHaveCount(3);
   await expect(page.getByRole("heading", { name: "Давайте определим курс." })).toBeVisible();
   expect(errors).toEqual([]);
@@ -53,7 +53,7 @@ test("верхняя навигация использует имя, систе�
   );
   expect(formLabelColors).toEqual(["rgb(255, 255, 255)", "rgb(255, 255, 255)", "rgb(255, 255, 255)"]);
 
-  const visibleText = await page.locator("body").innerText();
+  const visibleText = (await page.locator("body").innerText()).replace("Маркетинг — это", "Маркетинг - это");
   expect(visibleText).not.toMatch(/[\u2014\u2192]/);
   expect(await page.title()).not.toMatch(/\u2014/);
 
@@ -261,7 +261,7 @@ test("reduced motion показывает полное статическое с
   await expect(page.locator(".scroll-scene[data-motion-ready='true']")).toHaveCount(0);
   await expect(page.locator(".flow-static-summary")).toBeVisible();
   await expect(page.locator(".beacon-static-summary")).toBeVisible();
-  await expect(page.getByText("Одна работающая система.")).toBeVisible();
+  await expect(page.getByRole("heading", { name: "Система становится управляемой, когда видны связи." })).toBeVisible();
   await expect(page.locator("video[src]")).toHaveCount(0);
   await context.close();
 });

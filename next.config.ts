@@ -29,6 +29,7 @@ const securityHeaders = [
 ];
 
 const nextConfig: NextConfig = {
+  distDir: process.env.CRYSTAL_BUILD_DIR || ".next",
   allowedDevOrigins: ["127.0.0.1", "localhost"],
   poweredByHeader: false,
   reactStrictMode: true,

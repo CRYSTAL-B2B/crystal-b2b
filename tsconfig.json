@@ -33,10 +33,14 @@
     "**/*.ts",
     "**/*.tsx",
     ".next/types/**/*.ts",
-    ".next/dev/types/**/*.ts"
+    ".next/dev/types/**/*.ts",
+    ".next-avatar/types/**/*.ts",
+    ".next-avatar/dev/types/**/*.ts"
   ],
   "exclude": [
     "node_modules",
-    "b2b_marketing_site_production_pack_v1"
+    "b2b_marketing_site_production_pack_v1",
+    "crystal-b2b GitHub",
+    "b2b-system-cinematic-avatar-spec-v2"
   ]
 }

@@ -7,7 +7,11 @@ export default defineConfig([
   ...nextTypeScript,
   globalIgnores([
     ".next/**",
+    ".next-avatar/**",
+    "crystal-b2b GitHub/**",
+    "b2b-system-cinematic-avatar-spec-v2/**",
     "out/**",
+    "assets/**",
     "coverage/**",
     "b2b_marketing_site_production_pack_v1/**",
   ]),

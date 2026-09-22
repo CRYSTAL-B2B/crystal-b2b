@@ -76,12 +76,14 @@ export function Hero() {
       <div className="hero-copy">
         <p className="eyebrow">B2B-МАРКЕТИНГ / CRM / РОСТ</p>
         <h1 id="hero-title">
-          <span>Строю B2B-маркетинг</span>
-          <span>от спроса до <em>выручки.</em></span>
+          Маркетинг — это управляемая инвестиция в{" "}
+          <span data-system-target data-system-id="hero-profit"
+            data-system-trigger="hover" data-system-reveal="accent-word"
+            data-system-priority="high">рост прибыли</span>.
         </h1>
+        <p className="hero-supporting">Строю B2B-маркетинг от спроса до выручки.</p>
         <p className="hero-lede">
-          Стратегия, лидогенерация, CRM, аналитика и автоматизация - в одной
-          измеримой системе.
+          Стратегия, лидогенерация, CRM, аналитика и автоматизация в одной системе.
         </p>
         <div className="hero-actions">
           <TrackedLink className="button button-primary" href="#contact" event="hero_cta_click">

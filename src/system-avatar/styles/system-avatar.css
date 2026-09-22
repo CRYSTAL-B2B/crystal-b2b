@@ -1,0 +1,69 @@
+:root { --system-fx-z: 41; --system-avatar-z: 40; }
+.system-avatar {
+  --eye-intensity: .18;
+  --eye-reticle: 0;
+  --eye-x: 63.1%;
+  --eye-y: 46.5%;
+  position: fixed;
+  top: calc(var(--system-header-bottom, 76px) + 12px);
+  left: max(16px, env(safe-area-inset-left));
+  width: 88px;
+  z-index: var(--system-avatar-z);
+  pointer-events: none;
+  contain: layout style;
+}
+.system-avatar-portrait { position: relative; width: 100%; aspect-ratio: 1; }
+.system-avatar-base, .system-avatar-expression { position: absolute; inset: 0; background-repeat: no-repeat; background-size: 100% 100%; }
+.system-avatar-base { background-image: url('/system-avatar/states/idle.png'); }
+/* Supplied sprites include baked cyber-eye FX and small head drift. Only borrow
+   the natural eyelid/brow and mouth; identity plate and cyber-eye never switch. */
+.system-avatar-expression {
+  opacity: .7;
+  mask-image: radial-gradient(ellipse 10% 6% at 40% 45%, #000 45%, transparent 100%), radial-gradient(ellipse 10% 5% at 49% 72%, #000 40%, transparent 100%);
+}
+.system-avatar[data-master="true"] .system-avatar-expression { display: none; }
+.system-avatar-eye { position: absolute; left: var(--eye-x); top: var(--eye-y); width: 1px; height: 1px; transform: translate(-50%, -50%); }
+.system-avatar-eye i { display: block; position: absolute; left: 50%; top: 50%; transform: translate(-50%, -50%); pointer-events: none; }
+.system-eye-glow { width: 27px; height: 27px; background: radial-gradient(circle, #dbf8ff 0%, #82d7ff80 10%, #368aff35 30%, transparent 66%); opacity: var(--eye-intensity); }
+.system-eye-iris { width: 5px; height: 5px; border: .5px solid #ceefff; border-radius: 50%; background: radial-gradient(circle, #fff 10%, #62cbff 22%, #143c76 55%, #a0e6ff 70%); box-shadow: 0 0 4px #6acaff; opacity: calc(.15 + var(--eye-intensity) * .85); }
+.system-eye-reticle { width: 16px; height: 16px; border: .6px solid #a4deff; border-radius: 50%; opacity: var(--eye-reticle); }
+.system-eye-reticle::before, .system-eye-reticle::after { content: ''; position: absolute; background: #d4f3ff; }
+.system-eye-reticle::before { height: 1px; width: 22px; top: 7px; left: -4px; }
+.system-eye-reticle::after { height: 22px; width: 1px; left: 7px; top: -4px; }
+.system-avatar-status { display: flex; justify-content: center; gap: 4px; margin-top: 3px; }
+.system-avatar-status i { width: 3px; height: 2px; background: #7298ae; opacity: .35; }
+.system-avatar-status i:first-child { background: #b5e6ff; opacity: .8; }
+.system-avatar[data-state="CHARGE"] .system-avatar-status i,
+.system-avatar[data-state="SCAN"] .system-avatar-status i { opacity: 1; background: #d1f1ff; }
+.system-avatar[data-state="SLEEP"] .system-avatar-status { opacity: .3; }
+.system-fx-canvas { position: fixed; inset: 0; width: 100vw; height: 100vh; pointer-events: none; z-index: var(--system-fx-z); }
+body[data-navigation-open="true"] .system-avatar,
+body[data-navigation-open="true"] .system-fx-canvas { visibility: hidden; }
+/* The longer v2 thesis keeps the existing typography presets and media. */
+.hero .hero-copy { max-width: 68rem; }
+.hero h1 { line-height: 1.02; max-width: 15ch; }
+.hero h1 [data-system-target] { display: inline-block; white-space: nowrap; color: #aaceff; }
+.hero-supporting { margin-top: 1.5rem; max-width: 36rem; font-size: clamp(1.12rem, 1.7vw, 1.65rem); line-height: 1.35; color: #f1f3f7; letter-spacing: -.025em; }
+.hero .hero-lede { margin-top: .85rem; max-width: 35rem; }
+[data-system-id="hero-profit"] { --system-reveal: 0; position: relative; text-shadow: 0 0 calc(var(--system-reveal) * 16px) rgb(159 216 255 / calc(var(--system-reveal) * .32)); }
+[data-system-id="hero-profit"]::after { content: ''; position: absolute; left: 0; bottom: -.04em; width: 100%; height: 1px; transform: scaleX(var(--system-reveal)); transform-origin: left; background: linear-gradient(90deg, #71b2e4aa, #eefaff, transparent); }
+.hero h1 [data-system-scanned="true"] { color: #e5f2ff; }
+@media (min-width: 769px) { .hero { padding-top: max(12rem, 20vh); } }
+@media (max-width: 768px) {
+  .system-avatar { width: 64px; left: 8px; top: calc(var(--system-header-bottom, 64px) + 8px); }
+  .hero { padding-top: 10.5rem; padding-bottom: 5.5rem; }
+  .hero h1 { font-size: calc(var(--type-hero) * .82); max-width: 17ch; line-height: 1.04; }
+  .hero-supporting { margin-top: 1.25rem; font-size: 1.14rem; max-width: 29ch; }
+  .hero .hero-lede { max-width: 34ch; }
+  .system-eye-reticle { width: 12px; height: 12px; }
+  .system-eye-reticle::before { top: 5px; left: -3px; width: 16px; }
+  .system-eye-reticle::after { left: 5px; top: -3px; height: 16px; }
+}
+@media (prefers-reduced-motion: reduce) {
+  .system-fx-canvas { display: none; }
+  .system-avatar-expression { display: none; }
+  .system-eye-reticle { display: none; }
+}
+/* Asset masks enhance the CSS fallback; missing masks leave the eye usable. */
+.system-eye-glow { background-image: url('/system-avatar/eye/glow-mask.png'), radial-gradient(circle, #dbf8ff 0%, #82d7ff80 10%, #368aff35 30%, transparent 66%); background-size: contain; }
+.system-eye-iris { background-image: url('/system-avatar/eye/iris-mask.png'), radial-gradient(circle, #fff 10%, #62cbff 22%, #143c76 55%, #a0e6ff 70%); background-size: contain; }
