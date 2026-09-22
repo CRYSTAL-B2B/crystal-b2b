@@ -104,3 +104,11 @@ body[data-modal-open="true"] .avatar-bubble, body[data-navigation-open="true"] .
 .avatar-task-option:hover, .avatar-context-cta:hover { background:#b5d7f41c; border-color:#b5d7f480; }
 .avatar-task-option:focus-visible, .avatar-context-cta:focus-visible { outline:2px solid #afd8ff; outline-offset:2px; }
 .avatar-bubble[data-compact="true"] .avatar-task-option { padding:10px 12px; font-size:14px; }
+
+/* Кегль H1 на широких экранах задан по двум опорным точкам: 62 px на 1440 и
+   84 px на 1920, между ними - линейно (наклон 22 px на 480 px ширины).
+   Правило ограничено min-width:1440px, чтобы ширины ниже остались на общей
+   шкале --type-display и не поехали. Верхний предел 88 px - как у неё. */
+@media (min-width: 1440px) {
+  .hero h1 { font-size: clamp(62px, calc(4.58333vw - 4px), 88px); }
+}
