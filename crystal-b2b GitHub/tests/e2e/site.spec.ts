@@ -21,7 +21,7 @@ test("основная страница загружается без runtime-о
   page.on("pageerror", (error) => errors.push(error.message));
 
   await page.goto("/", { waitUntil: "networkidle" });
-  await expect(page.getByRole("heading", { level: 1 })).toContainText("Маркетинг – это управляемая инвестиция в системный рост прибыли");
+  await expect(page.getByRole("heading", { level: 1 })).toContainText("Маркетинг – это управляемая инвестиция в рост прибыли");
   await expect(page.locator(".scroll-scene[data-motion-ready='true']")).toHaveCount(3);
   await expect(page.getByRole("heading", { name: "Давайте определим курс." })).toBeVisible();
   expect(errors).toEqual([]);

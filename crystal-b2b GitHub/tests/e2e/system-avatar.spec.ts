@@ -19,7 +19,7 @@ test.use({viewport:{width:1440,height:900}});
 
 test('initial calm avatar, preserved semantic Hero and no laser',async({page})=>{
  const errors:string[]=[];page.on('pageerror',e=>errors.push(e.message));await start(page);
- await expect(page.locator('h1')).toHaveCount(1);await expect(page.locator('.hero h1')).toHaveText('Маркетинг – это управляемая инвестиция в системный рост прибыли');
+ await expect(page.locator('h1')).toHaveCount(1);await expect(page.locator('.hero h1')).toHaveText('Маркетинг – это управляемая инвестиция в рост прибыли');
  await expect(page.locator(`${panel} h1, ${panel} h2, .system-avatar canvas, [data-system-target]`)).toHaveCount(0);
  await expect(page.locator(panel)).toHaveAttribute('aria-hidden','true');await expect(page.locator('.avatar-video')).toHaveCount(2);
  expect(await page.locator(widget).evaluate(e=>e.getBoundingClientRect().width)).toBe(282);

@@ -134,7 +134,7 @@ export function Hero() {
       <div ref={copyRef} className="hero-copy">
         <h1 id="hero-title">
           Маркетинг – это управляемая инвестиция в{" "}
-          <span className="hero-profit">системный рост прибыли</span>
+          <span className="hero-profit">рост прибыли</span>
         </h1>
         <p className="hero-supporting">Строю B2B-маркетинг от спроса до выручки.</p>
         <p className="hero-lede">
