@@ -2,7 +2,7 @@
 import Image from 'next/image';
 import { useEffect, useRef, type CSSProperties } from 'react';
 import { AVATAR_CONFIG as config } from './config';
-import { AVATAR_QUESTION, AVATAR_TASKS } from './content';
+import { AVATAR_CTA, AVATAR_QUESTION, AVATAR_TASKS } from './content';
 import { useLead } from '@/components/contact/LeadProvider';
 import './styles/system-avatar.css';
 export function SystemAvatar() {
@@ -45,7 +45,7 @@ export function SystemAvatar() {
           </button>
         </li>)}
       </ol>
-      <button type="button" className="avatar-context-cta" hidden>Как это сделать? <span aria-hidden="true">↗</span></button>
+      <button type="button" className="avatar-context-cta" hidden><span className="avatar-cta-label">{AVATAR_CTA}</span> <span aria-hidden="true">↗</span></button>
     </div>
   </aside></>;
 }

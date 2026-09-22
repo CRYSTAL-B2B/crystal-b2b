@@ -1,5 +1,5 @@
 import { AVATAR_CONFIG as config } from './config';
-import { AVATAR_QUESTION, AVATAR_TASKS, type AvatarContext } from './content';
+import { AVATAR_CTA, AVATAR_QUESTION, AVATAR_TASKS, type AvatarContext } from './content';
 import { placeBubble } from './bubblePlacement';
 import type { createDockController } from './dockController';
 import type { gsap as Gsap } from 'gsap';
@@ -13,6 +13,7 @@ export function createBubbleController(root: HTMLElement, bubble: HTMLElement, d
   const secondary = bubble.querySelector<HTMLElement>('.avatar-bubble-secondary')!;
   const choices = bubble.querySelector<HTMLElement>('.avatar-question-options')!;
   const cta = bubble.querySelector<HTMLButtonElement>('.avatar-context-cta')!;
+  const ctaLabel = bubble.querySelector<HTMLElement>('.avatar-cta-label')!;
   const reduced = matchMedia('(prefers-reduced-motion: reduce)');
   let gsap: typeof Gsap | undefined, frame = 0, destroyed = false, blocked = false, visible = false;
   let mode: 'closed' | 'section' | 'question' = 'closed';
@@ -39,6 +40,8 @@ export function createBubbleController(root: HTMLElement, bubble: HTMLElement, d
     primary.textContent = question ? AVATAR_QUESTION : context?.section.description ?? '';
     secondary.textContent = question ? 'Выберите задачу — откроется форма для обсуждения.' : '';
     secondary.hidden = !question;
+    // Надпись на кнопке своя у тех секций, где она задана в content.
+    ctaLabel.textContent = context?.section.cta ?? AVATAR_CTA;
     choices.hidden = !question; cta.hidden = mode !== 'section'; bubble.dataset.mode = mode;
     if (mode === 'section' && context) bubble.dataset.section = context.section.id;
     else delete bubble.dataset.section;
