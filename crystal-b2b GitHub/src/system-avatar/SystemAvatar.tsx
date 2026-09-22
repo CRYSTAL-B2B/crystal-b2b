@@ -45,7 +45,7 @@ export function SystemAvatar() {
           </button>
         </li>)}
       </ol>
-      <button type="button" className="avatar-context-cta" hidden>Обсудить задачу <span aria-hidden="true">↗</span></button>
+      <button type="button" className="avatar-context-cta" hidden>Как это сделать? <span aria-hidden="true">↗</span></button>
     </div>
   </aside></>;
 }
