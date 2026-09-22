@@ -1,4 +1,4 @@
-import type { Metadata } from "next";
+import type { Metadata, Viewport } from "next";
 import Script from "next/script";
 import "@fontsource-variable/inter-tight";
 // Технические подписи: JetBrains Mono. Моноширинный, как и прежний IBM Plex
@@ -47,6 +47,18 @@ export const metadata: Metadata = {
     title: "Даниил Чекулаев - B2B-маркетинг от спроса до выручки",
     description: "Строю B2B-маркетинг как управляемую систему роста.",
   },
+};
+
+export const viewport: Viewport = {
+  // Цвет интерфейса браузера под фон сайта (--ink из globals.css). Реально
+  // применяет его Chrome на Android - и только когда у пользователя светлая
+  // системная тема: с тёмной он и так рисует тёмную панель. Safari 26 тег
+  // игнорирует и берёт цвет из контента наверху экрана, а тот и так тёмный.
+  themeColor: "#050506",
+  // То же, что `color-scheme: dark` в globals.css, но доезжает до браузера
+  // раньше стилей: Chrome на Android по нему сразу отказывается от Auto Dark
+  // Theme, не пытается затемнять уже тёмную страницу и не даёт вспышки.
+  colorScheme: "dark",
 };
 
 export default function RootLayout({ children }: Readonly<{ children: React.ReactNode }>) {
