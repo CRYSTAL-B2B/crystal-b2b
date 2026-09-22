@@ -69,7 +69,7 @@ body[data-modal-open="true"] .avatar-bubble, body[data-navigation-open="true"] .
 .hero .hero-lede { margin-top:10px; font-size:16px; line-height:1.4; max-width:39rem; }
 .hero .hero-actions { margin-top:22px; gap:14px 22px; }
 @media(max-width:768px) {
- .hero { padding-top:var(--hero-content-top, 240px); }
+ .hero { padding-top:var(--hero-content-top, 140px); }
  .hero h1 { font-size:var(--type-display); max-width:24ch; }
  .hero .hero-supporting { margin-top:12px;font-size:17px; }
  .hero .hero-lede { margin-top:8px;font-size:14px; }
