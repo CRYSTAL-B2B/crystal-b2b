@@ -39,7 +39,7 @@ body[data-modal-open="true"] .system-avatar, body[data-navigation-open="true"] .
 .avatar-bubble-close { position: absolute; right: 8px; top: 3px; width: 36px; height: 36px; border: 0; border-radius: 50%; background: transparent; color: #d0dce8; font-size: 24px; line-height: 1; cursor: pointer; }
 .avatar-bubble-close:hover { background: #ffffff10; }
 .avatar-bubble-close:focus-visible { outline: 2px solid #afd8ff; }
-.avatar-bubble-primary { margin: 0; font-size: clamp(24px,2.05vw,30px); font-weight: 500; line-height: 1.16; letter-spacing: -.035em; }
+.avatar-bubble-primary { margin: 0; font-size: clamp(24px,2.05vw,30px); font-weight: 500; line-height: 1.16; letter-spacing: -.035em; white-space: pre-line; }
 .avatar-bubble-secondary { margin: 18px 0 0; font-size: 18px; line-height: 1.35; color: #bcd4e9; letter-spacing: -.02em; }
 .avatar-bubble-supporting { margin: 14px 0 0; font-size: 14px; line-height: 1.5; color: #a8b5c3; }
 .avatar-bubble::before { content:''; position:absolute; width:10px; height:10px; background:#101923; border:1px solid #b5d7f42e; transform:rotate(45deg); }
