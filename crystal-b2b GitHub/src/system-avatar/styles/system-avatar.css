@@ -60,7 +60,7 @@ body[data-modal-open="true"] .avatar-bubble, body[data-navigation-open="true"] .
 .system-avatar[data-image-fallback="true"] .avatar-poster { inset:0;width:100%;height:100%; }
 @media (prefers-reduced-motion: reduce) { .avatar-video { display:none;transition:none; } }
 /* One-screen Hero: preserve its content and scale the complete copy together. */
-.hero { display:block; height:100svh; min-height:100svh; padding-top:var(--hero-content-top, 104px); padding-bottom:24px; }
+.hero { display:block; height:100svh; min-height:100svh; padding-top:var(--hero-content-top, 244px); padding-bottom:24px; }
 .hero .hero-copy { max-width:54rem; transform:scale(var(--hero-copy-scale,1)); transform-origin:top left; }
 /* Кегль заголовка - общая шкала заголовков --type-display: 65,52 px на 1440.
    У неё своя мобильная ступень, поэтому размер задан и в блоке ниже. */
@@ -69,7 +69,7 @@ body[data-modal-open="true"] .avatar-bubble, body[data-navigation-open="true"] .
 .hero .hero-lede { margin-top:10px; font-size:16px; line-height:1.4; max-width:39rem; }
 .hero .hero-actions { margin-top:22px; gap:14px 22px; }
 @media(max-width:768px) {
- .hero { padding-top:var(--hero-content-top, 100px); }
+ .hero { padding-top:var(--hero-content-top, 240px); }
  .hero h1 { font-size:var(--type-display); max-width:24ch; }
  .hero .hero-supporting { margin-top:12px;font-size:17px; }
  .hero .hero-lede { margin-top:8px;font-size:14px; }

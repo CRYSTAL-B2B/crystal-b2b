@@ -37,8 +37,9 @@ export function Hero() {
       }
       const headerHeight = header?.getBoundingClientRect().height ?? 72;
       // Аватар ушёл к правому краю и текст больше не перекрывает, поэтому
-      // копия начинается сразу под шапкой, а не под аватаром.
-      const top = headerHeight + 32;
+      // копия отсчитывается от шапки: 32 px базового зазора плюс 140 px
+      // опускания по макету.
+      const top = headerHeight + 172;
       // На мобильном аватар стоит в правом нижнем углу - держим под него полосу,
       // иначе на невысоких экранах (375x667 и ниже) он накрывает кнопки.
       const reserved = mobileDock.matches ? (avatar?.getBoundingClientRect().height ?? 196) + 14 : 0;
