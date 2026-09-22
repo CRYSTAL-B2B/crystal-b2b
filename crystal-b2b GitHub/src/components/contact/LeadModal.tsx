@@ -7,11 +7,12 @@ import { leadCopy, type LeadPlacement } from "@/data/lead";
 interface LeadModalProps {
   open: boolean;
   placement: LeadPlacement;
+  initialTask?: string;
   onClose: () => void;
 }
 
 /** Заявка в окне - для кнопок, которые стоят далеко от секции контактов. */
-export function LeadModal({ open, placement, onClose }: LeadModalProps) {
+export function LeadModal({ open, placement, initialTask, onClose }: LeadModalProps) {
   return (
     <Modal
       open={open}
@@ -23,7 +24,7 @@ export function LeadModal({ open, placement, onClose }: LeadModalProps) {
     >
       <div className="modal-body" data-native-scroll="true">
         <p className="modal-lead">{leadCopy.modalLead}</p>
-        <ContactForm formId="lead" placement={placement} />
+        <ContactForm formId="lead" placement={placement} initialTask={initialTask} />
       </div>
     </Modal>
   );

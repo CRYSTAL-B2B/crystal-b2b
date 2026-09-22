@@ -14,7 +14,13 @@ export type AnalyticsEvent =
   | "booking_calendar_loaded"
   | "booking_external_open"
   | "lead_modal_open"
-  | "lead_modal_close";
+  | "lead_modal_close"
+  | "avatar_drag_start"
+  | "avatar_drag_end"
+  | "avatar_snap"
+  | "avatar_bubble_view"
+  | "avatar_bubble_complete"
+  | "avatar_state_change";
 
 type AnalyticsPayload = Record<string, string | number | boolean | undefined>;
 

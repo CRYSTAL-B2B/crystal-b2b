@@ -1,6 +1,6 @@
 # План реализации CRYSTAL CUBE
 
-Последнее обновление: 2026-08-17.
+Последнее обновление: 2026-09-20.
 
 ## Фаза 0 — аудит и решения
 
@@ -197,3 +197,139 @@
 - [x] После recovery публичные `/`, CSS-chunk, `/robots.txt`, `/sitemap.xml` и
   `/opengraph-image` отвечают `200` с корректными MIME type. Headless browser
   smoke на HTTPS подтвердил корректный Hero и отсутствие console/page errors.
+
+## Фаза 13 — System Avatar v2 / только Hero
+
+- [x] Аудит без изменений, прочитан полный v2 pack; актуальный отчёт `crystal-b2b GitHub/docs/SYSTEM_AVATAR_HERO.md`.
+- [x] Hero copy: H1 → supporting headline → supporting copy, hero-profit target.
+- [x] Manifest/atlas/fallback → static avatar → state machine → tracking/eye.
+- [x] WebGL beam → DOM reveal → cinematic shader → state polish.
+- [x] Mobile/reduced/failure/performance и production atlas; локальная QA.
+- Аппаратная проверка Edge/Safari/iOS/Android остаётся вне возможностей текущей среды;
+  локальные browser evidence и границы acceptance перечислены в отчёте.
+- Следующие targets (v2 phase 13) и optional audio (phase 14) вне текущей задачи.
+
+- [x] 2026-09-20 исправлен выбор базы: модуль перенесён в актуальный Pages-релиз
+  `crystal-b2b GitHub`, его статический export снова обслуживает 3011.
+  Все 18 PNG взяты из v2 pack без изменений. HTML ниже Hero сохранён побайтово.
+  Проверки этой версии: 45 Hero E2E, 31 site regression, 15 unit, build/typecheck/lint.
+
+## Avatar motion handoff — 2026-09-20
+
+- [x] Прочитан новый UX: draggable floating widget, snap-to-edge, info bubble.
+- [x] Анализ всех 192 кадров master-video; 4 лучших one-shot сегмента и постеры.
+- [x] Постоянный square crop, timeline/JSON manifest/отчёт/архив; слабые состояния не экспортированы.
+- Естественный loop не получен; использовать partial video + static fallback.
+- Реализация нового draggable/bubble UI не входила в задачу экспорта.
+- Отчёт: `crystal-b2b GitHub/docs/AVATAR_VIDEO_SEGMENTS.md`.
+
+
+## Floating Avatar — 2026-09-21 (заменяет laser-концепцию)
+
+- [x] 1: аудит актуального `crystal-b2b GitHub` без изменений.
+- [x] 2: удалены WebGL beam, targeting registry, scan choreography.
+- [x] 3–6: Pointer Events drag, безопасные bounds, четыре edge, normalized persistence.
+- [x] 7–9: DOM bubble, responsive auto-placement и обратимый Hero scroll reveal.
+- [x] 10–11: четыре approved one-shot из manifest, два video-слоя, crossfade, static fallback.
+- [x] 12: mobile 196 px / desktop 282 px, keyboard и reduced motion.
+- [x] 13: production build, typecheck/lint, unit и browser QA; результаты и физические ограничения — в отчёте.
+- Preview 3011 раздаёт новую static-сборку актуального релиза; GitHub Pages не публиковался.
+- Отчёт: `crystal-b2b GitHub/docs/FLOATING_AVATAR.md`.
+
+
+## Hero fit / living avatar — 2026-09-21
+
+- [x] Hero укладывается в viewport через уменьшенную типографику и adaptive copy scale.
+- [x] Создан воспроизводимый 2.5 s idle-loop из approved closed-mouth frames; исходники сохранены.
+- [x] Добавлены continuous playback, редкое моргание, click и H2 reactions по всем секциям.
+- [x] Поддержаны backscroll, sticky headings, reduced motion и pause/resume.
+- Проверки и новый runtime manifest: `crystal-b2b GitHub/docs/FLOATING_AVATAR.md`.
+
+
+## 2026-09-21 — Полный видеопортрет и реакции нового UX
+
+- Новый H1: «Системный маркетинг – это управляемая инвестиция в рост прибыли».
+- Вместо editorial palindrome — полный исходный master 8 s / 192 frames.
+- Speak 5.166667–6.416667 s пока видна bubble; glint 3.5–4.5 s при click,
+  затем возврат в speak/idle. Новая явная runtime policy supersedes calm-only.
+- Уменьшение background overscan по доступному запасу и ходу параллакса.
+- Исходные assets/сегментация сохранены; только актуальная вложенная версия
+  `crystal-b2b GitHub`, preview 3011. Отчёт: `docs/FLOATING_AVATAR.md` в ней.
+
+Итог QA full-master: 18 unit, build/typecheck/lint без ошибок (одно прежнее
+lint warning). Финальный прогон 22/22 Chromium/WebKit; суммарно 69 уникальных
+avatar E2E и 31 site regression подтверждены с целевыми повторами. Исправлены
+WebKit blob/seek/EOS, устаревшая остановка reused player и RAF-зависимый toggle.
+HTTP 200, screenshots: `output/full-avatar-qa/`. Аппаратные FPS/iPhone не измерены.
+
+## 2026-09-21 — Отмена артикуляции по плашке
+
+Плашки Hero/H2 больше не вызывают смену видеосостояния: непрерывный master-loop
+192 кадра / 8 s продолжается. Click запускает исходную вспышку 3.5–4.5 s,
+затем полный idle. Speak удалён из runtime, preload, manifest и разрешённых
+состояний; прежний файл сохранён как исторический экспорт. Все кадры master,
+включая естественные движения рта внутри самого ролика, сохранены.
+Подробности и QA: `crystal-b2b GitHub/docs/FLOATING_AVATAR.md`.
+
+QA последнего уточнения: 18 unit, build/typecheck/lint без ошибок; 16 целевых
+Chromium/WebKit сценариев подтверждены с финальным повтором 8/8. Добавлена
+страховка выхода из короткого glint при пропущенном ended. Preview HTTP 200.
+
+## 2026-09-21 — Calm idle и полный onset вспышки
+
+По последнему уточнению full-master idle заменён `avatar-calm-loop.mp4`:
+source [0,63)+[152,192), два dissolve по 6 кадров, 91 кадр / 3.791667 s.
+Рот закрыт, яркого eye flare нет; сохранены взгляды и моргание. Click играет
+`avatar-glint-onset.mp4`, source [62,104) / 2.583333–4.333333 s, от нейтрального
+кадра перед первым разгоранием и до открывания рта, затем возвращает calm loop.
+Новый manifest `avatar-calm-motion-manifest.json`, сборка
+`scripts/build-avatar-calm-motion.py`. One-shot начинает play после открытия
+слоя с frame zero. Bubble не влияет на видео. Все 133 output-кадра просмотрены;
+contact sheets: `output/calm-avatar-qa/`. Старые exports сохранены.
+
+QA calm/onset завершена 2026-09-22: 18/18 Chromium/WebKit, 19 unit,
+build/typecheck/lint без ошибок. В обоих браузерах подтверждён play с time=0
+после показа слоя и возврат к idle; `output/calm-avatar-qa/onset-playback.json`.
+
+## 2026-09-22 — Тексты Hero/Results и масштаб фона
+
+H1 Hero и primary bubble: «Маркетинг – это управляемая инвестиция в системный
+рост прибыли». Подзаголовок остаётся «Строю B2B-маркетинг от спроса до выручки.».
+H2 блока 03: «Точные данные превращают маркетинг в инструмент управления ростом
+бизнеса.». Hero media уменьшен до 88%, с мягким краем маски; poster/video
+масштабируются вместе. Mobile font H1: 8vw вместо 8.3vw, прежние min/max.
+19 unit, build/typecheck/lint без ошибок; 22 browser checks прошли.
+Снимки: `output/hero-copy-scale-qa/`. Актуальный preview — порт 3011.
+
+Финальная проверка после коррекции mobile font: 8/8 Chromium/WebKit;
+Hero/Results screenshots просмотрены, точные тексты и scale=.88 подтверждены.
+
+## 2026-09-22 — Плашки шести разделов и выбор задачи
+
+В актуальном `crystal-b2b GitHub` автоматические плашки ограничены секциями
+`#system`, `#results`, `#offer`, `.flow-scene`, `#cases`, `#contact`.
+Каждая показывает H2, пояснение и CTA «Обсудить задачу». Hero и остальные
+экраны больше не вызывают автоматические плашки. Подсказка скрывается при
+выходе из секции и возвращается при обратной прокрутке.
+
+Клик/тап по аватару открывает «Какие у вас задачи:» с четырьмя вариантами:
+стратегия, лидогенерация, система привлечения, автоматизация бизнеса.
+Выбор открывает существующую форму «Обсудить задачу», `placement=avatar`;
+задача подставляется в textarea. Контакты и собственный комментарий сохраняются
+при смене выбора. После закрытия фокус возвращается к аватару. Ручной вопрос
+не заменяется подсказкой при прокрутке; drag, Escape, меню/modal, reduced motion
+и спокойный видеорежим с отдельной вспышкой сохранены.
+
+Подложка плашки уплотнена для читаемости. На коротких экранах содержимое
+прокручивается. Контент вынесен в `src/system-avatar/content.ts`.
+Build/typecheck и 19 unit прошли; lint без ошибок (прежнее предупреждение
+`layout.tsx`). Визуальные проверки Chromium/WebKit: 1440, 390, 320 px;
+передача задачи подтверждена, runtime errors отсутствуют, axe для вопроса и
+формы на трёх размерах Chromium не нашёл нарушений.
+Артефакты: `output/avatar-task-picker-qa/`. Preview 3011 отвечает HTTP 200.
+GitHub Pages не публиковался. Новый сценарий заменяет исторические Hero reveal
+и реакции на все H2. Подробнее: `crystal-b2b GitHub/docs/FLOATING_AVATAR.md`.
+
+Целевая браузерная QA этого обновления: 12/12 Chromium/WebKit сценариев прошли.
+Новая плашка сбрасывает внутреннюю прокрутку, чтобы заголовок не оставался скрытым
+после выбора четвёртой задачи на коротком экране.

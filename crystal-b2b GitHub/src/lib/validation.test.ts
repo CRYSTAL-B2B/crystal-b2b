@@ -17,6 +17,7 @@ describe("validateLead", () => {
       contact: "+7 999 123-45-67",
       task: "Нужна CRM-стратегия",
       company: "",
+      site: "",
       turnstileToken: "test-token",
       qualifiers: ["ПОСТРОИТЬ СИСТЕМУ"],
     });

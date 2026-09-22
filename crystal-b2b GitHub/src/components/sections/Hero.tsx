@@ -11,7 +11,56 @@ import { useReducedMotion } from "@/hooks/useReducedMotion";
 
 export function Hero() {
   const mediaRef = useRef<HTMLDivElement>(null);
+  const heroRef = useRef<HTMLElement>(null);
+  const copyRef = useRef<HTMLDivElement>(null);
   const reducedMotion = useReducedMotion();
+
+  useEffect(() => {
+    const hero = heroRef.current, copy = copyRef.current;
+    if (!hero || !copy) return;
+    const avatar = document.querySelector<HTMLElement>('.system-avatar');
+    const header = document.querySelector<HTMLElement>('.site-header');
+    const motionPreference = matchMedia('(prefers-reduced-motion: reduce)');
+    const pointerPreference = matchMedia('(hover: hover) and (pointer: fine)');
+    let frame = 0, disposed = false;
+    const fit = () => {
+      frame = 0;
+      const height = window.visualViewport?.height ?? innerHeight;
+      const media = mediaRef.current;
+      if (media) {
+        const parallax = !motionPreference.matches && pointerPreference.matches;
+        const offset = parseFloat(getComputedStyle(media).getPropertyValue('--hero-media-offset-x')) || 0;
+        const cover = 1 + Math.max(2 * (Math.abs(offset) + (parallax ? 7 : 0) + 1) / media.clientWidth, 2 * (parallax ? 6 : 1) / media.clientHeight);
+        media.style.setProperty('--hero-cover-scale', String(cover));
+      }
+      const headerHeight = header?.getBoundingClientRect().height ?? 72;
+      const avatarHeight = avatar?.getBoundingClientRect().height ?? 196;
+      const top = headerHeight + avatarHeight + 32;
+      const available = Math.max(1, height - top - 24);
+      hero.style.setProperty('--hero-content-top', `${top}px`);
+      // Keep the available line width while scaling, rather than shrinking text into a narrow column.
+      const fits = (scale: number) => { copy.style.width = `${100 / scale}%`; return copy.offsetHeight * scale <= available; };
+      let scale = 1;
+      if (!fits(1)) {
+        let low = .1, high = 1;
+        for (let i = 0; i < 9; i++) { const mid = (low + high) / 2; if (fits(mid)) low = mid; else high = mid; }
+        scale = low; fits(scale);
+      }
+      hero.style.setProperty('--hero-copy-scale', String(scale));
+      hero.dataset.fitted = 'true';
+      // Bubble caches real heading geometry; transforms do not notify ResizeObserver.
+      window.dispatchEvent(new Event('hero:layout'));
+    };
+    const schedule = () => { if (!disposed && !frame) frame = requestAnimationFrame(fit); };
+    const observer = new ResizeObserver(schedule);
+    observer.observe(copy); if (avatar) observer.observe(avatar); if (header) observer.observe(header);
+    window.addEventListener('resize', schedule);
+    motionPreference.addEventListener('change', schedule);
+    pointerPreference.addEventListener('change', schedule);
+    window.visualViewport?.addEventListener('resize', schedule);
+    void document.fonts.ready.then(schedule); schedule();
+    return () => { disposed = true; cancelAnimationFrame(frame); observer.disconnect(); window.removeEventListener('resize', schedule); motionPreference.removeEventListener('change', schedule); pointerPreference.removeEventListener('change', schedule); window.visualViewport?.removeEventListener('resize', schedule); };
+  }, []);
 
   useEffect(() => {
     const media = mediaRef.current;
@@ -35,6 +84,7 @@ export function Hero() {
     };
 
     const update = (event: PointerEvent) => {
+      if (event.pointerType !== 'mouse' || !matchMedia('(hover: hover) and (pointer: fine)').matches) return;
       const bounds = media.getBoundingClientRect();
       targetX = ((event.clientX - bounds.left) / bounds.width - 0.5) * 2;
       targetY = ((event.clientY - bounds.top) / bounds.height - 0.5) * 2;
@@ -59,7 +109,7 @@ export function Hero() {
   }, [reducedMotion]);
 
   return (
-    <section className="hero" id="top" aria-labelledby="hero-title">
+    <section ref={heroRef} className="hero" id="top" aria-labelledby="hero-title">
       <div className="hero-media" ref={mediaRef} aria-hidden="true">
         <Image
           className="hero-image"
@@ -74,14 +124,14 @@ export function Hero() {
           src="/media/video/01-hero.mp4"
         />
       </div>
-      <div className="hero-copy">
+      <div ref={copyRef} className="hero-copy">
         <h1 id="hero-title">
-          <span>Строю B2B-маркетинг</span>{" "}
-          <span>от спроса до <em>выручки.</em></span>
+          Маркетинг – это управляемая инвестиция в{" "}
+          <span className="hero-profit">системный рост прибыли</span>
         </h1>
+        <p className="hero-supporting">Строю B2B-маркетинг от спроса до выручки.</p>
         <p className="hero-lede">
-          Стратегия, лидогенерация, CRM, аналитика и автоматизация - в одной
-          измеримой системе.
+          Стратегия, лидогенерация, CRM, аналитика и автоматизация в одной системе.
         </p>
         <div className="hero-actions">
           <LeadButton

@@ -36,6 +36,7 @@ interface ContactFormProps {
   secondaryAction?: ReactNode;
   /** Подпись под кнопками - например, длительность созвона. */
   note?: ReactNode;
+  initialTask?: string;
 }
 
 export function ContactForm({
@@ -43,12 +44,25 @@ export function ContactForm({
   placement = "contact",
   secondaryAction,
   note,
+  initialTask,
 }: ContactFormProps) {
   const [errors, setErrors] = useState<FieldErrors>({});
   const [status, setStatus] = useState<FormStatus>("idle");
   const [message, setMessage] = useState("");
   const [started, setStarted] = useState(false);
   const [phoneFlag, setPhoneFlag] = useState(DEFAULT_PHONE_FLAG);
+  const taskRef = useRef<HTMLTextAreaElement>(null);
+  const previousTask = useRef<string | undefined>(undefined);
+  useEffect(() => {
+    if (!initialTask || !taskRef.current) return;
+    const field = taskRef.current;
+    const previous = previousTask.current;
+    // Replace only our previous suggestion, preserving the visitor's own details.
+    const details = (previous && field.value.startsWith(previous)
+      ? field.value.slice(previous.length) : field.value).trim();
+    field.value = initialTask + (details ? `\n\n${details}` : '');
+    previousTask.current = initialTask;
+  }, [initialTask]);
   const turnstileRef = useRef<HTMLDivElement>(null);
   // Идентификатор своего виджета: на странице их может быть два, и сбрасывать
   // нужно именно тот, что принадлежит этой форме.
@@ -234,6 +248,7 @@ export function ContactForm({
       <div className="form-field form-field-wide">
         <label htmlFor={`${formId}-task`}>Задача</label>
         <textarea
+          ref={taskRef}
           id={`${formId}-task`}
           name="task"
           rows={4}

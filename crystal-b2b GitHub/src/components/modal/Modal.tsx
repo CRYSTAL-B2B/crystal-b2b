@@ -93,7 +93,11 @@ export function Modal({
       window.cancelAnimationFrame(frame);
       openCount = Math.max(0, openCount - 1);
       if (openCount === 0) delete document.body.dataset.modalOpen;
-      returnFocusRef.current?.focus();
+      const target = returnFocusRef.current;
+      // Let overlay observers remove inert before returning focus to the avatar.
+      window.requestAnimationFrame(() => {
+        if (openCount === 0 && target?.isConnected) target.focus({ preventScroll: true });
+      });
     };
   }, [open, onClose]);
 

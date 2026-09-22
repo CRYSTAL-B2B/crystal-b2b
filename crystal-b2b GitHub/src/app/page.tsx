@@ -1,3 +1,4 @@
+import { SystemAvatar } from "@/system-avatar/SystemAvatar";
 import { Header } from "@/components/layout/Header";
 import { Footer } from "@/components/layout/Footer";
 import { Hero } from "@/components/sections/Hero";
@@ -46,6 +47,7 @@ export default function Home() {
       <CardAura />
       <a className="skip-link" href="#main">Перейти к содержанию</a>
       <Header />
+      <SystemAvatar />
       <main id="main">
         <Hero />
         {/* Порядок задан владельцем. Названные им блоки идут ровно так, как он

@@ -287,10 +287,15 @@ svg {
   --media-x: 0px;
   --media-y: 0px;
   --hero-media-offset-x: 0px;
+  --hero-background-scale: .88;
   position: absolute;
   z-index: 0;
   inset: 0;
   overflow: hidden;
+  transform: scale(var(--hero-background-scale));
+  transform-origin: center;
+  mask-image: linear-gradient(to right, transparent, #000 5%, #000 95%, transparent), linear-gradient(to bottom, transparent, #000 8%, #000 92%, transparent);
+  mask-composite: intersect;
 }
 
 .hero-image {
