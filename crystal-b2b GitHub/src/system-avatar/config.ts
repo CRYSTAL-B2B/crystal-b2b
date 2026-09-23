@@ -11,6 +11,9 @@ export const AVATAR_CONFIG = {
   },
   bubble: {
     maxWidth: 430, mobileWidth: 310, gap: 18, zIndex: 41,
+    // Уже этого плашку сбоку от аватара не ставим - строки становятся
+    // слишком короткими; вместо этого она уходит над аватар.
+    minBesideWidth: 150,
     scaleFrom: .97, blurFrom: 10, translateFrom: 18,
     revealStart: .60, revealEnd: .40, exitStart: .55, exitEnd: .15,
     dismissReset: .02, interactiveAt: .12, seenAt: .2, completeAt: .95,

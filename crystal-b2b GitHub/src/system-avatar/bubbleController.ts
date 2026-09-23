@@ -22,7 +22,19 @@ export function createBubbleController(root: HTMLElement, bubble: HTMLElement, d
     const b = dock.bounds, scale = dock.scale, availableHeight = b.bottom - b.top;
     const compact = dock.mobile || availableHeight / scale < config.avatar.shortViewportHeight;
     bubble.dataset.compact = String(compact);
-    bubble.style.width = `${Math.min((compact ? config.bubble.mobileWidth : config.bubble.maxWidth) * scale, b.right - b.left) / scale}px`;
+    // На мобильном плашка занимает ровно ту полосу, что осталась сбоку от
+    // аватара, - тогда placeBubble ставит её рядом, а не поверх экрана. Если
+    // сбоку теснее минимума, ширина остаётся прежней и плашка уходит
+    // над аватар или под него, как раньше.
+    const gap = config.bubble.gap * scale;
+    const beside = Math.max(
+      dock.position.x - b.left - gap,
+      b.right - (dock.position.x + dock.size.width) - gap,
+    );
+    const preferred = compact && beside >= config.bubble.minBesideWidth * scale
+      ? Math.min(beside, config.bubble.mobileWidth * scale)
+      : (compact ? config.bubble.mobileWidth : config.bubble.maxWidth) * scale;
+    bubble.style.width = `${Math.min(preferred, b.right - b.left) / scale}px`;
     surface.style.maxHeight = `${Math.min(availableHeight, Math.max(120 * scale, availableHeight - dock.size.height - config.bubble.gap * scale)) / scale}px`;
     const rect = bubble.getBoundingClientRect();
     const placement = placeBubble({ ...dock.position, ...dock.size }, { width: rect.width, height: rect.height }, b, dock.dock.edge, config.bubble.gap * scale);
