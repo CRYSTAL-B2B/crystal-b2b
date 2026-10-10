@@ -140,26 +140,17 @@ async function screen(page:Page,selector:string){
  await page.locator(selector).evaluate(e=>window.scrollTo({top:scrollY+e.getBoundingClientRect().top-innerHeight*.2,behavior:'instant'}));
  await page.waitForTimeout(600);
 }
-test('only six screens show contextual explanations and CTA, including backscroll',async({page})=>{
+test('scrolling never opens a bubble: the avatar speaks only on click',async({page})=>{
  await start(page);
- for(const [id,selector] of [...screens,...[...screens].reverse()]){
-  await screen(page,selector);await expect(page.locator(panel)).toHaveAttribute('data-section',id);
-  await expect(page.locator(panel)).toHaveAttribute('aria-hidden','false');
-  await expect(page.locator('.avatar-bubble-primary')).not.toBeEmpty();
-  await expect(page.locator('.avatar-bubble-secondary')).toBeHidden();
-  await expect(page.locator('.avatar-context-cta')).toBeVisible();await expect(page.locator('.avatar-question-options')).toBeHidden();await safe(page,panel);
+ for(const [,selector] of [...screens,...[...screens].reverse()]){
+  await screen(page,selector);
+  await expect(page.locator(panel)).toHaveAttribute('aria-hidden','true');
+  await expect(page.locator(panel)).not.toHaveAttribute('data-section',/.*/);
  }
- const excluded=await page.locator('main h2').evaluateAll(headings=>headings.filter(h=>!h.closest('#system,#results,#offer,.flow-scene,#cases,#contact')).map(h=>h.closest('section')?.className).filter(Boolean));
- expect(excluded.length).toBeGreaterThan(4);
- for(const className of excluded){await screen(page,'section.'+className!.trim().split(/\s+/).join('.'));await expect(page.locator(panel)).toHaveAttribute('aria-hidden','true');}
  await scrollTo(page,0);await expect(page.locator(panel)).toHaveAttribute('aria-hidden','true');
-});
-test('section CTA opens lead modal and dismissal lasts until leaving the screen',async({page})=>{
- await start(page);await screen(page,'#system');await expect(page.locator(panel)).toHaveAttribute('data-mode','section');
- await page.locator('.avatar-context-cta').click();await expect(page.getByRole('dialog',{name:'Обсудить задачу'})).toBeVisible();
- await page.keyboard.press('Escape');await expect(page.locator(handle)).toBeFocused();await expect(page.locator(panel)).toHaveAttribute('aria-hidden','true');
- await scrollTo(page,0);await screen(page,'#system');await expect(page.locator(panel)).toHaveAttribute('aria-hidden','false');
- await page.locator(handle).click();await expect(page.locator(panel)).toHaveAttribute('data-mode','question');
+ // Ручной вызов по-прежнему работает - отключены только комментарии к секциям.
+ await open(page);await expect(page.locator(panel)).toHaveAttribute('data-mode','question');
+ await expect(page.locator('.avatar-task-option')).toHaveCount(4);await safe(page,panel);
 });
 for(const viewport of [{width:1440,height:900},{width:320,height:568}]){
  test(`four tasks prefill the existing lead form and preserve drafts ${viewport.width}`,async({page})=>{
@@ -174,8 +165,7 @@ for(const viewport of [{width:1440,height:900},{width:320,height:568}]){
    else await expect(dialog.locator('#lead-name')).toHaveValue('Тестовый посетитель');
    await page.keyboard.press('Escape');await expect(dialog).toBeHidden();await expect(page.locator(handle)).toBeFocused();await expect(page.locator(panel)).toHaveAttribute('aria-hidden','true');
   }
-  await screen(page,'#results');await expect(page.locator(panel)).toHaveAttribute('data-section','results');
-  expect(await page.locator('.avatar-bubble-surface').evaluate(e=>e.scrollTop)).toBe(0);
+  await screen(page,'#results');await expect(page.locator(panel)).toHaveAttribute('aria-hidden','true');
  });
 }
 test('touch opens task picker and leads to capture form with reduced motion',async({browser,baseURL})=>{
@@ -194,14 +184,17 @@ test('calm loop excludes flare and speech; bubbles preserve playback and clicks 
  expect(manifest.exports.find((e:{label:string})=>e.label==='glint').start).toBe(62/24);
  await expect(page.locator(widget)).toHaveAttribute('data-media','video');
  expect(await page.locator('.avatar-video').evaluateAll(es=>es.some(e=>Math.abs((e as HTMLVideoElement).duration-91/24)<.01&&(e as HTMLVideoElement).loop))).toBe(true);
+ // Плашку открываем кликом: прокрутка её больше не вызывает. Слушатели
+ // вешаем после того, как отыграл glint от самого клика, иначе его загрузка
+ // засчиталась бы за перезапуск воспроизведения.
+ await open(page);
+ await expect(page.locator(panel)).toHaveAttribute('aria-hidden','false');await expect(page.locator(widget)).toHaveAttribute('data-state','idle');
  await page.evaluate(()=>{
   document.querySelectorAll('.avatar-video').forEach(v=>v.addEventListener('loadstart',()=>v.setAttribute('data-reloaded','true')));
-  const section=document.querySelector('#system')!.getBoundingClientRect();
-  window.scrollTo({top:scrollY+section.top-innerHeight*.2,behavior:'instant'});
  });
- await expect(page.locator(panel)).toHaveAttribute('aria-hidden','false');await expect(page.locator(widget)).toHaveAttribute('data-state','idle');
+ await page.keyboard.press('Escape');await expect(page.locator(panel)).toHaveAttribute('aria-hidden','true');
  await expect(page.locator('.avatar-video[data-reloaded]')).toHaveCount(0);
- await page.keyboard.press('Escape');await scrollTo(page,0);
+ await scrollTo(page,0);
  await open(page);await expect(page.locator(widget)).toHaveAttribute('data-state','idle');
  await page.locator('.hero h1').click();await expect(page.locator(widget)).toHaveAttribute('data-state','glint');await expect(page.locator('.avatar-video[data-source="clips/avatar-glint-onset.mp4"]')).toHaveCount(1);
  // Recover even if the native player stalls and never emits ended.

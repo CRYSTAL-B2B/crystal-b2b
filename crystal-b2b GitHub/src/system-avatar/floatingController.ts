@@ -1,7 +1,6 @@
 import { createDockController } from './dockController';
 import { createBubbleController } from './bubbleController';
 import { createVideoController } from './videoController';
-import { observeHeadings } from './headingController';
 import { getGsap } from '@/lib/gsap';
 export function mountFloatingAvatar(root:HTMLElement,panel:HTMLElement,signal:AbortSignal,onLead:(task?:string)=>void){
   const handle=root.querySelector<HTMLButtonElement>('.avatar-handle')!;
@@ -18,7 +17,10 @@ export function mountFloatingAvatar(root:HTMLElement,panel:HTMLElement,signal:Ab
     click(){bubble?.toggle();},
   });
   bubble=createBubbleController(root,panel,dock,visible=>{if(visible)pulse('heading');},onLead);
-  const stopHeadings=observeHeadings(root,context=>bubble?.setSection(context));
+  // Плашки-комментарии к секциям при прокрутке отключены: аватар молчит, пока
+  // на него не нажали. Подписка на заголовки снята здесь - сам
+  // headingController и bubble.setSection оставлены нетронутыми, чтобы
+  // поведение можно было вернуть одной строкой.
   function click(event:MouseEvent){
     if(root.inert||document.hidden||(dock.moving||(dock.suppressingClick&&event.detail>0))||!(event.target instanceof Element))return;
     pulse('click');media.glint();
@@ -32,5 +34,5 @@ export function mountFloatingAvatar(root:HTMLElement,panel:HTMLElement,signal:Ab
   }
   const observer=new MutationObserver(overlay);observer.observe(document.body,{attributes:true,attributeFilter:['data-modal-open','data-navigation-open']});
   document.addEventListener('visibilitychange',overlay);overlay();
-  return ()=>{destroyed=true;stopHeadings();clearTimeout(reactionTimer);document.removeEventListener('click',click,true);observer.disconnect();document.removeEventListener('visibilitychange',overlay);bubble?.destroy();dock.destroy();media.destroy();};
+  return ()=>{destroyed=true;clearTimeout(reactionTimer);document.removeEventListener('click',click,true);observer.disconnect();document.removeEventListener('visibilitychange',overlay);bubble?.destroy();dock.destroy();media.destroy();};
 }
