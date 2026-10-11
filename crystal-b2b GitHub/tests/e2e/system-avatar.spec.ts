@@ -159,7 +159,7 @@ for(const viewport of [{width:1440,height:900},{width:320,height:568}]){
   for(let i=0;i<tasks.length;i++){
    await page.locator(handle).click();await expect(page.locator(panel)).toHaveAttribute('data-mode','question');await safe(page,panel);
    await page.getByRole('button',{name:tasks[i],exact:true}).click();
-   const dialog=page.getByRole('dialog',{name:'Обсудить задачу'});await expect(dialog).toBeVisible();await expect(page.locator(widget)).toBeHidden();
+   const dialog=page.getByRole('dialog',{name:'Опишите задачу'});await expect(dialog).toBeVisible();await expect(page.locator(widget)).toBeHidden();
    await expect(dialog.locator('#lead-task')).toHaveValue(tasks[i]+(i?'\n\nНужна интеграция с CRM.':''));
    if(i===0){await dialog.locator('#lead-name').fill('Тестовый посетитель');await dialog.locator('#lead-task').fill(tasks[i]+'\n\nНужна интеграция с CRM.');}
    else await expect(dialog.locator('#lead-name')).toHaveValue('Тестовый посетитель');
@@ -172,7 +172,7 @@ test('touch opens task picker and leads to capture form with reduced motion',asy
  const context=await browser.newContext({viewport:{width:390,height:844},isMobile:true,hasTouch:true,reducedMotion:'reduce'});
  const page=await context.newPage();await page.goto(baseURL!);await expect(page.locator(widget)).toHaveAttribute('data-ready','true');
  await page.locator(handle).tap();await expect(page.locator(panel)).toHaveAttribute('data-mode','question');
- await page.getByRole('button',{name:'Автоматизация бизнеса.',exact:true}).tap();await expect(page.getByRole('dialog',{name:'Обсудить задачу'})).toBeVisible();await expect(page.locator('#lead-task')).toHaveValue('Автоматизация бизнеса.');
+ await page.getByRole('button',{name:'Автоматизация бизнеса.',exact:true}).tap();await expect(page.getByRole('dialog',{name:'Опишите задачу'})).toBeVisible();await expect(page.locator('#lead-task')).toHaveValue('Автоматизация бизнеса.');
  await context.close();
 });
 
