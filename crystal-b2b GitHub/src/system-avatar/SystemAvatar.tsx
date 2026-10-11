@@ -2,7 +2,7 @@
 import Image from 'next/image';
 import { useEffect, useRef, type CSSProperties } from 'react';
 import { AVATAR_CONFIG as config } from './config';
-import { AVATAR_CTA, AVATAR_QUESTION, AVATAR_TASKS } from './content';
+import { AVATAR_CTA, AVATAR_QUESTION, AVATAR_QUESTION_HINT, AVATAR_TASKS } from './content';
 import { useLead } from '@/components/contact/LeadProvider';
 import './styles/system-avatar.css';
 export function SystemAvatar() {
@@ -37,7 +37,7 @@ export function SystemAvatar() {
     <div className="avatar-bubble-surface" data-native-scroll="true">
       <button className="avatar-bubble-close" type="button" aria-label="Закрыть описание">×</button>
       <p className="avatar-bubble-primary" id="avatar-bubble-title">{AVATAR_QUESTION}</p>
-      <p className="avatar-bubble-secondary">Выберите задачу — откроется форма для обсуждения.</p>
+      <p className="avatar-bubble-secondary">{AVATAR_QUESTION_HINT}</p>
       <ol className="avatar-question-options" hidden>
         {AVATAR_TASKS.map((task, index) => <li key={task}>
           <button type="button" className="avatar-task-option" data-avatar-task={index}>

@@ -1,5 +1,5 @@
 import { AVATAR_CONFIG as config } from './config';
-import { AVATAR_CTA, AVATAR_QUESTION, AVATAR_TASKS, type AvatarContext } from './content';
+import { AVATAR_CTA, AVATAR_QUESTION, AVATAR_QUESTION_HINT, AVATAR_TASKS, type AvatarContext } from './content';
 import { placeBubble } from './bubblePlacement';
 import type { createDockController } from './dockController';
 import type { gsap as Gsap } from 'gsap';
@@ -50,7 +50,7 @@ export function createBubbleController(root: HTMLElement, bubble: HTMLElement, d
     // экране. Плашка несёт только комментарий к нему и кнопку, поэтому
     // комментарий занимает место основного текста.
     primary.textContent = question ? AVATAR_QUESTION : context?.section.description ?? '';
-    secondary.textContent = question ? 'Выберите задачу — откроется форма для обсуждения.' : '';
+    secondary.textContent = question ? AVATAR_QUESTION_HINT : '';
     secondary.hidden = !question;
     // Надпись на кнопке своя у тех секций, где она задана в content.
     ctaLabel.textContent = context?.section.cta ?? AVATAR_CTA;
