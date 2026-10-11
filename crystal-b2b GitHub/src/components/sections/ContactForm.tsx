@@ -72,8 +72,20 @@ export function ContactForm({
     const field = taskRef.current;
     if (!field) return;
     const mobile = matchMedia("(max-width: 768px)");
+    // Ближайший предок, который умеет прокручиваться: в окне заявки это
+    // .modal-body, на странице такого нет - там прокручивается документ.
+    // Проверять «уже прокручивается» нельзя: в момент вызова запас высоты
+    // ещё не израсходован, и контейнер выглядел бы неподвижным.
+    const scroller = () => {
+      for (let node = field.parentElement; node && node !== document.body; node = node.parentElement) {
+        const overflow = getComputedStyle(node).overflowY;
+        if (overflow === "auto" || overflow === "scroll") return node;
+      }
+      return null;
+    };
     const fit = () => {
       if (!mobile.matches) { field.style.height = ""; return; }
+      const before = field.offsetHeight;
       // Сначала отпускаем высоту: иначе scrollHeight вернёт прежнее значение
       // и поле не сможет уменьшиться после удаления строк.
       field.style.height = "auto";
@@ -81,6 +93,17 @@ export function ContactForm({
       // поправки последняя строка срезалась бы на толщину границ.
       const borders = field.offsetHeight - field.clientHeight;
       field.style.height = `${field.scrollHeight + borders}px`;
+      // Поле растёт вниз и утащило бы за край капчу и кнопку. Докручиваем на
+      // величину прироста: низ формы остаётся на месте, а наверх уходят поля,
+      // которые посетитель уже заполнил.
+      const delta = field.offsetHeight - before;
+      if (!delta) return;
+      const box = scroller();
+      // Следующим кадром: сразу после правки высоты контейнер ещё не знает
+      // свой новый scrollHeight и обрезает прокрутку по старому максимуму.
+      requestAnimationFrame(() => {
+        if (box) box.scrollTop += delta; else window.scrollBy(0, delta);
+      });
     };
     field.addEventListener("input", fit);
     mobile.addEventListener("change", fit);
