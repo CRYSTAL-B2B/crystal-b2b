@@ -62,7 +62,35 @@ export function ContactForm({
       ? field.value.slice(previous.length) : field.value).trim();
     field.value = initialTask + (details ? `\n\n${details}` : '');
     previousTask.current = initialTask;
+    // Подставленный текст длиннее стартовой высоты - просим поле подрасти.
+    field.dispatchEvent(new Event("input", { bubbles: true }));
   }, [initialTask]);
+  // На мобильном «Задача» растёт под текст: поле стартует с 8 rem и добавляет
+  // строки по мере ввода, чтобы описание было видно целиком, без прокрутки
+  // внутри поля. На десктопе высоту по-прежнему задают rows и CSS.
+  useEffect(() => {
+    const field = taskRef.current;
+    if (!field) return;
+    const mobile = matchMedia("(max-width: 768px)");
+    const fit = () => {
+      if (!mobile.matches) { field.style.height = ""; return; }
+      // Сначала отпускаем высоту: иначе scrollHeight вернёт прежнее значение
+      // и поле не сможет уменьшиться после удаления строк.
+      field.style.height = "auto";
+      // При border-box высота включает рамки, а scrollHeight - нет: без этой
+      // поправки последняя строка срезалась бы на толщину границ.
+      const borders = field.offsetHeight - field.clientHeight;
+      field.style.height = `${field.scrollHeight + borders}px`;
+    };
+    field.addEventListener("input", fit);
+    mobile.addEventListener("change", fit);
+    fit();
+    return () => {
+      field.removeEventListener("input", fit);
+      mobile.removeEventListener("change", fit);
+    };
+  }, []);
+
   const turnstileRef = useRef<HTMLDivElement>(null);
   // Идентификатор своего виджета: на странице их может быть два, и сбрасывать
   // нужно именно тот, что принадлежит этой форме.
@@ -176,6 +204,7 @@ export function ContactForm({
       setStatus("success");
       setMessage("Сообщение отправлено. Даниил свяжется с вами после получения заявки.");
       form.reset();
+      if (taskRef.current) taskRef.current.style.height = "";
       trackEvent("contact_success", { placement });
     } catch (error) {
       setStatus("error");
