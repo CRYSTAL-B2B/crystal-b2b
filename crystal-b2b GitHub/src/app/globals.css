@@ -6505,10 +6505,15 @@ body[data-modal-open="true"] {
     gap: 0.6rem;
   }
 
-  /* rows=4 задаёт высоту сильнее любого min-height - задаём height. */
+  /* rows=4 задаёт высоту сильнее любого min-height, поэтому height. Без
+     этого «Задача» занимает 124 px: при открытой клавиатуре поле целиком не
+     помещается, браузер подкручивает форму и предыдущие поля уезжают вверх.
+     resize на тач-экране только мешает - уголок легко задеть пальцем. */
+  .form-field textarea,
   .modal-body .form-field textarea {
     height: 4rem;
     min-height: 0;
+    resize: none;
   }
 
   .modal-body .form-submit p {
@@ -6546,4 +6551,20 @@ body[data-modal-open="true"] {
   min-height: 0;
   margin: 0;
   line-height: 0;
+}
+
+/* Клавиатура съедает больше половины экрана: вводный абзац в этот момент
+   только мешает - без него кнопка отправки остаётся на виду. */
+@media (max-width: 768px) and (max-height: 540px) {
+  .modal-lead {
+    display: none;
+  }
+
+  .modal-head {
+    padding: 0.6rem 1rem;
+  }
+
+  .modal-head h2 {
+    font-size: 1.2rem;
+  }
 }
